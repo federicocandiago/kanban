@@ -749,10 +749,16 @@ tr.is-paused { opacity: .6; }
 .calendar-title h1 { margin: 0; font-size: 18px; font-weight: 700; }
 .calendar-title small { font-size: 11px; opacity: .8; }
 .calendar-month { min-width: 9em; text-align: center; font-weight: 700; }
-/* the calendar's name only on wide screens: below, the buttons get the whole row */
-@media (max-width: 1199.98px) { .is-calendar .calendar-title { display: none; } }
-/* the month's name only from lg up: on md and smaller the arrows, today, search, sync and settings fit one row */
-@media (max-width: 991.98px) { .board-page.is-calendar .calendar-month { display: none; } }
+/* the calendar's name from lg up; on md and smaller the month and the buttons get the whole row */
+@media (max-width: 991.98px) { .is-calendar .calendar-title { display: none; } }
+.calendar-month .month-short { display: none; }
+@media (max-width: 575.98px) {   /* phones: short month ("ott 2026") and slightly smaller buttons, all on one row */
+    .calendar-month .month-long { display: none; }
+    .calendar-month .month-short { display: inline; }
+    .is-calendar .board-header { gap: 6px; }
+    .is-calendar .board-header .board-btn { min-width: 36px; width: 36px; height: 36px; padding: 0; }
+    .board-page.is-calendar .calendar-month { min-width: 0; height: 36px; padding: 0 10px; }
+}
 .is-calendar .calendar-title { margin-right: 14px; }      /* name · month navigation · today, a little apart */
 .is-calendar .calendar-today { margin-left: 14px; }
 .board-owner { display: inline-flex; }
