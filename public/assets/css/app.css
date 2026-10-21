@@ -759,12 +759,10 @@ tr.is-paused { opacity: .6; }
     .is-calendar .board-header .board-btn { min-width: 36px; width: 36px; height: 36px; padding: 0; }
     .board-page.is-calendar .calendar-month { min-width: 0; height: 36px; padding: 0 10px; }
 }
-.is-calendar .calendar-title { margin-right: 14px; }      /* name · month navigation · today, a little apart */
-.is-calendar .calendar-today { margin-left: 14px; }
-@media (min-width: 992px) {   /* desktop: the three groups (name · month · today) further apart, buttons a little apart */
+.is-calendar .calendar-today { margin-right: 14px; }      /* name and today · month navigation, a little apart */
+@media (min-width: 992px) {   /* desktop: two groups on the left (name + today · month), buttons a little apart */
     .is-calendar .board-header { gap: 12px; }
-    .is-calendar .calendar-title { margin-right: 26px; }
-    .is-calendar .calendar-today { margin-left: 26px; }
+    .is-calendar .calendar-today { margin-right: 26px; }
 }
 .board-owner { display: inline-flex; }
 .board-owner .avatar { box-shadow: 0 0 0 2px rgb(255 255 255 / .55); }
@@ -804,7 +802,8 @@ tr.is-paused { opacity: .6; }
 .calendar-account[open] > summary .btn-secondary { display: none; }
 .calendar-account-body { padding: 4px 0 16px; }
 @media (max-width: 575.98px) {
-    .is-calendar .calendar-today { margin-left: 0; }
+    .is-calendar .calendar-today { margin-right: 0; }
+    .is-calendar .board-header .board-filter.ms-auto { margin-left: auto !important; }   /* search, sync, settings on the right */
     .board-header .board-sep { display: none; }
 }
 

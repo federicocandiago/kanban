@@ -7,11 +7,11 @@ $next = date('Y-m', mktime(0, 0, 0, $m + 1, 1, $y)); ?>
         <h1><?= e($account->name) ?></h1>
         <small><?= e($account->label()) ?></small>
     </div>
+    <a class="board-btn calendar-today" href="<?= e($account->url()) ?>" data-today title="<?= e(__('Today')) ?>" aria-label="<?= e(__('Today')) ?>"><?= component('icon', ['name' => 'target']) ?></a>
     <span class="board-sep"></span>
     <a class="board-btn" href="?month=<?= e($prev) ?>" title="<?= e(__('Previous month')) ?>" aria-label="<?= e(__('Previous month')) ?>">‹</a>
     <span class="calendar-month"><span class="month-long"><?= e(month_name($m) . ' ' . $y) ?></span><span class="month-short"><?= e(mb_strtolower(mb_substr(month_name($m), 0, 3)) . ' ' . $y) ?></span></span>
     <a class="board-btn" href="?month=<?= e($next) ?>" title="<?= e(__('Next month')) ?>" aria-label="<?= e(__('Next month')) ?>">›</a>
-    <a class="board-btn calendar-today" href="<?= e($account->url()) ?>" data-today title="<?= e(__('Today')) ?>" aria-label="<?= e(__('Today')) ?>"><?= component('icon', ['name' => 'target']) ?></a>
     <div class="board-filter ms-auto" data-expand>
         <button class="board-btn" type="button" title="<?= e(__('Filter events')) ?>" aria-label="<?= e(__('Filter events')) ?>"><?= component('icon', ['name' => 'search']) ?></button>
         <?= component('icon', ['name' => 'search', 'size' => 14]) ?>
