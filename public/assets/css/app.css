@@ -751,6 +751,8 @@ tr.is-paused { opacity: .6; }
 .calendar-month { min-width: 9em; text-align: center; font-weight: 700; }
 /* the calendar's name only on wide screens: below, the buttons get the whole row */
 @media (max-width: 1199.98px) { .is-calendar .calendar-title { display: none; } }
+/* the month's name only from lg up: on md and smaller the arrows, today, search, sync and settings fit one row */
+@media (max-width: 991.98px) { .board-page.is-calendar .calendar-month { display: none; } }
 .is-calendar .calendar-title { margin-right: 14px; }      /* name · month navigation · today, a little apart */
 .is-calendar .calendar-today { margin-left: 14px; }
 .board-owner { display: inline-flex; }
@@ -791,10 +793,7 @@ tr.is-paused { opacity: .6; }
 .calendar-account[open] > summary .btn-secondary { display: none; }
 .calendar-account-body { padding: 4px 0 16px; }
 @media (max-width: 575.98px) {
-    /* one row of buttons: the month takes the room left; the sync state (not a button) stays out */
-    .calendar-month { flex: 1; min-width: 0; white-space: nowrap; }
     .is-calendar .calendar-today { margin-left: 0; }
-    .is-calendar .calendar-sync { display: none; }
     .board-header .board-sep { display: none; }
 }
 
