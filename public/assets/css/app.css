@@ -139,7 +139,6 @@ a:hover { color: var(--k-text); }
 .topbar {
     position: relative; display: flex; align-items: center; gap: 12px;
     min-height: 56px; padding: 10px 16px; background: var(--k-topbar); color: #fff;
-    padding-top: max(10px, env(safe-area-inset-top));   /* installed on a phone, full screen: clear of the status bar */
 }
 .topbar-group { display: flex; align-items: center; gap: 10px; }
 .topbar-btn {
@@ -740,7 +739,7 @@ tr.is-paused { opacity: .6; }
     .side-bottom { position: static; margin-top: 8px; padding-top: 16px; }
     .card-back-side h3:not(:first-child) { margin-top: 20px; }
     .card-back-grid { grid-template-columns: 1fr; }
-    .topbar { padding: 8px; padding-top: max(8px, env(safe-area-inset-top)); }
+    .topbar { padding: 8px; }
     .topbar-group { gap: 6px; }   /* room for the logo in the middle */
     .topbar-btn { min-width: 36px; height: 36px; }
     .topbar-btn:has(> .icon:only-child) { width: 36px; }

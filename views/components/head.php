@@ -19,7 +19,7 @@ $color = auth()?->color() ?? Palette::DEFAULT; ?>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="<?= e(env('APP_NAME')) ?>">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="stylesheet" href="<?= asset('vendor/bootstrap/bootstrap.min.css') ?>">
 <link rel="stylesheet" href="<?= asset('assets/css/app.css') ?>">
 <?php if (filter_var(env('VIEW_TRANSITIONS', true), FILTER_VALIDATE_BOOL) && ($vt = (float) env('VIEW_TRANSITION_SECONDS', 0.2)) > 0): ?>
