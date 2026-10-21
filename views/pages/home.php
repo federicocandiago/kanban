@@ -1,6 +1,6 @@
 <section class="hero">
     <div class="hero-text">
-        <h1><?= e(__(':app lets you organize everything, together.', ['app' => env('APP_NAME')])) ?></h1>
+        <h1><?= e(__('Everything in order, at a glance.')) ?></h1>
         <p><?= e(__((string) env('APP_DESCRIPTION', ''))) ?></p>
         <?php if (auth()): ?>
             <a href="<?= base_url() ?>/dashboard" class="btn btn-success btn-lg"><?= e(__('Go to your boards')) ?></a>

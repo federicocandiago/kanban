@@ -1,0 +1,17 @@
+{
+    "name": "Kalban",
+    "short_name": "Kalban",
+    "description": "Boards, lists, cards and calendars.",
+    "start_url": "./dashboard",
+    "scope": "./",
+    "display": "fullscreen",
+    "display_override": ["fullscreen", "standalone"],
+    "orientation": "any",
+    "background_color": "#027196",
+    "theme_color": "#027196",
+    "icons": [
+        { "src": "assets/icons/app-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+        { "src": "assets/icons/app-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+        { "src": "assets/icons/app-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    ]
+}

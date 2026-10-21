@@ -8,6 +8,7 @@ use App\Core\Crypt;
 use App\Core\Throttle;
 use App\Core\Request;
 use App\Core\Response;
+use App\Core\Session;
 use App\Models\Calendar;
 use App\Models\CalendarAccount;
 use App\Models\Event;
@@ -188,10 +189,26 @@ final class CalendarController extends Controller
             return $this->fail(__('Please check the form.'), $errors);
         }
         $description = trim(str_replace("\r\n", "\n", (string) $request->input('description', '')));
+        $view = $this->view($request) ?? $start->format('Y-m');
 
-        return $this->remote(fn (): Response => $this->ok('', ['close' => true, ...$this->redraw($account, $this->view($request) ?? $start->format('Y-m'), [
-            (new CalendarService($account, auth()))->create($calendar, $title, $start, $allDay ? $end->modify('+1 day') : $end, $allDay, $description),
-        ])]));
+        // the window's nonce: a second Confirm of the same window (double tap, slow network) creates nothing more
+        $nonce = substr((string) $request->input('nonce', ''), 0, 64);
+        $done = (array) Session::get('event_nonces', []);
+        if ($nonce !== '' && in_array($nonce, $done, true)) {
+            return $this->ok('', ['close' => true, ...$this->redraw($account, $view)]);
+        }
+        if ($nonce !== '') {
+            Session::set('event_nonces', array_slice([...$done, $nonce], -20));
+        }
+
+        try {
+            $event = (new CalendarService($account, auth()))->create($calendar, $title, $start, $allDay ? $end->modify('+1 day') : $end, $allDay, $description);
+        } catch (CalDavException $e) {
+            Session::set('event_nonces', array_values(array_diff((array) Session::get('event_nonces', []), [$nonce]))); // not saved: it can be tried again
+            return $this->remote(static fn () => throw $e);
+        }
+
+        return $this->ok('', ['close' => true, ...$this->redraw($account, $view, [$event])]);
     }
 
     /**

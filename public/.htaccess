@@ -1,5 +1,8 @@
 Options -Indexes
 
+# the web app manifest (install on phones)
+AddType application/manifest+json .webmanifest
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     # Always use HTTPS (the session cookie needs a secure page): uncomment once

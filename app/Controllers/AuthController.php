@@ -19,7 +19,7 @@ final class AuthController extends Controller
 {
     public function showLogin(Request $request): Response
     {
-        return view('pages/auth/login', ['title' => __('Sign in')]);
+        return view('pages/auth/login', ['title' => __('Sign in'), 'bodyClass' => 'is-auth']);
     }
 
     public function login(Request $request): Response
@@ -60,6 +60,7 @@ final class AuthController extends Controller
         }
 
         return view('pages/auth/register', [
+            'bodyClass' => 'is-auth',
             'title' => __('Create account'),
             'locales' => Translator::available(),
             'email' => $email,
@@ -156,7 +157,7 @@ final class AuthController extends Controller
 
     public function showResend(Request $request): Response
     {
-        return view('pages/auth/resend', ['title' => __('Confirm your email')]);
+        return view('pages/auth/resend', ['title' => __('Confirm your email'), 'bodyClass' => 'is-auth']);
     }
 
     /** Sends a new link. The answer is the same whether the address exists or not (no account probing). */

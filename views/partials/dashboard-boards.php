@@ -1,6 +1,5 @@
-<?php /** Dashboard: favourite boards, then the others (redrawn when a star changes). @var App\Models\Board[] $boards */
-$favorites = array_filter($boards, static fn (App\Models\Board $b): bool => (bool) $b->is_favorite);
-$others = array_filter($boards, static fn (App\Models\Board $b): bool => !$b->is_favorite); ?>
+<?php /** Dashboard: favourite boards, then all the boards, favourites included (redrawn when a star changes). @var App\Models\Board[] $boards */
+$favorites = array_filter($boards, static fn (App\Models\Board $b): bool => (bool) $b->is_favorite); ?>
 <div id="dashboard-boards">
     <?php if ($favorites): ?>
         <section class="board-section" data-filter-group>
@@ -19,7 +18,7 @@ $others = array_filter($boards, static fn (App\Models\Board $b): bool => !$b->is
             <summary class="board-section-title"><?= component('icon', ['name' => 'board']) ?> <?= e(__('My boards')) ?></summary>
             <div class="board-grid">
                 <button class="board-tile board-tile-new" type="button" data-bs-toggle="modal" data-bs-target="#create-board-modal"><?= component('icon', ['name' => 'plus', 'size' => 22]) ?><span><?= e(__('Create new board…')) ?></span></button>
-                <?php foreach ($others as $board): ?>
+                <?php foreach ($boards as $board): ?>
                     <?= component('board-tile', ['board' => $board]) ?>
                 <?php endforeach ?>
             </div>

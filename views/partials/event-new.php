@@ -10,6 +10,7 @@ $minutes = auth()->eventMinutes(); ?>
     <form id="<?= $form ?>" method="post" action="<?= e($account->url('/events')) ?>" data-ajax data-duration="<?= $minutes ?>" novalidate>
         <?= csrf_field() ?>
         <input type="hidden" name="view" value="<?= e($view) ?>">
+        <input type="hidden" name="nonce" value="<?= e(uuid()) ?>"><?php /* one event per window, even if Confirm arrives twice */ ?>
     </form>
     <button type="button" class="pop-close card-back-close" data-bs-dismiss="modal" aria-label="<?= e(__('Close')) ?>"><?= component('icon', ['name' => 'x', 'size' => 20]) ?></button>
 

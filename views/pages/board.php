@@ -14,7 +14,11 @@ $star = $board->is_favorite ? __('Remove from favourites') : __('Add to favourit
         <?= component('icon', ['name' => 'search', 'size' => 14]) ?>
         <input type="search" placeholder="<?= e(__('Filter cards')) ?>" aria-label="<?= e(__('Filter cards')) ?>" data-filter=".board-canvas [data-search]">
     </div>
-    <button class="board-btn ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#board-menu" aria-controls="board-menu"
+    <?php $owner = array_values(array_filter($members, static fn ($m): bool => (int) $m->id === (int) $board->owner_id))[0] ?? null; ?>
+    <?php if ($owner && !$board->isOwner()): /* whose board it is, only when it is somebody else's */ ?>
+        <span class="board-owner ms-auto" title="<?= e(__('Owner: :name', ['name' => $owner->name])) ?>"><?= component('avatar', ['user' => $owner, 'size' => 34]) ?></span>
+    <?php endif ?>
+    <button class="board-btn <?= $owner && !$board->isOwner() ? '' : 'ms-auto' ?>" type="button" data-bs-toggle="offcanvas" data-bs-target="#board-menu" aria-controls="board-menu"
             title="<?= e(__('Show menu')) ?>" aria-label="<?= e(__('Show menu')) ?>"><?= component('icon', ['name' => 'more']) ?></button>
 </div>
 

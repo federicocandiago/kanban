@@ -8,16 +8,18 @@ $next = date('Y-m', mktime(0, 0, 0, $m + 1, 1, $y)); ?>
         <small><?= e($account->label()) ?></small>
     </div>
     <span class="board-sep"></span>
+    <span class="calendar-break" aria-hidden="true"></span>
     <a class="board-btn" href="?month=<?= e($prev) ?>" title="<?= e(__('Previous month')) ?>" aria-label="<?= e(__('Previous month')) ?>">‹</a>
     <span class="calendar-month"><?= e(month_name($m) . ' ' . $y) ?></span>
     <a class="board-btn" href="?month=<?= e($next) ?>" title="<?= e(__('Next month')) ?>" aria-label="<?= e(__('Next month')) ?>">›</a>
-    <div class="board-filter" data-expand>
+    <a class="board-btn calendar-today" href="<?= e($account->url()) ?>" data-today title="<?= e(__('Today')) ?>" aria-label="<?= e(__('Today')) ?>"><?= component('icon', ['name' => 'target']) ?></a>
+    <div class="board-filter ms-auto" data-expand>
         <button class="board-btn" type="button" title="<?= e(__('Filter events')) ?>" aria-label="<?= e(__('Filter events')) ?>"><?= component('icon', ['name' => 'search']) ?></button>
         <?= component('icon', ['name' => 'search', 'size' => 14]) ?>
         <input type="search" placeholder="<?= e(__('Filter events')) ?>" aria-label="<?= e(__('Filter events')) ?>" data-filter=".board-canvas [data-search]">
     </div>
-    <span class="board-btn calendar-sync ms-auto" data-sync-state title="<?= e(__('Last sync: :date', ['date' => format_date($account->synced_at)])) ?>"><?= component('icon', ['name' => 'restore']) ?></span>
-    <a class="board-btn" href="<?= base_url() ?>/account#calendar-<?= (int) $account->id ?>" title="<?= e(__('Calendar settings')) ?>" aria-label="<?= e(__('Calendar settings')) ?>"><?= component('icon', ['name' => 'gear']) ?></a>
+    <span class="board-btn calendar-sync" data-sync-state title="<?= e(__('Last sync: :date', ['date' => format_date($account->synced_at)])) ?>"><?= component('icon', ['name' => 'restore']) ?></span>
+    <a class="board-btn calendar-settings" href="<?= base_url() ?>/account#calendar-<?= (int) $account->id ?>" title="<?= e(__('Calendar settings')) ?>" aria-label="<?= e(__('Calendar settings')) ?>"><?= component('icon', ['name' => 'gear']) ?></a>
 </div>
 
 <div class="board-canvas" data-cards-url="<?= e(url('/events/')) ?>" data-view="<?= e($month) ?>" data-start-offset="<?= (int) env('CALENDAR_START_OFFSET_DAYS', -1) ?>"

@@ -89,7 +89,13 @@
     /** Applies a server answer: navigation, DOM patches, then the message. */
     function handle(data, trigger = null) {
         if (data.reload) return window.location.reload();
-        if (data.redirect) return void (window.location.href = data.redirect);
+        if (data.redirect) {
+            // the same page with another #anchor would not load again by itself (e.g. back to Settings after saving)
+            const target = new URL(data.redirect, location.href);
+            window.location.href = target.href;
+            if (target.pathname === location.pathname && target.search === location.search) window.location.reload();
+            return;
+        }
 
         for (const [selector, html] of Object.entries(data.html ?? {})) {
             $$(selector).forEach((el) => { el.outerHTML = html; });
@@ -145,7 +151,16 @@
         event.preventDefault();
         if (form.dataset.ask && !(await confirmDialog(form.dataset.ask))) return;
 
-        const button = event.submitter ?? form.querySelector('[type="submit"]');
+        // a form that is sent on purpose (not saving itself on every change) goes once at a time:
+        // a second tap on its buttons, or Enter, while it is on its way is ignored
+        const once = !form.hasAttribute('data-autosubmit');
+        if (once && form.hasAttribute('data-sending')) return;
+        const buttons = [...form.querySelectorAll('[type="submit"]'), ...(form.id ? $$(`[type="submit"][form="${CSS.escape(form.id)}"]`) : [])];
+        const button = event.submitter ?? buttons[0];
+        if (once) {
+            form.setAttribute('data-sending', '');
+            buttons.forEach((el) => { el.disabled = true; });
+        }
         await busy(button, async () => {
             const data = await api(form.action, new FormData(form));
             showErrors(form, data.errors);
@@ -156,6 +171,10 @@
             // on document: the form may have just been redrawn away
             document.dispatchEvent(new CustomEvent('app:done', { detail: { data, form } }));
         });
+        if (once) {
+            form.removeAttribute('data-sending');
+            buttons.forEach((el) => { el.disabled = false; });
+        }
     });
 
     // form[data-duration="30"] (calendar event): changing the start sets the end that many minutes later

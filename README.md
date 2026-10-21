@@ -41,6 +41,8 @@ php bin/migrate.php         # optional: the site creates the tables and the admi
   the month opens `CALENDAR_START_OFFSET_DAYS` days from today (default -1: yesterday is visible too); phones open
   on today. Quick add makes whole-day events, or (each calendar's setting, starting from `CALENDAR_NEW_ALL_DAY`,
   default off) opens a "new event" window from now to the user's default length, saved only on "Confirm".
+- **Install on a phone**: `public/manifest.webmanifest` (full screen, the app icon), so browsers offer "Add to
+  Home screen".
 - **Board look**: the top bar and the board header are one band of frosted glass tinted with the photo's average
   colour (from Unsplash) or the board's colour; lists are light frosted glass; cards stay solid.
 - **Dashboard**: three sections — Calendars, Favourites (only when there are some) and My boards (the others) —

@@ -3,7 +3,7 @@
     <p class="text-secondary small"><?= e(__('Last updated: :date', ['date' => legal('date')])) ?></p>
 
     <h2 class="h6 mt-4">1. <?= e(__('The service')) ?></h2>
-    <p><?= e(__(':app lets you organise your work in boards, lists and cards, alone or together with other people.', ['app' => env('APP_NAME')])) ?></p>
+    <p><?= e(__(':app lets you organise boards, lists, cards and calendar appointments, alone or together with other people.', ['app' => env('APP_NAME')])) ?></p>
 
     <h2 class="h6 mt-4">2. <?= e(__('Your account')) ?></h2>
     <p><?= e(__('You are responsible for your credentials and for everything done with your account.')) ?></p>

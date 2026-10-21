@@ -107,13 +107,20 @@
 
     // Calendar: start from today — on wider screens data-start-offset days away (-1: yesterday
     // shows too, within the month) — then keep in step with the server.
-    const today = canvas.querySelector('.is-today');
-    if (today) {
+    const toToday = (behavior = 'auto') => {
+        const today = canvas.querySelector('.is-today');
+        if (!today) return false;
         const days = [...today.parentElement.children];
         const offset = matchMedia('(min-width: 576px)').matches ? Number(canvas.dataset.startOffset ?? 0) || 0 : 0;
         const start = days[Math.min(days.length - 1, Math.max(0, days.indexOf(today) + offset))];
-        canvas.scrollLeft = start.offsetLeft - 8;
-    }
+        canvas.scrollTo({ left: start.offsetLeft - 8, behavior });
+        return true;
+    };
+    toToday();
+    // [data-today]: back to today; on this month's page just scroll there, otherwise the link opens it
+    document.querySelector('[data-today]')?.addEventListener('click', (event) => {
+        if (toToday('smooth')) event.preventDefault();
+    });
 
     if (sync) {
         const state = document.querySelector('[data-sync-state]');

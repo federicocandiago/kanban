@@ -1,6 +1,6 @@
 <?php /** Top bar: menu and boards on the left, logo in the middle, create / notifications / settings (the avatar) on the right. */
 $user = auth(); ?>
-<header class="topbar" id="topbar">
+<header class="topbar <?= $user ? '' : 'is-guest' ?>" id="topbar">
     <?php if ($user): ?>
         <div class="topbar-group">
             <button class="topbar-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#side-menu" aria-controls="side-menu" aria-label="<?= e(__('Menu')) ?>"><?= component('icon', ['name' => 'menu']) ?></button>
