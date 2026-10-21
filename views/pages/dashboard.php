@@ -27,9 +27,13 @@
     </div>
 
     <?php if ($archived): ?>
-        <p class="text-muted"><?= e(__('Archived boards are hidden from everyone. The owner can restore them or delete them for good.')) ?> <a href="<?= base_url() ?>/dashboard"><?= e(__('Back to boards')) ?></a></p>
         <?php if (!$boards): ?>
-            <p class="empty-note"><?= e(__('No archived boards.')) ?></p>
+            <div class="empty-panel">
+                <?= component('icon', ['name' => 'archive', 'size' => 28]) ?>
+                <h2><?= e(__('No archived boards.')) ?></h2>
+                <p><?= e(__('Archived boards are hidden from everyone. The owner can restore them or delete them for good.')) ?></p>
+                <a class="btn btn-secondary" href="<?= base_url() ?>/dashboard"><?= e(__('Back to boards')) ?></a>
+            </div>
         <?php endif ?>
         <div class="archived-boards">
             <?php foreach ($boards as $board): ?>

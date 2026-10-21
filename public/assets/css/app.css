@@ -407,6 +407,14 @@ tr.is-paused { opacity: .6; }
 .archived-row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--k-surface); border-radius: var(--r); flex-wrap: wrap; }
 .archived-thumb { width: 48px; height: 36px; border-radius: var(--r-xs); background-size: cover; background-position: center; flex: none; }
 .empty-note { color: var(--k-muted); padding: 24px 0; }
+/* nothing to show: a calm card in the middle */
+.empty-panel {
+    max-width: 460px; margin: 48px auto; padding: 36px 32px; text-align: center; color: var(--k-text);
+    background: var(--k-card); border-radius: var(--r-xl); box-shadow: 0 18px 40px -24px rgb(0 0 0 / .5);
+}
+.empty-panel > .icon { color: var(--k-muted); margin-bottom: 12px; }
+.empty-panel h2 { font-size: 18px; font-weight: 700; margin: 0 0 8px; }
+.empty-panel p { color: var(--k-muted); margin: 0 0 20px; text-wrap: balance; }
 
 /* ── Create board dialog ─────────────────────────────────────────────────── */
 .create-board { max-width: 560px; }
@@ -481,7 +489,9 @@ tr.is-paused { opacity: .6; }
 .board-sep { width: 1px; height: 18px; margin: 0 4px; background: rgba(255, 255, 255, .3); }
 .board-members { display: flex; align-items: center; gap: 6px; }
 .board-members .avatar { box-shadow: 0 0 0 1px rgba(0, 0, 0, .1); }
-.board-members .board-btn { margin-left: 6px; }
+.board-members .board-btn { margin-left: 0; }
+.board-page:not(.is-calendar) .board-header { gap: 10px; }          /* the same space between every button */
+.board-page:not(.is-calendar) .board-header .board-sep { display: none; }
 .board-members .avatar-more { width: 34px; height: 34px; }
 .board-canvas { padding-top: 6px; }
 .board-filter { position: relative; display: flex; align-items: center; }
@@ -803,7 +813,7 @@ tr.is-paused { opacity: .6; }
 .calendar-account-body { padding: 4px 0 16px; }
 @media (max-width: 575.98px) {
     .is-calendar .calendar-today { margin-right: 0; }
-    .is-calendar .board-header .board-filter.ms-auto { margin-left: auto !important; }   /* search, sync, settings on the right */
+    .board-header .board-filter.ms-auto { margin-left: auto !important; }   /* search, sync, settings on the right */
     .board-header .board-sep { display: none; }
 }
 
