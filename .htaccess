@@ -1,0 +1,28 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Project uploaded inside the web folder (e.g. htdocs/kalban):
+# every request is served from public/, the rest of the project stays private.
+# Works in the site root or in a subfolder. (Not used when only public/ is online.)
+# ─────────────────────────────────────────────────────────────────────────────
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # If your host needs it, uncomment and set the URL path of this folder:
+    # RewriteBase /kalban/
+    RewriteRule ^public/ - [L]
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Safety net if rewriting is disabled: never expose config, code or data
+<FilesMatch "^\.|\.(env|sql|log|md|po|pot|sh|json|lock)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+# Private folders (app, bin, bootstrap, database, lang, routes, storage, views) also have
+# their own deny-all .htaccess, so they stay closed even if this file is ignored.

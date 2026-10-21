@@ -1,0 +1,174 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controllers;
+
+use App\Core\Request;
+use App\Core\Response;
+use App\Models\Attachment;
+use App\Models\Board;
+use App\Models\BoardList;
+use App\Models\Card;
+use App\Services\AttachmentService;
+use App\Services\CardService;
+
+/**
+ * Cards on the site. The rules (validation, log) are in CardService; the answers carry the
+ * markup to redraw: the tile on the board and the open card's panels.
+ */
+final class CardController extends Controller
+{
+    /** Quick create from the bottom of a list: only the name. */
+    public function store(Request $request, string $id): Response
+    {
+        [$list] = $this->list((int) $id);
+        $card = $this->cards()->create($list, (string) $request->input('title', ''));
+
+        return $this->ok('', ['append' => ["#list-{$list->id} [data-cards]" => $this->tile((int) $card->id)]]);
+    }
+
+    /** The card "back", loaded into the card modal. */
+    public function show(Request $request, string $id): Response
+    {
+        [$card, $board] = $this->card((int) $id);
+
+        return Response::html(partial('card', $this->details($card, $board)));
+    }
+
+    /** Name, description, dates and list: the form saves itself on every change. */
+    public function update(Request $request, string $id): Response
+    {
+        [$card, $board] = $this->card((int) $id);
+        $input = array_intersect_key($request->all(), array_flip(['title', 'description', 'start_date', 'end_date', 'list_id']));
+        $movedTo = $this->cards()->update($card, $board, $input);
+
+        return $this->ok('', $this->redraw((int) $card->id, $board, $movedTo));
+    }
+
+    /** Drag & drop: the card lands in list_id, whose cards are now ordered as ids. */
+    public function move(Request $request, string $id): Response
+    {
+        [$card, $board] = $this->card((int) $id);
+        $list = BoardList::find((int) $request->input('list_id'));
+        if (!$list || (int) $list->board_id !== (int) $board->id) {
+            return $this->fail(__('Choose a list of this board.'));
+        }
+        $this->cards()->reorder($card, $list, (array) $request->input('ids', []));
+
+        return $this->ok();
+    }
+
+    /** The user's own labels on this card: label_ids[] is the complete new selection. */
+    public function labels(Request $request, string $id): Response
+    {
+        [$card, $board] = $this->card((int) $id);
+        $this->cards()->setLabels($card, (array) $request->input('label_ids', []));
+
+        return $this->ok('', $this->redraw((int) $card->id, $board));
+    }
+
+    public function attach(Request $request, string $id): Response
+    {
+        [$card, $board] = $this->card((int) $id);
+        $file = $request->files('file')[0] ?? null;
+        $this->cards()->attach($card, $board, $file, $file === null && $request->contentLength() > 0);
+
+        return $this->ok('', $this->redraw((int) $card->id, $board));
+    }
+
+    public function download(Request $request, string $id): Response
+    {
+        $attachment = Attachment::find((int) $id) ?? abort(404);
+        [, $board] = $this->card((int) $attachment->card_id);
+
+        return self::sendAttachment($attachment, $board, $attachment->isImage() && $request->input('inline'));
+    }
+
+    public function detach(Request $request, string $id): Response
+    {
+        $attachment = Attachment::find((int) $id) ?? abort(404);
+        [$card, $board] = $this->card((int) $attachment->card_id);
+        $this->cards()->detach($card, $board, $attachment);
+
+        return $this->ok('', $this->redraw((int) $card->id, $board));
+    }
+
+    public function archive(Request $request, string $id): Response
+    {
+        [$card, $board] = $this->card((int) $id);
+        $this->cards()->archive($card);
+
+        return $this->ok(__('Card archived.'), ['remove' => ["#card-{$card->id}"], 'close' => true, ...$this->archivedPanel($board)]);
+    }
+
+    public function restore(Request $request, string $id): Response
+    {
+        [$card, $board] = $this->card((int) $id);
+        $list = $this->cards()->restore($card);
+
+        return $this->ok(__('Card restored.'), [
+            'append' => ["#list-{$list->id} [data-cards]" => $this->tile((int) $card->id)],
+            ...$this->archivedPanel($board),
+        ]);
+    }
+
+    /** Hard delete: board owner only. */
+    public function destroy(Request $request, string $id): Response
+    {
+        [$card, $board] = $this->card((int) $id, owner: true);
+        $this->cards()->destroy($card);
+
+        return $this->ok(__('Card deleted.'), ['remove' => ["#card-{$card->id}"], 'close' => true, ...$this->archivedPanel($board)]);
+    }
+
+    /** The stored file, as a download (or shown, for images asked inline). Also used by the API. */
+    public static function sendAttachment(Attachment $attachment, Board $board, bool $inline = false): Response
+    {
+        $path = (new AttachmentService())->path((int) $board->id, (string) $attachment->file) ?? abort(404);
+        $name = str_replace(['"', "\r", "\n"], '', (string) $attachment->name);
+
+        return Response::file($path, $inline ? (string) $attachment->mime : 'application/octet-stream')
+            ->withHeader('Content-Disposition', ($inline ? 'inline' : 'attachment') . '; filename="' . $name . '"; filename*=UTF-8\'\'' . rawurlencode($name))
+            ->withHeader('Cache-Control', 'private, max-age=86400');
+    }
+
+    private function cards(): CardService
+    {
+        return new CardService(auth());
+    }
+
+    /** Everything the card back shows. */
+    private function details(Card $card, Board $board): array
+    {
+        return [
+            'card' => $card,
+            'board' => $board,
+            'lists' => $board->lists(),
+            'myLabels' => auth()->labels(),
+        ];
+    }
+
+    private function tile(int $id): string
+    {
+        return partial('card-tile', ['card' => Card::detailed($id)]);
+    }
+
+    /**
+     * Answer that redraws the tile and the read-only parts of the open card (labels, attachments,
+     * log): never its form, so a field being edited keeps focus and text. When the card changed
+     * list ($movedTo) the tile leaves the old list and joins the bottom of the new one.
+     */
+    private function redraw(int $id, Board $board, ?int $movedTo = null): array
+    {
+        $data = $this->details(Card::detailed($id), $board);
+        $panels = [];
+        foreach (['labels', 'attachments', 'activity'] as $part) {
+            $panels["#card-{$part}"] = partial("card-{$part}", $data);
+        }
+
+        return $movedTo === null
+            ? ['html' => ["#card-{$id}" => $this->tile($id), ...$panels]]
+            : ['remove' => ["#card-{$id}"], 'append' => ["#list-{$movedTo} [data-cards]" => $this->tile($id)], 'html' => $panels];
+    }
+}

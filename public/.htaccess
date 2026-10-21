@@ -1,0 +1,17 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Always use HTTPS (the session cookie needs a secure page): uncomment once
+    # https:// works on your site. If the site then keeps reloading, your host terminates HTTPS
+    # in front of Apache: comment these two lines again.
+    # RewriteCond %{HTTPS} !=on
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # If your host needs it (site in a subfolder), uncomment and set the URL path of this folder,
+    # e.g. /kalban/public/ when the whole project is in htdocs/kalban
+    # RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>

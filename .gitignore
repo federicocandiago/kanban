@@ -1,0 +1,10 @@
+.env
+.DS_Store
+/storage/attachments/*
+!/storage/attachments/.gitkeep
+/storage/avatars/*
+!/storage/avatars/.gitkeep
+/storage/cache/*
+!/storage/cache/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitkeep
