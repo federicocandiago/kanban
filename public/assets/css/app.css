@@ -637,6 +637,7 @@ tr.is-paused { opacity: .6; }
 .side-bottom { position: sticky; bottom: 20px; margin-top: auto; padding-top: 16px; }
 .side-confirm { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; margin-bottom: 18px; }
 .side-bottom .side-btn.is-danger { margin-top: 16px; }
+.side-confirm.confirm-inline { display: none; }
 .calendar-choice { gap: 8px; padding: 2px; }
 .calendar-choice label { cursor: pointer; }
 .calendar-choice .label { opacity: .45; transition: opacity .15s, box-shadow .15s; }
@@ -737,6 +738,9 @@ tr.is-paused { opacity: .6; }
     .modal-fullscreen-sm-down .modal-content { overflow-y: auto; -webkit-overflow-scrolling: touch; }
     /* one column on phones: Confirm and the actions just follow the rest, nothing floats over it */
     .side-bottom { position: static; margin-top: 8px; padding-top: 16px; }
+    /* Confirm moves up, before the log, so it is in reach without scrolling to the bottom */
+    .side-confirm.confirm-inline { display: flex; margin: 8px 0 24px; }
+    .side-bottom .side-confirm:not(.confirm-inline) { display: none; }
     .card-back-side h3:not(:first-child) { margin-top: 20px; }
     .card-back-grid { grid-template-columns: 1fr; }
     .topbar { padding: 8px; }

@@ -53,6 +53,7 @@ $onCard = $card->labelIds(); ?>
             </section>
 
             <?= partial('card-attachments', compact('card', 'board')) ?>
+            <button class="btn btn-success side-confirm confirm-inline" type="submit" form="<?= $form ?>" data-close><?= component('icon', ['name' => 'check']) ?> <?= e(__('Confirm')) ?></button><?php /* phones only: in reach before the log */ ?>
             <?= partial('card-activity', compact('card')) ?>
         </div>
 
