@@ -749,7 +749,8 @@ tr.is-paused { opacity: .6; }
 .calendar-title h1 { margin: 0; font-size: 18px; font-weight: 700; }
 .calendar-title small { font-size: 11px; opacity: .8; }
 .calendar-month { min-width: 9em; text-align: center; font-weight: 700; }
-.calendar-break { display: none; }
+/* the calendar's name only on wide screens: below, the buttons get the whole row */
+@media (max-width: 1199.98px) { .is-calendar .calendar-title { display: none; } }
 .is-calendar .calendar-title { margin-right: 14px; }      /* name · month navigation · today, a little apart */
 .is-calendar .calendar-today { margin-left: 14px; }
 .board-owner { display: inline-flex; }
@@ -790,14 +791,10 @@ tr.is-paused { opacity: .6; }
 .calendar-account[open] > summary .btn-secondary { display: none; }
 .calendar-account-body { padding: 4px 0 16px; }
 @media (max-width: 575.98px) {
-    /* two rows: name, sync and settings; then month, arrows, today and search */
-    .is-calendar .board-header > * { order: 4; }
-    .is-calendar .calendar-title { order: 1; flex: 1 1 0; min-width: 0; padding: 0 4px 4px; }
-    .calendar-title h1, .calendar-title small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .is-calendar .calendar-sync, .is-calendar .calendar-settings { order: 2; }
-    .is-calendar .calendar-break { display: block; order: 3; flex-basis: 100%; height: 0; }
+    /* one row of buttons: the month takes the room left; the sync state (not a button) stays out */
     .calendar-month { flex: 1; min-width: 0; white-space: nowrap; }
     .is-calendar .calendar-today { margin-left: 0; }
+    .is-calendar .calendar-sync { display: none; }
     .board-header .board-sep { display: none; }
 }
 

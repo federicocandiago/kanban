@@ -8,7 +8,6 @@ $next = date('Y-m', mktime(0, 0, 0, $m + 1, 1, $y)); ?>
         <small><?= e($account->label()) ?></small>
     </div>
     <span class="board-sep"></span>
-    <span class="calendar-break" aria-hidden="true"></span>
     <a class="board-btn" href="?month=<?= e($prev) ?>" title="<?= e(__('Previous month')) ?>" aria-label="<?= e(__('Previous month')) ?>">‹</a>
     <span class="calendar-month"><?= e(month_name($m) . ' ' . $y) ?></span>
     <a class="board-btn" href="?month=<?= e($next) ?>" title="<?= e(__('Next month')) ?>" aria-label="<?= e(__('Next month')) ?>">›</a>
