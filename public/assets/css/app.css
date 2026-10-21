@@ -761,6 +761,11 @@ tr.is-paused { opacity: .6; }
 }
 .is-calendar .calendar-title { margin-right: 14px; }      /* name · month navigation · today, a little apart */
 .is-calendar .calendar-today { margin-left: 14px; }
+@media (min-width: 992px) {   /* desktop: the three groups (name · month · today) further apart, buttons a little apart */
+    .is-calendar .board-header { gap: 12px; }
+    .is-calendar .calendar-title { margin-right: 26px; }
+    .is-calendar .calendar-today { margin-left: 26px; }
+}
 .board-owner { display: inline-flex; }
 .board-owner .avatar { box-shadow: 0 0 0 2px rgb(255 255 255 / .55); }
 .calendar-sync { width: var(--control); padding: 0; cursor: default; }
