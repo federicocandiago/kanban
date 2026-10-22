@@ -87,6 +87,9 @@ body {
     --bs-body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: 14px; line-height: 20px; background: var(--k-page); color: var(--k-text);
 }
+/* Safari 26 tints its bars from the page's background (theme-color is ignored): the root takes the
+   top bar's colour, the body keeps its own (it no longer propagates, so board pages clear it below) */
+html { background-color: var(--k-topbar); }
 a { color: var(--k-muted); }
 a:hover { color: var(--k-text); }
 .text-muted { color: var(--k-muted) !important; }
@@ -473,7 +476,7 @@ tr.is-paused { opacity: .6; }
 .bg-credit { font-size: 11px; color: var(--k-muted); margin: 8px 0 0; }
 
 /* ── Board page ──────────────────────────────────────────────────────────── */
-.board-page { display: flex; flex-direction: column; height: 100vh; height: 100dvh; overflow: hidden; }
+.board-page { display: flex; flex-direction: column; height: 100vh; height: 100dvh; overflow: hidden; background: none; }
 .board-backdrop { position: fixed; inset: 0; z-index: -1; background-size: cover; background-position: center; view-transition-name: board; }
 .board-page .topbar { background: rgba(0, 0, 0, .15); }
 .board-page.has-photo .topbar { background: rgba(0, 0, 0, .35); }
@@ -997,12 +1000,12 @@ tr.is-paused { opacity: .6; }
 .is-dashboard .search-page-form .search-box input { height: 50px; }
 
 /* ── Board pages: Material You tones from the board ─────────────────────────
-   --tint (set on <body>) is the photo's average colour, or the board's colour. From it, with
+   --tint (set on <html>) is the photo's average colour, or the board's colour. From it, with
    relative colours: the top bar in a deep solid tone, tonal containers (light fill, dark text
    of the same hue) for the title and the header buttons, so they read on any photo, and lists
    on a tinted surface, slightly see-through with a light frost. Cards stay solid.
    Browsers without relative colours keep the plain look above. */
-.is-calendar { --tint: var(--k-header); }
+:root:has(> .is-calendar) { --tint: var(--k-header); }
 /* soft, layered shadows: a hairline, a close contact shadow and a wide faint one; cards lift a little on hover */
 .board-page {
     --card-shadow: 0 0 0 1px rgb(15 23 42 / .04), 0 1px 2px rgb(15 23 42 / .06), 0 4px 10px -4px rgb(15 23 42 / .12);
@@ -1035,7 +1038,8 @@ tr.is-paused { opacity: .6; }
         --surface: oklch(from var(--tint, #2c3e50) .21 min(c, .02) h / .93);
         --surface-dim: oklch(from var(--tint, #2c3e50) .18 min(c, .02) h / .93);
     }
-    .board-page .topbar, .board-page.has-photo .topbar { background: oklch(from var(--tint, #2c3e50) min(l, .42) min(c, .13) h); }
+    :root:has(> .board-page) { --k-topbar: oklch(from var(--tint, #2c3e50) min(l, .42) min(c, .13) h); }
+    .board-page .topbar, .board-page.has-photo .topbar { background: var(--k-topbar); }
     .board-page .board-name input, .board-page .board-btn, .board-page .board-filter input, .board-page .calendar-title, .board-page .calendar-month {
         background: var(--tone); color: var(--on-tone); box-shadow: 0 1px 3px rgb(0 0 0 / .2);
     }

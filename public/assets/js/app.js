@@ -25,6 +25,10 @@
     const csrf = document.querySelector('meta[name="csrf-token"]')?.content ?? '';
     const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
+    // the browser bars take the top bar's colour (the root's background, see app.css): theme-color for Chrome and older Safari
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = getComputedStyle(document.documentElement).backgroundColor;
+
     /** POST (FormData or plain object) → parsed JSON ({ok, message, errors, ...}). */
     async function api(url, body = null) {
         if (body && !(body instanceof FormData)) body = toFormData(body);
