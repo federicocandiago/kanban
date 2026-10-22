@@ -53,10 +53,9 @@ $onCard = $card->labelIds(); ?>
 
             <?php $checks = App\Models\ChecklistItem::forCard((int) $card->id); ?>
             <section class="card-section card-switch" data-card-switch="<?= (int) $card->id ?>" data-view="<?= $checks ? 'checklist' : 'description' ?>">
-                <h3 class="card-switch-tabs" role="tablist">
-                    <?= component('icon', ['name' => 'text']) ?>
-                    <button type="button" role="tab" data-switch-to="description"><?= e(__('Description')) ?></button>
-                    <button type="button" role="tab" data-switch-to="checklist"><?= e(__('Checklist')) ?> <span data-check-count></span></button>
+                <h3>
+                    <span data-pane-title="description"><?= component('icon', ['name' => 'text']) ?> <?= e(__('Description')) ?></span>
+                    <span data-pane-title="checklist"><?= component('icon', ['name' => 'check-square']) ?> <?= e(__('Checklist')) ?> <span data-check-count></span></span>
                 </h3>
                 <div class="card-switch-pane" data-pane="description">
                     <textarea class="form-control card-description" name="description" form="<?= $form ?>" rows="7"
@@ -73,7 +72,7 @@ $onCard = $card->labelIds(); ?>
         </div>
 
         <aside class="card-back-side">
-            <h3><?= e(__('Add to card')) ?></h3>
+            <h3><?= e(__('Card items')) ?></h3>
             <div class="dropdown">
                 <button class="side-btn" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><?= component('icon', ['name' => 'tag']) ?> <?= e(__('Labels')) ?></button>
                 <div class="dropdown-menu pop label-picker">
@@ -101,6 +100,8 @@ $onCard = $card->labelIds(); ?>
                 <small class="side-hint"><?= e(__('Maximum size: :size', ['size' => format_bytes($max)])) ?></small>
                 <div class="invalid-feedback" data-error-for="file"></div>
             </form>
+            <button class="side-btn side-toggle" type="button" data-switch-toggle="<?= (int) $card->id ?>" aria-pressed="false"
+                    title="<?= e(__('Show the checklist instead of the description')) ?>"><?= component('icon', ['name' => 'check-square']) ?> <?= e(__('Checklist')) ?></button>
 
             <div class="side-bottom">
                 <button class="btn btn-success side-confirm" type="submit" form="<?= $form ?>" data-close><?= component('icon', ['name' => 'check']) ?> <?= e(__('Confirm')) ?></button>

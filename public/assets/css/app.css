@@ -647,15 +647,12 @@ tr.is-paused { opacity: .6; }
 .card-section > h3, .activity-head > h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 8px -28px; font-size: 16px; font-weight: 700; }
 .card-section > h3 .icon, .activity-head > h3 .icon { color: var(--k-muted); width: 20px; }
 /* the description: a white field with a thin border, also while not in use */
-/* Description / Checklist: two tabs in the section title, one pane at a time */
-.card-switch-tabs { gap: 4px !important; }
-.card-switch-tabs .icon { margin-right: 4px; }
-.card-switch-tabs button {
-    border: 0; background: none; padding: 3px 12px; border-radius: var(--r-pill); font: inherit; font-weight: 700; color: var(--k-muted); cursor: pointer;
-}
-.card-switch-tabs button:hover { color: var(--k-text); background: var(--k-hover); }
-.card-switch-tabs button[aria-selected="true"] { color: var(--k-text); background: var(--k-btn); }
-.card-switch-tabs [data-check-count] { font-weight: 400; color: var(--k-muted); }
+/* Description / Checklist: one area, switched by the Checklist button in the side column */
+[data-pane-title] { display: none; align-items: center; gap: 8px; }
+.card-switch[data-view="description"] [data-pane-title="description"], .card-switch[data-view="checklist"] [data-pane-title="checklist"] { display: inline-flex; }
+[data-check-count] { font-weight: 400; color: var(--k-muted); }
+.side-toggle.is-on { background: var(--k-focus); color: #fff; }
+.side-toggle.is-on:hover { background: color-mix(in oklab, var(--k-focus) 85%, #000); color: #fff; }
 .card-switch-pane { display: none; }
 .card-switch[data-view="description"] [data-pane="description"], .card-switch[data-view="checklist"] [data-pane="checklist"] { display: block; }
 /* the checklist: a row per item (grip, box, text that edits in place, × on hover), the field to add below */

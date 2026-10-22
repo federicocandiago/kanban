@@ -11,7 +11,7 @@ msgstr ""
 msgid "\"color:{name}\" (:colors) or \"photo:{Unsplash id}\". Default: the user's colour."
 msgstr ""
 
-#: app/Services/DataTransfer.php:136
+#: app/Services/DataTransfer.php:138
 msgid "(imported)"
 msgstr ""
 
@@ -155,7 +155,7 @@ msgstr ""
 msgid "Account, profile and service data: as long as your account exists. When you delete your account (or an administrator deletes it), your data, your profile picture and the boards you own are deleted immediately; on boards owned by others your cards stay, and the log keeps your name."
 msgstr ""
 
-#: views/partials/card.php:107 views/partials/event.php:116
+#: views/partials/card.php:108 views/partials/event.php:116
 msgid "Actions"
 msgstr ""
 
@@ -183,7 +183,7 @@ msgstr ""
 msgid "Add a list"
 msgstr ""
 
-#: views/partials/card.php:63 views/partials/event.php:90 views/partials/event-new.php:64
+#: views/partials/card.php:62 views/partials/event.php:90 views/partials/event-new.php:64
 msgid "Add a more detailed description…"
 msgstr ""
 
@@ -233,10 +233,6 @@ msgstr ""
 
 #: views/partials/note-add.php:9
 msgid "Add note"
-msgstr ""
-
-#: views/partials/card.php:76
-msgid "Add to card"
 msgstr ""
 
 #: views/components/board-tile.php:15 views/pages/board.php:2
@@ -299,7 +295,7 @@ msgstr ""
 msgid "April"
 msgstr ""
 
-#: views/partials/card.php:111
+#: views/partials/card.php:112
 msgid "Archive"
 msgstr ""
 
@@ -363,7 +359,7 @@ msgstr ""
 msgid "Attach a file"
 msgstr ""
 
-#: views/partials/card.php:97 views/partials/event.php:106
+#: views/partials/card.php:96 views/partials/event.php:106
 msgid "Attachment"
 msgstr ""
 
@@ -535,6 +531,10 @@ msgstr ""
 msgid "Card id."
 msgstr ""
 
+#: views/partials/card.php:75
+msgid "Card items"
+msgstr ""
+
 #: app/Controllers/CardController.php:113
 msgid "Card restored."
 msgstr ""
@@ -591,7 +591,7 @@ msgstr ""
 msgid "Changes to this policy"
 msgstr ""
 
-#: views/partials/card.php:59 views/partials/card-tile.php:26
+#: views/partials/card.php:58 views/partials/card.php:104 views/partials/card-tile.php:26
 msgid "Checklist"
 msgstr ""
 
@@ -655,7 +655,7 @@ msgstr ""
 msgid "Complying with legal obligations and requests from authorities."
 msgstr ""
 
-#: views/components/confirm-modal.php:11 views/partials/card.php:71 views/partials/card.php:106 views/partials/event.php:94 views/partials/event.php:115
+#: views/components/confirm-modal.php:11 views/partials/card.php:70 views/partials/card.php:107 views/partials/event.php:94 views/partials/event.php:115
 msgid "Confirm"
 msgstr ""
 
@@ -827,7 +827,7 @@ msgstr ""
 msgid "Defending our rights in legal proceedings."
 msgstr ""
 
-#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:115 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:22 views/partials/event-attachments.php:20 views/partials/card-attachments.php:15 views/partials/labels.php:21
+#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:116 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:22 views/partials/event-attachments.php:20 views/partials/card-attachments.php:15 views/partials/labels.php:21
 msgid "Delete"
 msgstr ""
 
@@ -859,7 +859,7 @@ msgstr ""
 msgid "Deleted"
 msgstr ""
 
-#: app/Models/Activity.php:19 app/Models/EventActivity.php:17 views/pages/api-docs.php:63 views/partials/card.php:58 views/partials/event.php:88 views/partials/event-new.php:63
+#: app/Models/Activity.php:19 app/Models/EventActivity.php:17 views/pages/api-docs.php:63 views/partials/card.php:57 views/partials/event.php:88 views/partials/event-new.php:63
 msgid "Description"
 msgstr ""
 
@@ -1135,7 +1135,7 @@ msgstr ""
 msgid "Imported :boards boards, :cards cards and :files attachments."
 msgstr ""
 
-#: app/Services/DataTransfer.php:134
+#: app/Services/DataTransfer.php:136
 msgid "Imported board"
 msgstr ""
 
@@ -1287,7 +1287,7 @@ msgstr ""
 msgid "Label saved."
 msgstr ""
 
-#: views/partials/card.php:78 views/partials/card.php:80 views/partials/card-labels.php:4
+#: views/partials/card.php:77 views/partials/card.php:79 views/partials/card-labels.php:4
 msgid "Labels"
 msgstr ""
 
@@ -1403,7 +1403,7 @@ msgstr ""
 msgid "Loading photos…"
 msgstr ""
 
-#: views/partials/card.php:90
+#: views/partials/card.php:89
 msgid "Manage my labels"
 msgstr ""
 
@@ -1411,7 +1411,7 @@ msgstr ""
 msgid "March"
 msgstr ""
 
-#: views/partials/card.php:101 views/partials/event.php:110
+#: views/partials/card.php:100 views/partials/event.php:110
 msgid "Maximum size: :size"
 msgstr ""
 
@@ -1967,7 +1967,7 @@ msgstr ""
 msgid "Responses"
 msgstr ""
 
-#: views/pages/dashboard.php:47 views/partials/card.php:109 views/partials/archived.php:12 views/partials/archived.php:27
+#: views/pages/dashboard.php:47 views/partials/card.php:110 views/partials/archived.php:12 views/partials/archived.php:27
 msgid "Restore"
 msgstr ""
 
@@ -2131,6 +2131,10 @@ msgstr "Shared with me"
 msgid "Show menu"
 msgstr ""
 
+#: views/partials/card.php:104
+msgid "Show the checklist instead of the description"
+msgstr ""
+
 #: app/Controllers/AuthController.php:22 views/components/header.php:23 views/pages/auth/resend.php:9 views/pages/auth/login.php:2 views/pages/auth/login.php:7 views/pages/auth/register.php:32 views/pages/home.php:10
 msgid "Sign in"
 msgstr ""
@@ -2263,7 +2267,7 @@ msgstr ""
 msgid "The calendar “:name” will be disconnected from this site; nothing changes on the calendar itself."
 msgstr ""
 
-#: views/partials/card.php:115 views/partials/archived.php:15
+#: views/partials/card.php:116 views/partials/archived.php:15
 msgid "The card “:name” and its attachments will be deleted for good."
 msgstr ""
 
@@ -2307,7 +2311,7 @@ msgstr ""
 msgid "The file"
 msgstr ""
 
-#: app/Controllers/AccountController.php:198 app/Controllers/CalendarController.php:335 app/Services/CardService.php:145 views/partials/card.php:99 views/partials/event.php:108
+#: app/Controllers/AccountController.php:198 app/Controllers/CalendarController.php:335 app/Services/CardService.php:145 views/partials/card.php:98 views/partials/event.php:108
 msgid "The file is too large (max :size)."
 msgstr ""
 
@@ -2471,7 +2475,7 @@ msgstr ""
 msgid "This invitation has already been answered or withdrawn."
 msgstr ""
 
-#: app/Controllers/AccountController.php:203 app/Services/DataTransfer.php:114
+#: app/Controllers/AccountController.php:203 app/Services/DataTransfer.php:116
 msgid "This is not a Kalban export (or it comes from a newer version)."
 msgstr ""
 

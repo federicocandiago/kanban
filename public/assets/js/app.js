@@ -321,29 +321,35 @@
         sum.textContent = [start, end].filter(Boolean).join(' → ') || sum.dataset.none;
     });
 
-    // A card's Description / Checklist switch ([data-card-switch]): one shows at a time; the choice is
+    // A card's Description / Checklist area ([data-card-switch]): one shows at a time; the choice is
     // remembered per card in this browser, otherwise the checklist shows when the card has one.
-    // The tab says how far the checklist is ("3/5", from #card-checklist[data-count]).
+    // The title says how far the checklist is ("3/5", from #card-checklist[data-count]).
     const viewKey = (box) => `cardview:${box.dataset.cardSwitch}`;
     function cardSwitch(box, view = null) {
         if (!view) {
             try { view = localStorage.getItem(viewKey(box)); } catch { /* storage disabled */ }
         }
         box.dataset.view = view || box.dataset.view;
-        $$('[data-switch-to]', box).forEach((tab) => tab.setAttribute('aria-selected', String(tab.dataset.switchTo === box.dataset.view)));
+        $$(`[data-switch-toggle="${box.dataset.cardSwitch}"]`).forEach((button) => {
+            button.setAttribute('aria-pressed', String(box.dataset.view === 'checklist'));
+            button.classList.toggle('is-on', box.dataset.view === 'checklist');
+        });
         const count = box.querySelector('#card-checklist')?.dataset.count ?? '';
         const label = box.querySelector('[data-check-count]');
         if (label) label.textContent = count ? `(${count})` : '';
     }
     const cardSwitches = () => $$('[data-card-switch]').forEach((box) => cardSwitch(box));
+    // the Checklist button in the side column turns the area from description to checklist and back
     document.addEventListener('click', (event) => {
-        const tab = event.target.closest('[data-switch-to]');
-        if (!tab) return;
-        const box = tab.closest('[data-card-switch]');
-        try { localStorage.setItem(viewKey(box), tab.dataset.switchTo); } catch { /* storage disabled */ }
-        cardSwitch(box, tab.dataset.switchTo);
-        if (tab.dataset.switchTo === 'checklist' && !box.querySelector('.check-item')) {
-            requestAnimationFrame(() => box.querySelector('.check-add input[name="text"]')?.focus()); // after the click has settled on the tab
+        const button = event.target.closest('[data-switch-toggle]');
+        if (!button) return;
+        const box = document.querySelector(`[data-card-switch="${CSS.escape(button.dataset.switchToggle)}"]`);
+        if (!box) return;
+        const view = box.dataset.view === 'checklist' ? 'description' : 'checklist';
+        try { localStorage.setItem(viewKey(box), view); } catch { /* storage disabled */ }
+        cardSwitch(box, view);
+        if (view === 'checklist' && !box.querySelector('.check-item')) {
+            requestAnimationFrame(() => box.querySelector('.check-add input[name="text"]')?.focus()); // after the click has settled
         }
     });
     document.addEventListener('app:patched', cardSwitches);
