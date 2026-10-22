@@ -24,6 +24,11 @@ class Activity extends Model
             'label_removed' => __('Label removed'),
             'attachment_added' => __('Attachment added'),
             'attachment_removed' => __('Attachment removed'),
+            'check_added' => __('Checklist item added'),
+            'check_done' => __('Checklist item done'),
+            'check_undone' => __('Checklist item not done'),
+            'check_renamed' => __('Checklist item renamed'),
+            'check_removed' => __('Checklist item removed'),
             'archived' => __('Archived'),
             'restored' => __('Restored'),
         ];

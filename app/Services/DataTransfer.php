@@ -16,7 +16,7 @@ use DateTimeImmutable;
  * and notes. So it can be imported into any account, also of another Kalban.
  *
  * Exported: profile preferences, the user's labels, the boards they own (archived too) with
- * their lists, cards, labels on cards, log, notes and, optionally, attachments (base64), and
+ * their lists, cards, labels on cards, checklists, log, notes and, optionally, attachments (base64), and
  * the calendars' names and settings (to be connected again: no credentials).
  * Imported: always as new boards; labels with the same name and colour are reused.
  */
@@ -67,6 +67,8 @@ final class DataTransfer
                         // only the user's own labels can travel (other members' are theirs)
                         'labels' => array_values(array_filter(array_map(static fn ($id) => $labelKey[(int) $id] ?? null, $cardLabels))),
                         'attachments' => $attachments,
+                        'checklist' => array_map(static fn (array $row): array => ['text' => $row['text'], 'done' => (bool) $row['done']],
+                            $this->db->select('SELECT text, done FROM checklist_items WHERE card_id = ? ORDER BY position, id', [$card['id']])),
                         'log' => array_map(static fn (array $row): array => [
                             'by' => $row['user_name'], 'field' => $row['field'], 'old' => $row['old_value'], 'new' => $row['new_value'],
                             'at' => $row['created_at'], 'edited_at' => $row['updated_at'],
@@ -183,6 +185,13 @@ final class DataTransfer
                                 'mime' => mb_substr((string) ($a['mime'] ?? 'application/octet-stream'), 0, 100), 'size' => strlen($content),
                                 'created_at' => $this->date($a['created_at'] ?? null) ?? $this->now(), 'updated_at' => $this->now()]);
                             $count['attachments']++;
+                        }
+                        foreach (array_values((array) ($c['checklist'] ?? [])) as $kp => $k) {
+                            $text = mb_substr(trim((string) ($k['text'] ?? '')), 0, 500);
+                            if ($text !== '') {
+                                $this->db->insert('checklist_items', ['card_id' => $cardId, 'text' => $text, 'done' => (int) !empty($k['done']),
+                                    'position' => $kp, 'created_at' => $this->now(), 'updated_at' => $this->now()]);
+                            }
                         }
                         // log and notes keep their names; nobody's account is attached to them any more
                         foreach ((array) ($c['log'] ?? []) as $e) {

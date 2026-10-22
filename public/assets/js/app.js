@@ -321,6 +321,39 @@
         sum.textContent = [start, end].filter(Boolean).join(' → ') || sum.dataset.none;
     });
 
+    // A card's Description / Checklist switch ([data-card-switch]): one shows at a time; the choice is
+    // remembered per card in this browser, otherwise the checklist shows when the card has one.
+    // The tab says how far the checklist is ("3/5", from #card-checklist[data-count]).
+    const viewKey = (box) => `cardview:${box.dataset.cardSwitch}`;
+    function cardSwitch(box, view = null) {
+        if (!view) {
+            try { view = localStorage.getItem(viewKey(box)); } catch { /* storage disabled */ }
+        }
+        box.dataset.view = view || box.dataset.view;
+        $$('[data-switch-to]', box).forEach((tab) => tab.setAttribute('aria-selected', String(tab.dataset.switchTo === box.dataset.view)));
+        const count = box.querySelector('#card-checklist')?.dataset.count ?? '';
+        const label = box.querySelector('[data-check-count]');
+        if (label) label.textContent = count ? `(${count})` : '';
+    }
+    const cardSwitches = () => $$('[data-card-switch]').forEach((box) => cardSwitch(box));
+    document.addEventListener('click', (event) => {
+        const tab = event.target.closest('[data-switch-to]');
+        if (!tab) return;
+        const box = tab.closest('[data-card-switch]');
+        try { localStorage.setItem(viewKey(box), tab.dataset.switchTo); } catch { /* storage disabled */ }
+        cardSwitch(box, tab.dataset.switchTo);
+        if (tab.dataset.switchTo === 'checklist' && !box.querySelector('.check-item')) {
+            requestAnimationFrame(() => box.querySelector('.check-add input[name="text"]')?.focus()); // after the click has settled on the tab
+        }
+    });
+    document.addEventListener('app:patched', cardSwitches);
+    cardSwitches();
+    // a form with data-keep-focus (add a checklist item) is redrawn on success: the new one gets the cursor back
+    document.addEventListener('app:done', (event) => {
+        const { data, form } = event.detail;
+        if (data.ok && form.hasAttribute('data-keep-focus')) document.querySelector(`form[action="${CSS.escape(form.getAttribute('action'))}"] input:not([type="hidden"])`)?.focus();
+    });
+
     // after a DOM patch the new elements are filtered like the others
     document.addEventListener('app:patched', () => {
         $$('[data-filter]').forEach((box) => { if (box.value) box.dispatchEvent(new Event('input', { bubbles: true })); });
@@ -409,7 +442,8 @@
         if (form.hasAttribute('data-reset')) form.reset();
     });
     document.addEventListener('shown.bs.modal', (event) => {
-        const field = event.target.querySelector('[autofocus]') ?? event.target.querySelector('input[required]');
+        // a card window opens without a cursor (its checklist items are required fields too)
+        const field = event.target.querySelector('[autofocus]') ?? event.target.querySelector('input[required]:not(.card-back input)');
         field?.focus();
         field?.select?.();
     });

@@ -18,7 +18,9 @@ final class Card extends Model
     {
         $rows = static::db()->select(
             "SELECT c.*, l.name AS list_name, (SELECT COUNT(*) FROM attachments a WHERE a.card_id = c.id) AS attachment_count,
-                    (SELECT COUNT(*) FROM card_activity n WHERE n.card_id = c.id AND n.field = 'note') AS note_count
+                    (SELECT COUNT(*) FROM card_activity n WHERE n.card_id = c.id AND n.field = 'note') AS note_count,
+                    (SELECT COUNT(*) FROM checklist_items k WHERE k.card_id = c.id) AS check_total,
+                    (SELECT COUNT(*) FROM checklist_items k WHERE k.card_id = c.id AND k.done = 1) AS check_done
              FROM cards c JOIN lists l ON l.id = c.list_id WHERE {$where} ORDER BY {$order}",
             $params
         );

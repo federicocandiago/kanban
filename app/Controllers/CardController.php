@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Core\Database;
 use App\Core\Request;
 use App\Core\Response;
 use App\Models\Activity;
@@ -11,6 +12,7 @@ use App\Models\Attachment;
 use App\Models\Board;
 use App\Models\BoardList;
 use App\Models\Card;
+use App\Models\ChecklistItem;
 use App\Services\AttachmentService;
 use App\Services\CardService;
 
@@ -170,6 +172,78 @@ final class CardController extends Controller
         return $this->ok('', $this->redraw((int) $card->id, $board));
     }
 
+    /** Checklist: a new item at the bottom. */
+    public function addCheck(Request $request, string $id): Response
+    {
+        [$card, $board] = $this->card((int) $id);
+        $text = $this->checkText($request) ?? abort(422, __('Write the item first.'));
+        $position = (int) Database::connection()->scalar('SELECT COALESCE(MAX(position) + 1, 0) FROM checklist_items WHERE card_id = ?', [$card->id]);
+        ChecklistItem::create(['card_id' => $card->id, 'text' => $text, 'done' => 0, 'position' => $position]);
+        $card->log(auth(), 'check_added', null, $text);
+        $card->update([]);
+
+        return $this->ok('', $this->redraw((int) $card->id, $board));
+    }
+
+    /** Checklist: tick / untick (done) or rename (text). */
+    public function updateCheck(Request $request, string $id): Response
+    {
+        [$item, $card, $board] = $this->check((int) $id);
+        if ($request->input('text') !== null) {
+            $text = $this->checkText($request) ?? abort(422, __('Write the item first.'));
+            if ($text !== $item->text) {
+                $card->log(auth(), 'check_renamed', (string) $item->text, $text);
+                $item->update(['text' => $text]);
+            }
+        } else {
+            $done = (bool) $request->input('done');
+            if ($done !== (bool) $item->done) {
+                $item->update(['done' => (int) $done]);
+                $card->log(auth(), $done ? 'check_done' : 'check_undone', null, (string) $item->text);
+            }
+        }
+        $card->update([]);
+
+        return $this->ok('', $this->redraw((int) $card->id, $board));
+    }
+
+    public function deleteCheck(Request $request, string $id): Response
+    {
+        [$item, $card, $board] = $this->check((int) $id);
+        $item->delete();
+        $card->log(auth(), 'check_removed', (string) $item->text, null);
+        $card->update([]);
+
+        return $this->ok('', $this->redraw((int) $card->id, $board));
+    }
+
+    /** Checklist: the items in their new order (drag & drop). */
+    public function orderChecks(Request $request, string $id): Response
+    {
+        [$card] = $this->card((int) $id);
+        foreach (array_values((array) $request->input('ids', [])) as $position => $itemId) {
+            Database::connection()->query('UPDATE checklist_items SET position = ? WHERE id = ? AND card_id = ?', [$position, (int) $itemId, $card->id]);
+        }
+
+        return $this->ok();
+    }
+
+    /** @return array{0: ChecklistItem, 1: Card, 2: Board} */
+    private function check(int $id): array
+    {
+        $item = ChecklistItem::find($id) ?? abort(404);
+        [$card, $board] = $this->card((int) $item->card_id);
+
+        return [$item, $card, $board];
+    }
+
+    private function checkText(Request $request): ?string
+    {
+        $text = trim(preg_replace('/\s+/', ' ', (string) $request->input('text', '')) ?? '');
+
+        return $text === '' ? null : mb_substr($text, 0, 500);
+    }
+
     /** @return array{0: Activity, 1: Card, 2: Board} */
     private function note(int $id): array
     {
@@ -219,7 +293,7 @@ final class CardController extends Controller
     {
         $data = $this->details(Card::detailed($id), $board);
         $panels = [];
-        foreach (['labels', 'attachments', 'activity'] as $part) {
+        foreach (['labels', 'checklist', 'attachments', 'activity'] as $part) {
             $panels["#card-{$part}"] = partial("card-{$part}", $data);
         }
 

@@ -647,6 +647,38 @@ tr.is-paused { opacity: .6; }
 .card-section > h3, .activity-head > h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 8px -28px; font-size: 16px; font-weight: 700; }
 .card-section > h3 .icon, .activity-head > h3 .icon { color: var(--k-muted); width: 20px; }
 /* the description: a white field with a thin border, also while not in use */
+/* Description / Checklist: two tabs in the section title, one pane at a time */
+.card-switch-tabs { gap: 4px !important; }
+.card-switch-tabs .icon { margin-right: 4px; }
+.card-switch-tabs button {
+    border: 0; background: none; padding: 3px 12px; border-radius: var(--r-pill); font: inherit; font-weight: 700; color: var(--k-muted); cursor: pointer;
+}
+.card-switch-tabs button:hover { color: var(--k-text); background: var(--k-hover); }
+.card-switch-tabs button[aria-selected="true"] { color: var(--k-text); background: var(--k-btn); }
+.card-switch-tabs [data-check-count] { font-weight: 400; color: var(--k-muted); }
+.card-switch-pane { display: none; }
+.card-switch[data-view="description"] [data-pane="description"], .card-switch[data-view="checklist"] [data-pane="checklist"] { display: block; }
+/* the checklist: a row per item (grip, box, text that edits in place, × on hover), the field to add below */
+.checklist { list-style: none; margin: 0 0 6px; padding: 0; }
+.check-item { display: flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: var(--r-sm); }
+.check-item:hover { background: var(--k-hover); }
+.check-item > form { margin: 0; display: flex; }
+.check-item .form-check-input { margin: 0; width: 18px; height: 18px; cursor: pointer; }
+.check-text { flex: 1; min-width: 0; }
+.check-text input { width: 100%; border: 0; background: transparent; color: var(--k-text); padding: 4px 6px; border-radius: var(--r-xs); }
+.check-text input:focus { outline: 0; background: var(--k-input); box-shadow: inset 0 0 0 1px var(--k-focus); }
+.check-item.is-done .check-text input { text-decoration: line-through; color: var(--k-muted); }
+.check-grip { display: inline-flex; color: var(--k-muted); cursor: grab; opacity: 0; touch-action: none; }
+.check-item:hover .check-grip, .check-remove:focus-visible { opacity: 1; }
+.check-remove { display: inline-flex; border: 0; background: none; color: var(--k-muted); padding: 4px; border-radius: 50%; opacity: 0; }
+.check-item:hover .check-remove, .check-remove:focus-visible { opacity: 1; }
+.check-remove:hover { color: var(--k-text); background: var(--k-btn); }
+@media (hover: none) { .check-grip, .check-remove { opacity: .7; } }
+.check-add { display: flex; align-items: center; gap: 8px; padding: 4px 6px 4px 28px; color: var(--k-muted); }
+.check-add input { flex: 1; border: 0; border-bottom: 1px solid var(--k-input-border); background: transparent; color: var(--k-text); padding: 6px 4px; }
+.check-add input:focus { outline: 0; border-bottom-color: var(--k-focus); }
+.badge-check { display: inline-flex; align-items: center; gap: 3px; padding: 0 6px; border-radius: var(--r-pill); }
+.badge-check.is-complete { background: #3d9756; color: #fff; }
 .card-description { min-height: 56px; padding: 10px 14px; background: var(--k-input); }
 .card-back-side h3 { font-size: 12px; font-weight: 700; color: var(--k-muted); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 8px; }
 .card-back-side h3:not(:first-child) { margin-top: 16px; }

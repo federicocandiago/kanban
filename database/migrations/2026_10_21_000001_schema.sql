@@ -162,6 +162,20 @@ CREATE TABLE IF NOT EXISTS `attachments` (
   CONSTRAINT `fk_attachments_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Checklist of a card: items in order, each done or not (changes go to the card's log).
+CREATE TABLE IF NOT EXISTS `checklist_items` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `card_id` int unsigned NOT NULL,
+  `text` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `done` tinyint(1) NOT NULL DEFAULT '0',
+  `position` int unsigned NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_checklist_card` (`card_id`, `position`),
+  CONSTRAINT `fk_checklist_card` FOREIGN KEY (`card_id`) REFERENCES `cards` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Change log under each card: who, when, which field, old value → new value.
 -- user_name is copied so the log still reads well after the account is deleted.
 CREATE TABLE IF NOT EXISTS `card_activity` (

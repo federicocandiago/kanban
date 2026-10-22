@@ -51,10 +51,20 @@ $onCard = $card->labelIds(); ?>
                 </div>
             </details>
 
-            <section class="card-section">
-                <h3><?= component('icon', ['name' => 'text']) ?> <?= e(__('Description')) ?></h3>
-                <textarea class="form-control card-description" name="description" form="<?= $form ?>" rows="7"
-                          placeholder="<?= e(__('Add a more detailed description…')) ?>"><?= e($card->description) ?></textarea>
+            <?php $checks = App\Models\ChecklistItem::forCard((int) $card->id); ?>
+            <section class="card-section card-switch" data-card-switch="<?= (int) $card->id ?>" data-view="<?= $checks ? 'checklist' : 'description' ?>">
+                <h3 class="card-switch-tabs" role="tablist">
+                    <?= component('icon', ['name' => 'text']) ?>
+                    <button type="button" role="tab" data-switch-to="description"><?= e(__('Description')) ?></button>
+                    <button type="button" role="tab" data-switch-to="checklist"><?= e(__('Checklist')) ?> <span data-check-count></span></button>
+                </h3>
+                <div class="card-switch-pane" data-pane="description">
+                    <textarea class="form-control card-description" name="description" form="<?= $form ?>" rows="7"
+                              placeholder="<?= e(__('Add a more detailed description…')) ?>"><?= e($card->description) ?></textarea>
+                </div>
+                <div class="card-switch-pane" data-pane="checklist">
+                    <?= partial('card-checklist', ['card' => $card, 'items' => $checks]) ?>
+                </div>
             </section>
 
             <?= partial('card-attachments', compact('card', 'board')) ?>

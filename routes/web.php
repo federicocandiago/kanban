@@ -80,6 +80,10 @@ return static function (Router $r): void {
     $r->post('/cards/{id}/move', [CardController::class, 'move'], ['auth']);
     $r->post('/cards/{id}/labels', [CardController::class, 'labels'], ['auth']);
     $r->post('/cards/{id}/attachments', [CardController::class, 'attach'], ['auth']);
+    $r->post('/cards/{id}/checklist', [CardController::class, 'addCheck'], ['auth']);
+    $r->post('/cards/{id}/checklist/order', [CardController::class, 'orderChecks'], ['auth']);
+    $r->post('/checklist/{id}/update', [CardController::class, 'updateCheck'], ['auth']);
+    $r->post('/checklist/{id}/delete', [CardController::class, 'deleteCheck'], ['auth']);
     $r->post('/cards/{id}/notes', [CardController::class, 'addNote'], ['auth']);
     $r->post('/notes/{id}/update', [CardController::class, 'updateNote'], ['auth']);
     $r->post('/notes/{id}/delete', [CardController::class, 'deleteNote'], ['auth']);

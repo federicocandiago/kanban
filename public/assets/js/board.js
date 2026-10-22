@@ -34,6 +34,14 @@
         },
     });
 
+    // a card's checklist, by its grip
+    Dnd.sortable({
+        items: '[data-checks] > .check-item',
+        handle: '.check-grip',
+        zone: (el) => el.closest('[data-checks]'),
+        onDrop: (item, list) => send(list.closest('#card-checklist').dataset.order, { ids: [...list.children].map((li) => li.dataset.checkId) }),
+    });
+
     if (listsOrder) {
         Dnd.sortable({
             items: '[data-lists] > .list',
@@ -56,6 +64,7 @@
         modal.show();
         try {
             content.innerHTML = await App.get(`${cardsUrl}${id}${view ? `?view=${view}` : ''}`, 'text');
+            document.dispatchEvent(new CustomEvent('app:patched'));
             const params = new URLSearchParams(location.search);
             params.set('card', id);
             history.replaceState(null, '', `?${params}`);
@@ -78,6 +87,7 @@
         if (!data.ok || !data.open) return;
         form.closest('details')?.removeAttribute('open');
         content.innerHTML = data.open;
+        document.dispatchEvent(new CustomEvent('app:patched'));
         modal.show();
     });
 

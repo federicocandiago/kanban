@@ -41,6 +41,8 @@ php bin/migrate.php         # optional: the site creates the tables and the admi
   the month opens `CALENDAR_START_OFFSET_DAYS` days from today (default -1: yesterday is visible too); phones open
   on today. Quick add makes whole-day events, or (each calendar's setting, starting from `CALENDAR_NEW_ALL_DAY`,
   default off) opens a "new event" window from now to the user's default length, saved only on "Confirm".
+- **Checklist**: in the card window the description area switches to a checklist (tab "Checklist (3/5)"): tick,
+  rename in place, remove, drag to reorder, add with Enter; every change goes to the card log, tiles show "3/5".
 - **Notes**: "Add a note" next to Activity, in cards and calendar events: notes go into the log in time order
   (author and board owner can delete them, the author can change them); card tiles show how many. Event notes stay
   in Kalban, the calendar server never sees them.

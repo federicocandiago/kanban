@@ -18,7 +18,7 @@
                     <?= e($entry->fieldName()) ?>
                 <?php else: ?>
                     <span class="activity-field"><?= e($entry->fieldName()) ?>:</span>
-                    <?php if (str_starts_with($entry->field, 'label_') || str_starts_with($entry->field, 'attachment_')): ?>
+                    <?php if (str_starts_with($entry->field, 'label_') || str_starts_with($entry->field, 'attachment_') || in_array($entry->field, ['check_added', 'check_done', 'check_undone', 'check_removed'], true)): ?>
                         <?= e($entry->value($entry->new_value ?? $entry->old_value)) ?>
                     <?php else: ?>
                         <del><?= e($entry->value($entry->old_value)) ?></del> → <ins><?= e($entry->value($entry->new_value)) ?></ins>
