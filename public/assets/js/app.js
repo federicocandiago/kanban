@@ -361,6 +361,25 @@
         if (data.ok && form.hasAttribute('data-keep-focus')) document.querySelector(`form[action="${CSS.escape(form.getAttribute('action'))}"] input:not([type="hidden"])`)?.focus();
     });
 
+    // Sections of a card / event window fold with a click on their title (⌃ open, ⌄ folded); the state
+    // is kept per kind of section (description, attachments, activity) in this browser.
+    const foldKey = (section) => `fold:${(section.id || 'body').replace(/^(card|event)-/, '')}`;
+    const folds = () => $$('.card-back .card-section').forEach((section) => {
+        let folded = false;
+        try { folded = localStorage.getItem(foldKey(section)) === '1'; } catch { /* storage disabled */ }
+        section.classList.toggle('is-folded', folded);
+        section.querySelector(':scope > h3, :scope > .activity-head > h3')?.setAttribute('aria-expanded', String(!folded));
+    });
+    document.addEventListener('click', (event) => {
+        const title = event.target.closest('.card-back .card-section > h3, .card-back .card-section > .activity-head > h3');
+        if (!title) return;
+        const section = title.closest('.card-section');
+        const folded = !section.classList.contains('is-folded');
+        try { localStorage.setItem(foldKey(section), folded ? '1' : '0'); } catch { /* storage disabled */ }
+        folds();
+    });
+    document.addEventListener('app:patched', folds);
+
     // after a DOM patch the new elements are filtered like the others
     document.addEventListener('app:patched', () => {
         $$('[data-filter]').forEach((box) => { if (box.value) box.dispatchEvent(new Event('input', { bubbles: true })); });

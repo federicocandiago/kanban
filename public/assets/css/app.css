@@ -603,9 +603,9 @@ tr.is-paused { opacity: .6; }
 .card-back-loading { height: 240px; }
 .card-back-archived { display: flex; gap: 8px; align-items: center; margin: -22px -26px 16px; padding: 16px 60px 16px 26px; background: var(--k-archived); }
 .card-back-head { display: flex; gap: 8px; margin-right: 32px; margin-bottom: 12px; }
-.card-back-head > .icon { margin-top: 13px; color: var(--k-muted); }
+.card-back-head > .icon { margin-top: 10px; color: var(--k-muted); }
 .card-back-title {
-    display: block; width: calc(100% + 12px); field-sizing: content; min-height: 46px; padding: 8px 12px; margin: 0 0 2px -12px;
+    display: block; width: calc(100% + 8px); field-sizing: content; min-height: 40px; padding: 4px 8px; margin: 0 0 10px -8px;
     border: 0; border-radius: var(--r-sm); background: transparent; color: var(--k-text);
     font-size: 23px; font-weight: 700; line-height: 30px; resize: none; overflow-wrap: anywhere; cursor: text;
     transition: background .15s;
@@ -646,6 +646,26 @@ tr.is-paused { opacity: .6; }
 .card-section { margin-bottom: 24px; }
 .card-section > h3, .activity-head > h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 8px -28px; font-size: 16px; font-weight: 700; }
 .card-section > h3 .icon, .activity-head > h3 .icon { color: var(--k-muted); width: 20px; }
+/* window sections fold with a click on the title: ⌃ when open, ⌄ when folded */
+.card-back .card-section > h3, .card-back .activity-head > h3 { cursor: pointer; user-select: none; }
+.card-back .card-section > h3::after, .card-back .activity-head > h3::after {
+    content: "›"; display: inline-block; margin-left: 2px; font-size: 18px; line-height: 1; font-weight: 400; color: var(--k-muted); transform: rotate(-90deg); transition: transform .15s;
+}
+.card-back .card-section.is-folded > h3::after, .card-back .card-section.is-folded > .activity-head > h3::after { transform: rotate(90deg); }
+.card-section.is-folded > :not(h3):not(.activity-head), .card-section.is-folded > .activity-head > :not(h3) { display: none !important; }
+.card-section.is-folded { margin-bottom: 14px; }
+/* desktop: the window never grows past the screen; the log scrolls inside it, under the parts above */
+@media (min-width: 576px) {
+    .card-window { max-height: calc(100dvh - 3.5rem); display: flex; flex-direction: column; }
+    .card-window > .card-back { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+    .card-window .card-back-grid { flex: 1 1 auto; min-height: 0; }
+    .card-window .card-back-main { display: flex; flex-direction: column; min-height: 0; overflow-y: auto; padding-right: 4px; }
+    .card-window .card-back-main > * { flex: none; }
+    .card-window #card-activity, .card-window #event-activity { flex: 1 1 auto; min-height: 160px; display: flex; flex-direction: column; margin-bottom: 0; }
+    .card-window #card-activity.is-folded, .card-window #event-activity.is-folded { flex: none; min-height: 0; }
+    .card-window .activity { flex: 1 1 auto; min-height: 0; overflow-y: auto; scrollbar-width: thin; }
+    .card-window .side-bottom { position: static; }
+}
 /* the description: a white field with a thin border, also while not in use */
 /* Description / Checklist: one area, switched by the Checklist button in the side column */
 [data-pane-title] { display: none; align-items: center; gap: 8px; }
