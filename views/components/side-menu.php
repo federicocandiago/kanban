@@ -1,4 +1,6 @@
-<?php /** The hamburger menu: boards, favourites, archive, settings. */
+<?php /** The hamburger menu: calendars, boards, favourites, archive, settings. */
+use App\Models\CalendarAccount;
+
 $user = auth();
 $favorites = array_filter($user->boards(), static fn ($b) => (bool) $b->is_favorite); ?>
 <aside class="offcanvas offcanvas-start side-menu" tabindex="-1" id="side-menu" aria-labelledby="side-menu-title">
@@ -7,6 +9,9 @@ $favorites = array_filter($user->boards(), static fn ($b) => (bool) $b->is_favor
         <button type="button" class="pop-close" data-bs-dismiss="offcanvas" aria-label="<?= e(__('Close')) ?>"><?= component('icon', ['name' => 'x']) ?></button>
     </div>
     <nav class="side-nav">
+        <?php foreach (CalendarAccount::forUser($user) as $calendar): ?>
+            <a href="<?= e($calendar->url()) ?>"><?= component('icon', ['name' => 'calendar']) ?> <?= e($calendar->name) ?></a>
+        <?php endforeach ?>
         <a href="<?= base_url() ?>/dashboard"><?= component('icon', ['name' => 'board']) ?> <?= e(__('Boards')) ?></a>
         <?php if ($favorites): ?>
             <h3><?= component('icon', ['name' => 'star', 'size' => 14]) ?> <?= e(__('Favourite boards')) ?></h3>
