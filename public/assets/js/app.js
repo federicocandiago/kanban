@@ -236,6 +236,19 @@
             box.classList.add('is-open');
             box.querySelector('input').focus(); // in the same tap: phones open the keyboard
         }
+        // a note in a log: "Edit" swaps its text for a field, "Cancel" back
+        const noteEdit = event.target.closest('[data-note-edit], [data-note-cancel]');
+        if (noteEdit) {
+            const note = noteEdit.closest('.is-note');
+            const editing = noteEdit.matches('[data-note-edit]');
+            note.querySelector('.note-edit').hidden = !editing;
+            note.querySelector('.note-text').hidden = editing;
+            if (editing) {
+                const field = note.querySelector('.note-edit textarea');
+                field.focus();
+                field.setSelectionRange(field.value.length, field.value.length);
+            }
+        }
         const close = event.target.closest('[data-close-details]');
         if (close) close.closest('details').open = false;
         const open = event.target.closest('[data-open-details]');
@@ -276,6 +289,7 @@
             field.form?.requestSubmit();
         }
         if (event.key === 'Escape' && field.closest('details.quick-add')) field.closest('details').open = false;
+        if (event.key === 'Escape' && field.closest('.note-edit')) field.closest('.is-note').querySelector('[data-note-cancel]').click();
     });
 
     // Search boxes that filter what is already on the page.

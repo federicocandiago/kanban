@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Core\Request;
 use App\Core\Response;
+use App\Models\Activity;
 use App\Models\Attachment;
 use App\Models\Board;
 use App\Models\BoardList;
@@ -131,6 +132,61 @@ final class CardController extends Controller
         return Response::file($path, $inline ? (string) $attachment->mime : 'application/octet-stream')
             ->withHeader('Content-Disposition', ($inline ? 'inline' : 'attachment') . '; filename="' . $name . '"; filename*=UTF-8\'\'' . rawurlencode($name))
             ->withHeader('Cache-Control', 'private, max-age=86400');
+    }
+
+    /** A note in the card's log (any member). */
+    public function addNote(Request $request, string $id): Response
+    {
+        [$card, $board] = $this->card((int) $id);
+        $text = $this->noteText($request) ?? abort(422, __('Write the note first.'));
+        $card->log(auth(), 'note', null, $text);
+        $card->update([]); // the board counts as changed (dashboard order)
+
+        return $this->ok('', $this->redraw((int) $card->id, $board));
+    }
+
+    /** Its author changes the text. */
+    public function updateNote(Request $request, string $id): Response
+    {
+        [$note, $card, $board] = $this->note((int) $id);
+        if ((int) $note->user_id !== (int) auth()->id) {
+            abort(403, __('Only its author can change a note.'));
+        }
+        $text = $this->noteText($request) ?? abort(422, __('Write the note first.'));
+        $note->update(['new_value' => $text]);
+
+        return $this->ok('', $this->redraw((int) $card->id, $board));
+    }
+
+    /** Its author, or the board owner, removes it. */
+    public function deleteNote(Request $request, string $id): Response
+    {
+        [$note, $card, $board] = $this->note((int) $id);
+        if ((int) $note->user_id !== (int) auth()->id && !$board->isOwner()) {
+            abort(403, __('Only its author or the board owner can delete a note.'));
+        }
+        $note->delete();
+
+        return $this->ok('', $this->redraw((int) $card->id, $board));
+    }
+
+    /** @return array{0: Activity, 1: Card, 2: Board} */
+    private function note(int $id): array
+    {
+        $note = Activity::find($id);
+        if (!$note || $note->field !== 'note') {
+            abort(404);
+        }
+        [$card, $board] = $this->card((int) $note->card_id);
+
+        return [$note, $card, $board];
+    }
+
+    private function noteText(Request $request): ?string
+    {
+        $text = trim(str_replace("\r\n", "\n", (string) $request->input('text', '')));
+
+        return $text === '' ? null : mb_substr($text, 0, 5000);
     }
 
     private function cards(): CardService

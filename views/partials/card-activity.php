@@ -1,8 +1,15 @@
-<?php /** The change log: date, who, field, old value → new value. @var App\Models\Card $card */ ?>
+<?php /** The change log, with the notes: date, who, field, old value → new value. @var App\Models\Card $card @var App\Models\Board $board */ ?>
 <section class="card-section" id="card-activity">
-    <h3><?= component('icon', ['name' => 'activity']) ?> <?= e(__('Activity')) ?></h3>
+    <div class="activity-head">
+        <h3><?= component('icon', ['name' => 'activity']) ?> <?= e(__('Activity')) ?></h3>
+        <?= partial('note-add', ['action' => url("/cards/{$card->id}/notes")]) ?>
+    </div>
     <ul class="activity">
         <?php foreach ($card->activity() as $entry): ?>
+            <?php if ($entry->field === 'note'): ?>
+                <?= partial('note', ['entry' => $entry, 'base' => '/notes/' . $entry->id, 'canDelete' => $board->isOwner()]) ?>
+                <?php continue ?>
+            <?php endif ?>
             <li>
                 <strong><?= e($entry->user_name) ?></strong>
                 <?php if ($entry->field === 'created'): ?>

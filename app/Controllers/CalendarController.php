@@ -12,6 +12,7 @@ use App\Core\Session;
 use App\Models\Calendar;
 use App\Models\CalendarAccount;
 use App\Models\Event;
+use App\Models\EventActivity;
 use App\Services\AttachmentService;
 use App\Services\CalDav;
 use App\Services\CalDavException;
@@ -376,6 +377,57 @@ final class CalendarController extends Controller
             'Content-Disposition' => ($inline ? 'inline' : 'attachment') . '; filename="' . $name . '"; filename*=UTF-8\'\'' . rawurlencode($name),
             'Cache-Control' => 'private, max-age=3600',
         ]));
+    }
+
+    /** A note in the event's log: it stays in this app, the calendar server never sees it. */
+    public function addNote(Request $request, string $id): Response
+    {
+        [$account, $event] = $this->find((int) $id);
+        $text = $this->noteText($request) ?? abort(422, __('Write the note first.'));
+        EventActivity::create([
+            'account_id' => $account->id, 'uid' => $event->uid, 'user_id' => auth()->id, 'user_name' => auth()->name,
+            'field' => 'note', 'old_value' => null, 'new_value' => $text,
+        ]);
+
+        return $this->ok('', $this->redraw($account, $this->view($request) ?? substr((string) $event->start_day, 0, 7), [], $event));
+    }
+
+    public function updateNote(Request $request, string $id): Response
+    {
+        [$note, $account, $event] = $this->note((int) $id);
+        $text = $this->noteText($request) ?? abort(422, __('Write the note first.'));
+        $note->update(['new_value' => $text]);
+
+        return $this->ok('', $this->redraw($account, $this->view($request) ?? substr((string) $event->start_day, 0, 7), [], $event));
+    }
+
+    public function deleteNote(Request $request, string $id): Response
+    {
+        [$note, $account, $event] = $this->note((int) $id);
+        $note->delete();
+
+        return $this->ok('', $this->redraw($account, $this->view($request) ?? substr((string) $event->start_day, 0, 7), [], $event));
+    }
+
+    /** A note of one of the user's events (the calendars are the user's own: they are its author). @return array{0: EventActivity, 1: CalendarAccount, 2: Event} */
+    private function note(int $id): array
+    {
+        $note = EventActivity::find($id);
+        $account = $note ? CalendarAccount::ofUser((int) $note->account_id, auth()) : null;
+        if (!$note || $note->field !== 'note' || !$account) {
+            abort(404);
+        }
+        $event = Event::first('calendar_id IN (SELECT id FROM calendars WHERE account_id = ?) AND uid = ?', [$account->id, $note->uid]) ?? abort(404, __('This event is no longer in the calendar.'));
+        $event = Event::inAccount((int) $event->id, $account) ?? abort(404);
+
+        return [$note, $account, $event];
+    }
+
+    private function noteText(Request $request): ?string
+    {
+        $text = trim(str_replace("\r\n", "\n", (string) $request->input('text', '')));
+
+        return $text === '' ? null : mb_substr($text, 0, 5000);
     }
 
     private function account(string $id): CalendarAccount

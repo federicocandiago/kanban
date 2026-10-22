@@ -11,6 +11,10 @@ msgstr ""
 msgid "\"color:{name}\" (:colors) or \"photo:{Unsplash id}\". Default: the user's colour."
 msgstr ""
 
+#: app/Services/DataTransfer.php:136
+msgid "(imported)"
+msgstr ""
+
 #: views/partials/event-tile.php:16 views/partials/search-results.php:94
 msgid "(no title)"
 msgstr ""
@@ -131,6 +135,10 @@ msgstr ""
 msgid "Access removed."
 msgstr ""
 
+#: views/pages/account.php:116
+msgid "Account and data"
+msgstr ""
+
 #: app/Controllers/AuthController.php:130
 msgid "Account created, but the confirmation email could not be sent. Try again from «Need a new link?»."
 msgstr ""
@@ -151,7 +159,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: views/partials/card-activity.php:3 views/partials/event-activity.php:4
+#: views/partials/card-activity.php:4 views/partials/event-activity.php:10
 msgid "Activity"
 msgstr ""
 
@@ -177,6 +185,10 @@ msgstr ""
 
 #: views/partials/card.php:52 views/partials/event.php:90 views/partials/event-new.php:64
 msgid "Add a more detailed description…"
+msgstr ""
+
+#: views/partials/note-add.php:3
+msgid "Add a note"
 msgstr ""
 
 #: views/partials/calendar-days.php:17
@@ -209,6 +221,10 @@ msgstr ""
 
 #: views/pages/board.php:37
 msgid "Add list"
+msgstr ""
+
+#: views/partials/note-add.php:9
+msgid "Add note"
 msgstr ""
 
 #: views/partials/card.php:61
@@ -355,7 +371,7 @@ msgstr ""
 msgid "Attachment removed"
 msgstr ""
 
-#: views/partials/event-tile.php:30 views/partials/event-attachments.php:5 views/partials/card-attachments.php:4 views/partials/card-tile.php:26 views/partials/search-results.php:75
+#: views/partials/event-tile.php:30 views/partials/event-attachments.php:5 views/partials/card-attachments.php:4 views/partials/card-tile.php:29 views/partials/search-results.php:75
 msgid "Attachments"
 msgstr ""
 
@@ -455,11 +471,11 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
-#: app/Controllers/CalendarController.php:145
+#: app/Controllers/CalendarController.php:146
 msgid "Calendar connected: :n calendars found."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:98
+#: app/Controllers/CalendarController.php:99
 msgid "Calendar disconnected."
 msgstr ""
 
@@ -467,7 +483,7 @@ msgstr ""
 msgid "Calendar events are shown and saved in this time zone."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:88
+#: app/Controllers/CalendarController.php:89
 msgid "Calendar saved."
 msgstr ""
 
@@ -483,11 +499,15 @@ msgstr ""
 msgid "Calendars"
 msgstr ""
 
+#: app/Controllers/AccountController.php:208
+msgid "Calendars are not imported: connect them again from Settings."
+msgstr ""
+
 #: views/partials/api-settings.php:36
 msgid "Can"
 msgstr ""
 
-#: views/pages/board.php:38 views/partials/list.php:29 views/partials/calendar-days.php:24
+#: views/pages/board.php:38 views/partials/note-add.php:10 views/partials/note.php:33 views/partials/list.php:29 views/partials/calendar-days.php:24
 msgid "Cancel"
 msgstr ""
 
@@ -495,11 +515,11 @@ msgstr ""
 msgid "Card"
 msgstr ""
 
-#: app/Controllers/CardController.php:102
+#: app/Controllers/CardController.php:103
 msgid "Card archived."
 msgstr ""
 
-#: app/Controllers/CardController.php:122
+#: app/Controllers/CardController.php:123
 msgid "Card deleted."
 msgstr ""
 
@@ -507,7 +527,7 @@ msgstr ""
 msgid "Card id."
 msgstr ""
 
-#: app/Controllers/CardController.php:110
+#: app/Controllers/CardController.php:111
 msgid "Card restored."
 msgstr ""
 
@@ -555,7 +575,7 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-#: views/partials/event-activity.php:8
+#: views/partials/event-activity.php:20
 msgid "Changed outside the app"
 msgstr ""
 
@@ -567,23 +587,23 @@ msgstr ""
 msgid "Choose a background."
 msgstr ""
 
-#: app/Controllers/LabelController.php:59 app/Controllers/AuthController.php:106 app/Controllers/AccountController.php:53
+#: app/Controllers/LabelController.php:59 app/Controllers/AuthController.php:106 app/Controllers/AccountController.php:55
 msgid "Choose a colour."
 msgstr ""
 
-#: app/Controllers/CardController.php:55 app/Services/CardService.php:213
+#: app/Controllers/CardController.php:56 app/Services/CardService.php:213
 msgid "Choose a list of this board."
 msgstr ""
 
-#: app/Controllers/AccountController.php:56
+#: app/Controllers/AccountController.php:58
 msgid "Choose a time zone."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:251
+#: app/Controllers/CalendarController.php:252
 msgid "Choose one of your calendars."
 msgstr ""
 
-#: app/Controllers/AccountController.php:201
+#: app/Controllers/AccountController.php:237
 msgid "Choose what the token can do."
 msgstr ""
 
@@ -607,7 +627,7 @@ msgstr ""
 msgid "Confirm my email"
 msgstr ""
 
-#: views/pages/account.php:121
+#: views/pages/account.php:145
 msgid "Confirm with your password"
 msgstr ""
 
@@ -695,11 +715,11 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: views/partials/card-activity.php:9
+#: views/partials/card-activity.php:16
 msgid "created this card in :list"
 msgstr ""
 
-#: views/partials/event-activity.php:10
+#: views/partials/event-activity.php:22
 msgid "created this event in :calendar"
 msgstr ""
 
@@ -771,7 +791,7 @@ msgstr ""
 msgid "Defending our rights in legal proceedings."
 msgstr ""
 
-#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:100 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/event-attachments.php:20 views/partials/card-attachments.php:15 views/partials/labels.php:21
+#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:100 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:22 views/partials/event-attachments.php:20 views/partials/card-attachments.php:15 views/partials/labels.php:21
 msgid "Delete"
 msgstr ""
 
@@ -787,7 +807,7 @@ msgstr ""
 msgid "Delete a list for good"
 msgstr ""
 
-#: views/pages/account.php:116
+#: views/pages/account.php:140
 msgid "Delete account"
 msgstr ""
 
@@ -795,7 +815,7 @@ msgstr ""
 msgid "Delete an attachment"
 msgstr ""
 
-#: views/pages/account.php:122
+#: views/pages/account.php:146
 msgid "Delete my account"
 msgstr ""
 
@@ -823,6 +843,10 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
+#: views/pages/account.php:126
+msgid "Download"
+msgstr ""
+
 #: app/Services/ApiSpec.php:128
 msgid "Download an attachment"
 msgstr ""
@@ -831,12 +855,16 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
-#: views/partials/calendar-settings.php:11
+#: views/partials/note.php:19 views/partials/calendar-settings.php:11
 msgid "Edit"
 msgstr ""
 
 #: views/partials/event.php:101
 msgid "Edit the event"
+msgstr ""
+
+#: views/partials/note.php:15
+msgid "edited"
 msgstr ""
 
 #: views/pages/auth/resend.php:6 views/pages/auth/login.php:5 views/pages/auth/register.php:10 views/pages/legal/privacy.php:17
@@ -867,7 +895,7 @@ msgstr ""
 msgid "End date"
 msgstr ""
 
-#: app/Controllers/AccountController.php:60
+#: app/Controllers/AccountController.php:62
 msgid "Enter a number of minutes between 5 and 1440."
 msgstr ""
 
@@ -883,7 +911,7 @@ msgstr ""
 msgid "Enter list title…"
 msgstr ""
 
-#: app/Controllers/CalendarController.php:118
+#: app/Controllers/CalendarController.php:119
 msgid "Enter the address of the CalDAV server (https://…)."
 msgstr ""
 
@@ -891,15 +919,15 @@ msgstr ""
 msgid "Enter the address you signed up with and we'll send you a new confirmation link."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:124
+#: app/Controllers/CalendarController.php:125
 msgid "Enter the password again to change the account."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:124
+#: app/Controllers/CalendarController.php:125
 msgid "Enter the password."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:121
+#: app/Controllers/CalendarController.php:122
 msgid "Enter the username."
 msgstr ""
 
@@ -911,7 +939,7 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
-#: app/Controllers/CalendarController.php:323
+#: app/Controllers/CalendarController.php:324
 msgid "Event deleted."
 msgstr ""
 
@@ -929,6 +957,14 @@ msgstr ""
 
 #: views/partials/api-settings.php:38
 msgid "Expires"
+msgstr ""
+
+#: views/pages/account.php:134
+msgid "Export file"
+msgstr ""
+
+#: views/pages/account.php:119
+msgid "Export your data"
 msgstr ""
 
 #: views/components/side-menu.php:12
@@ -975,7 +1011,7 @@ msgstr ""
 msgid "Give the board a name (up to 100 characters)."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:84 app/Controllers/CalendarController.php:115
+#: app/Controllers/CalendarController.php:85 app/Controllers/CalendarController.php:116
 msgid "Give the calendar a name (up to 100 characters)."
 msgstr ""
 
@@ -983,7 +1019,7 @@ msgstr ""
 msgid "Give the card a name."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:162 app/Controllers/CalendarController.php:240
+#: app/Controllers/CalendarController.php:163 app/Controllers/CalendarController.php:241
 msgid "Give the event a name."
 msgstr ""
 
@@ -1055,6 +1091,18 @@ msgstr ""
 msgid "If you don't know :name, just ignore this email."
 msgstr ""
 
+#: views/pages/account.php:129 views/pages/account.php:137
+msgid "Import"
+msgstr ""
+
+#: app/Controllers/AccountController.php:206
+msgid "Imported :boards boards, :cards cards and :files attachments."
+msgstr ""
+
+#: app/Services/DataTransfer.php:134
+msgid "Imported board"
+msgstr ""
+
 #: views/pages/api-docs.php:63
 msgid "In"
 msgstr ""
@@ -1075,6 +1123,10 @@ msgstr ""
 msgid "in the months already opened"
 msgstr ""
 
+#: views/pages/account.php:124
+msgid "Include the attachments (a bigger file)"
+msgstr ""
+
 #: app/Services/Palette.php:56
 msgid "Indigo"
 msgstr ""
@@ -1083,7 +1135,7 @@ msgstr ""
 msgid "Interface"
 msgstr ""
 
-#: app/Controllers/CalendarController.php:243 app/Controllers/CalendarController.php:246 app/Controllers/CalendarController.php:305 app/Services/CardService.php:50 app/Services/CardService.php:53
+#: app/Controllers/CalendarController.php:244 app/Controllers/CalendarController.php:247 app/Controllers/CalendarController.php:306 app/Services/CardService.php:50 app/Services/CardService.php:53
 msgid "Invalid date."
 msgstr ""
 
@@ -1091,11 +1143,11 @@ msgstr ""
 msgid "Invalid fields: see \"errors\"."
 msgstr ""
 
-#: app/Controllers/AuthController.php:103 app/Controllers/AccountController.php:47
+#: app/Controllers/AuthController.php:103 app/Controllers/AccountController.php:49
 msgid "Invalid language."
 msgstr ""
 
-#: app/Controllers/AccountController.php:50
+#: app/Controllers/AccountController.php:52
 msgid "Invalid theme."
 msgstr ""
 
@@ -1363,7 +1415,7 @@ msgstr ""
 msgid "multipart/form-data with a \"file\" field, up to :size."
 msgstr ""
 
-#: app/Controllers/AccountController.php:25
+#: app/Controllers/AccountController.php:27
 msgid "My account"
 msgstr ""
 
@@ -1411,7 +1463,7 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: app/Controllers/AccountController.php:205
+#: app/Controllers/AccountController.php:241
 msgid "New token created: copy it now, it won't be shown again."
 msgstr ""
 
@@ -1443,7 +1495,7 @@ msgstr ""
 msgid "No archived lists."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:164
+#: app/Controllers/CalendarController.php:165
 msgid "No calendar of this account can be written."
 msgstr ""
 
@@ -1469,6 +1521,14 @@ msgstr ""
 
 #: app/Services/ApiSpec.php:231
 msgid "Not possible in this state (for example: the board is archived)."
+msgstr ""
+
+#: views/partials/note-add.php:7 views/partials/note.php:30
+msgid "Note"
+msgstr ""
+
+#: views/partials/card-tile.php:26
+msgid "Notes"
 msgstr ""
 
 #: views/partials/search-results.php:18
@@ -1507,6 +1567,10 @@ msgstr ""
 msgid "on"
 msgstr ""
 
+#: views/pages/account.php:120
+msgid "One JSON file with your preferences, your labels and the boards you own (archived too), with lists, cards, log and notes. It names nobody and holds no passwords: it can be imported into any account. Calendars: only their names and settings."
+msgstr ""
+
 #: app/Services/ApiSpec.php:182
 msgid "One of the user's labels (they can put it on or take it off)."
 msgstr ""
@@ -1521,6 +1585,14 @@ msgstr ""
 
 #: app/Services/ApiSpec.php:218
 msgid "Only for 422: field → message."
+msgstr ""
+
+#: app/Controllers/CardController.php:153
+msgid "Only its author can change a note."
+msgstr ""
+
+#: app/Controllers/CardController.php:166
+msgid "Only its author or the board owner can delete a note."
 msgstr ""
 
 #: views/pages/admin/index.php:30 views/partials/api-settings.php:36
@@ -1549,6 +1621,10 @@ msgstr ""
 
 #: views/pages/legal/terms.php:12
 msgid "Only upload content you have the right to share. Malware and any content that breaks the law are not allowed and will be removed. Invite only people who expect to hear from you."
+msgstr ""
+
+#: views/pages/account.php:117
+msgid "Only when you need it: take your data with you, bring it in from another account, or close your account."
 msgstr ""
 
 #: views/partials/calendar-settings.php:10
@@ -1603,7 +1679,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: app/Controllers/AccountController.php:153
+#: app/Controllers/AccountController.php:155
 msgid "Password changed."
 msgstr ""
 
@@ -1655,7 +1731,7 @@ msgstr ""
 msgid "Pink"
 msgstr ""
 
-#: app/Core/ValidationException.php:16 app/Controllers/AuthController.php:112 app/Controllers/AuthController.php:168 app/Controllers/AccountController.php:63 app/Controllers/AccountController.php:146 app/Controllers/AccountController.php:164 app/Controllers/AccountController.php:201 app/Controllers/CalendarController.php:84 app/Controllers/CalendarController.php:132 app/Controllers/CalendarController.php:189 app/Controllers/CalendarController.php:270
+#: app/Core/ValidationException.php:16 app/Controllers/AuthController.php:112 app/Controllers/AuthController.php:168 app/Controllers/AccountController.php:65 app/Controllers/AccountController.php:148 app/Controllers/AccountController.php:166 app/Controllers/AccountController.php:203 app/Controllers/AccountController.php:237 app/Controllers/CalendarController.php:85 app/Controllers/CalendarController.php:133 app/Controllers/CalendarController.php:190 app/Controllers/CalendarController.php:271
 msgid "Please check the form."
 msgstr ""
 
@@ -1663,11 +1739,11 @@ msgstr ""
 msgid "Please check the request."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:336 app/Services/CardService.php:148
+#: app/Controllers/AccountController.php:198 app/Controllers/CalendarController.php:337 app/Services/CardService.php:148
 msgid "Please choose a file."
 msgstr ""
 
-#: app/Controllers/AccountController.php:94
+#: app/Controllers/AccountController.php:96
 msgid "Please choose an image."
 msgstr ""
 
@@ -1679,7 +1755,7 @@ msgstr ""
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: app/Controllers/AuthController.php:90 app/Controllers/AccountController.php:44
+#: app/Controllers/AuthController.php:90 app/Controllers/AccountController.php:46
 msgid "Please enter your name."
 msgstr ""
 
@@ -1715,15 +1791,15 @@ msgstr ""
 msgid "profile picture (re-encoded by our system, which removes any embedded metadata such as location), preferred language and theme."
 msgstr ""
 
-#: app/Controllers/AccountController.php:117
+#: app/Controllers/AccountController.php:119
 msgid "Profile picture removed."
 msgstr ""
 
-#: app/Controllers/AccountController.php:109
+#: app/Controllers/AccountController.php:111
 msgid "Profile picture updated."
 msgstr ""
 
-#: app/Controllers/AccountController.php:76
+#: app/Controllers/AccountController.php:78
 msgid "Profile updated."
 msgstr ""
 
@@ -1791,7 +1867,7 @@ msgstr ""
 msgid "Recurring event: change it from your calendar app."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:392
+#: app/Controllers/CalendarController.php:444
 msgid "Recurring events can be changed from your calendar app."
 msgstr ""
 
@@ -1875,7 +1951,7 @@ msgstr ""
 msgid "Sat"
 msgstr ""
 
-#: views/pages/account.php:56 views/partials/calendar-settings.php:56
+#: views/pages/account.php:56 views/partials/note.php:32 views/partials/calendar-settings.php:56
 msgid "Save"
 msgstr ""
 
@@ -1955,7 +2031,7 @@ msgstr ""
 msgid "Session expired"
 msgstr ""
 
-#: app/Controllers/CalendarController.php:105
+#: app/Controllers/CalendarController.php:106
 msgid "Set APP_KEY in .env first (php bin/key.php)."
 msgstr ""
 
@@ -2095,15 +2171,19 @@ msgstr ""
 msgid "The board “:name”, its lists, cards and attachments will be deleted for everyone. This cannot be undone."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:496
+#: views/pages/account.php:130
+msgid "The boards of an export are added as new ones (nothing you have is changed); labels with the same name and colour are reused. Up to :size."
+msgstr ""
+
+#: app/Controllers/CalendarController.php:548
 msgid "The calendar server asks to wait a little (:s seconds): your changes are safe, try again shortly."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:500
+#: app/Controllers/CalendarController.php:552
 msgid "The calendar server is not answering right now (:error)."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:498
+#: app/Controllers/CalendarController.php:550
 msgid "The calendar server refused the credentials. For iCloud use an app-specific password."
 msgstr ""
 
@@ -2119,7 +2199,7 @@ msgstr ""
 msgid "The cookie is marked HttpOnly (not readable by scripts) and SameSite=Lax (not sent on requests started by other sites), and it is sent only over HTTPS when the site uses it. It does not contain personal data: only a random identifier of your session."
 msgstr ""
 
-#: app/Controllers/AccountController.php:137 app/Controllers/AccountController.php:164
+#: app/Controllers/AccountController.php:139 app/Controllers/AccountController.php:166
 msgid "The current password is wrong."
 msgstr ""
 
@@ -2135,7 +2215,7 @@ msgstr ""
 msgid "The email could not be sent right now. Please try again later."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:248
+#: app/Controllers/CalendarController.php:249
 msgid "The end comes before the start."
 msgstr ""
 
@@ -2155,7 +2235,7 @@ msgstr ""
 msgid "The file"
 msgstr ""
 
-#: app/Controllers/CalendarController.php:334 app/Services/CardService.php:145 views/partials/card.php:84 views/partials/event.php:108
+#: app/Controllers/AccountController.php:198 app/Controllers/CalendarController.php:335 app/Services/CardService.php:145 views/partials/card.php:84 views/partials/event.php:108
 msgid "The file is too large (max :size)."
 msgstr ""
 
@@ -2167,7 +2247,7 @@ msgstr ""
 msgid "the file to attach"
 msgstr ""
 
-#: app/Controllers/AccountController.php:101
+#: app/Controllers/AccountController.php:103
 msgid "The image is too large (max :size KB)."
 msgstr ""
 
@@ -2191,11 +2271,15 @@ msgstr ""
 msgid "The members of the boards you share: they see the board, its cards and its log, with your name and profile picture."
 msgstr ""
 
-#: app/Controllers/AuthController.php:98 app/Controllers/AccountController.php:141
+#: views/partials/note.php:22
+msgid "The note will be deleted."
+msgstr ""
+
+#: app/Controllers/AuthController.php:98 app/Controllers/AccountController.php:143
 msgid "The password must be at least 8 characters."
 msgstr ""
 
-#: app/Controllers/AuthController.php:100 app/Controllers/AccountController.php:143
+#: app/Controllers/AuthController.php:100 app/Controllers/AccountController.php:145
 msgid "The passwords do not match."
 msgstr ""
 
@@ -2251,7 +2335,7 @@ msgstr ""
 msgid "There have been too many sign-up attempts on :app: please try again later."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:128
+#: app/Controllers/CalendarController.php:129
 msgid "This account is already connected as “:name”."
 msgstr ""
 
@@ -2259,15 +2343,15 @@ msgstr ""
 msgid "This board is archived."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:383
+#: app/Controllers/CalendarController.php:435
 msgid "This calendar is not among yours."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:392 views/partials/event.php:26
+#: app/Controllers/CalendarController.php:444 views/partials/event.php:26
 msgid "This calendar is read-only."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:331
+#: app/Controllers/CalendarController.php:332
 msgid "This calendar server does not accept attachments."
 msgstr ""
 
@@ -2283,7 +2367,7 @@ msgstr ""
 msgid "This confirmation link is not valid or has already been used."
 msgstr ""
 
-#: views/pages/account.php:120
+#: views/pages/account.php:144
 msgid "This deletes your account and the boards you own, with their cards and attachments, for every member. You will leave the boards shared with you. It cannot be undone."
 msgstr ""
 
@@ -2295,24 +2379,28 @@ msgstr ""
 msgid "This event has a description."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:211
+#: app/Controllers/CalendarController.php:212
 msgid "This event is already in the calendar."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:389
+#: app/Controllers/CalendarController.php:420 app/Controllers/CalendarController.php:441
 msgid "This event is no longer in the calendar."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:499
+#: app/Controllers/CalendarController.php:551
 msgid "This event is no longer on the calendar server."
 msgstr ""
 
-#: app/Controllers/CalendarController.php:497
+#: app/Controllers/CalendarController.php:549
 msgid "This event was changed on another device in the meantime: reload the calendar and try again."
 msgstr ""
 
 #: app/Controllers/ShareController.php:122
 msgid "This invitation has already been answered or withdrawn."
+msgstr ""
+
+#: app/Controllers/AccountController.php:203 app/Services/DataTransfer.php:114
+msgid "This is not a Kalban export (or it comes from a newer version)."
 msgstr ""
 
 #: views/pages/legal/privacy.php:11
@@ -2363,7 +2451,7 @@ msgstr ""
 msgid "Token for \"Try it\""
 msgstr ""
 
-#: app/Controllers/CalendarController.php:138
+#: app/Controllers/CalendarController.php:139
 msgid "Too many connection attempts: try again in :min minutes."
 msgstr ""
 
@@ -2387,7 +2475,7 @@ msgstr ""
 msgid "Too many requests: wait as many seconds as Retry-After says."
 msgstr ""
 
-#: app/Controllers/AccountController.php:217
+#: app/Controllers/AccountController.php:253
 msgid "Too many wrong passwords: try again in :min minutes."
 msgstr ""
 
@@ -2435,7 +2523,7 @@ msgstr ""
 msgid "Upload"
 msgstr ""
 
-#: app/Controllers/AccountController.php:103
+#: app/Controllers/AccountController.php:105
 msgid "Use a JPG, PNG, GIF or WebP image."
 msgstr ""
 
@@ -2539,6 +2627,14 @@ msgstr ""
 msgid "Withdraw"
 msgstr ""
 
+#: views/partials/note-add.php:7
+msgid "Write a note…"
+msgstr ""
+
+#: app/Controllers/CardController.php:141 app/Controllers/CardController.php:155 app/Controllers/CalendarController.php:386 app/Controllers/CalendarController.php:398
+msgid "Write the note first."
+msgstr ""
+
 #: app/Controllers/AuthController.php:41
 msgid "Wrong email or password."
 msgstr ""
@@ -2559,7 +2655,7 @@ msgstr ""
 msgid "You are responsible for your credentials and for everything done with your account."
 msgstr ""
 
-#: app/Controllers/AccountController.php:167
+#: app/Controllers/AccountController.php:169
 msgid "You are the only administrator: promote another user before deleting your account."
 msgstr ""
 
@@ -2611,11 +2707,11 @@ msgstr ""
 msgid "Your account"
 msgstr ""
 
-#: views/pages/account.php:118
+#: views/pages/account.php:142
 msgid "Your account and the boards you own will be deleted forever. Continue?"
 msgstr ""
 
-#: app/Controllers/AccountController.php:173
+#: app/Controllers/AccountController.php:175
 msgid "Your account has been deleted. Goodbye!"
 msgstr ""
 

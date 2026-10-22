@@ -11,7 +11,7 @@ $labels = $card->labels(); ?>
         </span>
     <?php endif ?>
     <span class="card-title"><?= e($card->title) ?></span>
-    <?php if ($card->start_date || $card->end_date || $card->description || $card->attachment_count): ?>
+    <?php if ($card->start_date || $card->end_date || $card->description || $card->attachment_count || $card->note_count): ?>
         <span class="card-badges">
             <?php if ($card->start_date || $card->end_date): ?>
                 <span class="badge-date <?= $due ? 'is-' . $due : '' ?>" title="<?= e(__('Dates')) ?>">
@@ -21,6 +21,9 @@ $labels = $card->labels(); ?>
             <?php endif ?>
             <?php if ($card->description): ?>
                 <span class="badge-icon" title="<?= e(__('This card has a description.')) ?>"><?= component('icon', ['name' => 'text', 'size' => 12]) ?></span>
+            <?php endif ?>
+            <?php if ($card->note_count): ?>
+                <span class="badge-icon" title="<?= e(__('Notes')) ?>"><?= component('icon', ['name' => 'note', 'size' => 12]) ?> <?= (int) $card->note_count ?></span>
             <?php endif ?>
             <?php if ($card->attachment_count): ?>
                 <span class="badge-icon" title="<?= e(__('Attachments')) ?>"><?= component('icon', ['name' => 'clip', 'size' => 12]) ?> <?= (int) $card->attachment_count ?></span>

@@ -41,6 +41,12 @@ php bin/migrate.php         # optional: the site creates the tables and the admi
   the month opens `CALENDAR_START_OFFSET_DAYS` days from today (default -1: yesterday is visible too); phones open
   on today. Quick add makes whole-day events, or (each calendar's setting, starting from `CALENDAR_NEW_ALL_DAY`,
   default off) opens a "new event" window from now to the user's default length, saved only on "Confirm".
+- **Notes**: "Add a note" next to Activity, in cards and calendar events: notes go into the log in time order
+  (author and board owner can delete them, the author can change them); card tiles show how many. Event notes stay
+  in Kalban, the calendar server never sees them.
+- **Export / import** (Settings › Account and data): one JSON file per user that names nobody (no ids, emails,
+  passwords, tokens or calendar credentials) with preferences, labels and the owned boards (archived too) with
+  lists, cards, log, notes and, optionally, attachments in base64. Importing adds the boards as new ones.
 - **Install on a phone**: `public/manifest.webmanifest` (full screen, the app icon), so browsers offer "Add to
   Home screen".
 - **Board look**: the top bar and the board header are one band of frosted glass tinted with the photo's average

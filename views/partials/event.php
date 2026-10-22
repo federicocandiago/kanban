@@ -92,7 +92,7 @@ $defaultEnd = (new DateTimeImmutable('09:00'))->modify("+{$minutes} minutes")->f
 
             <?= partial('event-attachments', compact('event', 'account', 'view')) ?>
             <?php if ($editable): ?><button class="btn btn-success side-confirm confirm-inline" type="submit" form="<?= $form ?>" data-close><?= component('icon', ['name' => 'check']) ?> <?= e(__('Confirm')) ?></button><?php endif /* phones only: in reach before the log */ ?>
-            <?= partial('event-activity', compact('event', 'account')) ?>
+            <?= partial('event-activity', compact('event', 'account', 'view')) ?>
         </div>
 
         <aside class="card-back-side">

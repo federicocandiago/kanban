@@ -112,8 +112,32 @@
         </form>
     </details>
 
-    <details class="panel is-collapsible is-danger" id="delete-account">
-        <summary><h2><?= e(__('Delete account')) ?></h2></summary>
+    <details class="panel is-collapsible" id="account-data">
+        <summary><h2><?= e(__('Account and data')) ?></h2></summary>
+        <p class="text-muted small"><?= e(__('Only when you need it: take your data with you, bring it in from another account, or close your account.')) ?></p>
+
+        <h3 class="account-sub"><?= component('icon', ['name' => 'download', 'size' => 16]) ?> <?= e(__('Export your data')) ?></h3>
+        <p class="small text-muted"><?= e(__('One JSON file with your preferences, your labels and the boards you own (archived too), with lists, cards, log and notes. It names nobody and holds no passwords: it can be imported into any account. Calendars: only their names and settings.')) ?></p>
+        <form class="d-flex flex-wrap align-items-center gap-3 mb-4" method="get" action="<?= base_url() ?>/account/export">
+            <label class="form-check form-switch m-0">
+                <input class="form-check-input" type="checkbox" role="switch" name="attachments" value="1" checked>
+                <span class="form-check-label"><?= e(__('Include the attachments (a bigger file)')) ?></span>
+            </label>
+            <button class="btn btn-secondary" type="submit"><?= component('icon', ['name' => 'download', 'size' => 14]) ?> <?= e(__('Download')) ?></button>
+        </form>
+
+        <h3 class="account-sub"><?= component('icon', ['name' => 'restore', 'size' => 16]) ?> <?= e(__('Import')) ?></h3>
+        <p class="small text-muted"><?= e(__('The boards of an export are added as new ones (nothing you have is changed); labels with the same name and colour are reused. Up to :size.', ['size' => format_bytes(App\Services\AttachmentService::uploadBytes())])) ?></p>
+        <form class="d-flex flex-wrap align-items-start gap-2 mb-4" method="post" action="<?= base_url() ?>/account/import" enctype="multipart/form-data" data-ajax novalidate>
+            <?= csrf_field() ?>
+            <div class="flex-grow-1">
+                <input class="form-control" type="file" name="file" accept="application/json,.json" aria-label="<?= e(__('Export file')) ?>">
+                <div class="invalid-feedback" data-error-for="file"></div>
+            </div>
+            <button class="btn btn-secondary" type="submit"><?= e(__('Import')) ?></button>
+        </form>
+
+        <h3 class="account-sub text-danger"><?= component('icon', ['name' => 'trash', 'size' => 16]) ?> <?= e(__('Delete account')) ?></h3>
         <form method="post" action="<?= base_url() ?>/account/delete" data-ajax
               data-ask="<?= e(__('Your account and the boards you own will be deleted forever. Continue?')) ?>" novalidate>
             <?= csrf_field() ?>

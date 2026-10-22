@@ -80,6 +80,9 @@ return static function (Router $r): void {
     $r->post('/cards/{id}/move', [CardController::class, 'move'], ['auth']);
     $r->post('/cards/{id}/labels', [CardController::class, 'labels'], ['auth']);
     $r->post('/cards/{id}/attachments', [CardController::class, 'attach'], ['auth']);
+    $r->post('/cards/{id}/notes', [CardController::class, 'addNote'], ['auth']);
+    $r->post('/notes/{id}/update', [CardController::class, 'updateNote'], ['auth']);
+    $r->post('/notes/{id}/delete', [CardController::class, 'deleteNote'], ['auth']);
     $r->post('/cards/{id}/archive', [CardController::class, 'archive'], ['auth']);
     $r->post('/cards/{id}/restore', [CardController::class, 'restore'], ['auth']);
     $r->post('/cards/{id}/delete', [CardController::class, 'destroy'], ['auth']);
@@ -99,6 +102,9 @@ return static function (Router $r): void {
     $r->post('/events/{id}/update', [CalendarController::class, 'update'], ['auth']);
     $r->post('/events/{id}/move', [CalendarController::class, 'move'], ['auth']);
     $r->post('/events/{id}/delete', [CalendarController::class, 'destroy'], ['auth']);
+    $r->post('/events/{id}/notes', [CalendarController::class, 'addNote'], ['auth']);
+    $r->post('/event-notes/{id}/update', [CalendarController::class, 'updateNote'], ['auth']);
+    $r->post('/event-notes/{id}/delete', [CalendarController::class, 'deleteNote'], ['auth']);
     $r->post('/events/{id}/attachments', [CalendarController::class, 'attach'], ['auth']);
     $r->get('/events/{id}/attachments/{index}', [CalendarController::class, 'download'], ['auth']);
     $r->post('/events/{id}/attachments/{index}/delete', [CalendarController::class, 'detach'], ['auth']);
@@ -111,6 +117,8 @@ return static function (Router $r): void {
     $r->post('/account/avatar/delete', [AccountController::class, 'deleteAvatar'], ['auth']);
     $r->post('/account/password', [AccountController::class, 'password'], ['auth']);
     $r->post('/account/delete', [AccountController::class, 'destroy'], ['auth']);
+    $r->get('/account/export', [AccountController::class, 'export'], ['auth']);
+    $r->post('/account/import', [AccountController::class, 'import'], ['auth']);
     $r->get('/avatars/{file}', [AccountController::class, 'avatarFile'], ['auth']);
     $r->post('/labels', [LabelController::class, 'store'], ['auth']);
     $r->post('/labels/{id}/update', [LabelController::class, 'update'], ['auth']);

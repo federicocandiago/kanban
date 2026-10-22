@@ -15,6 +15,8 @@ use App\Models\ApiToken;
 use App\Models\CalendarAccount;
 use App\Models\User;
 use App\Services\AvatarService;
+use App\Services\AttachmentService;
+use App\Services\DataTransfer;
 use App\Services\Palette;
 
 final class AccountController extends Controller
@@ -173,6 +175,40 @@ final class AccountController extends Controller
         Session::flash('success', __('Your account has been deleted. Goodbye!'));
 
         return $this->ok('', ['redirect' => '/']);
+    }
+
+    /** Settings › Account and data › Export: everything of the user as one JSON file, naming nobody. */
+    public function export(Request $request): Response
+    {
+        $doc = (new DataTransfer(auth()))->export((bool) $request->input('attachments'));
+        $name = 'kalban-' . date('Y-m-d') . '.json';
+
+        return new Response((string) json_encode($doc, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 200, [
+            'Content-Type' => 'application/json; charset=utf-8',
+            'Content-Disposition' => 'attachment; filename="' . $name . '"',
+            'Cache-Control' => 'no-store',
+        ]);
+    }
+
+    /** Settings › Account and data › Import: the boards of an export, always as new ones. */
+    public function import(Request $request): Response
+    {
+        $file = $request->files('file')[0] ?? null;
+        if ($file === null || $file['error'] !== UPLOAD_ERR_OK) {
+            $error = $file === null || $file['error'] === UPLOAD_ERR_NO_FILE ? __('Please choose a file.') : __('The file is too large (max :size).', ['size' => format_bytes(AttachmentService::uploadBytes())]);
+            return $this->fail($error, ['file' => $error]);
+        }
+        $doc = json_decode((string) file_get_contents($file['tmp_name']), true);
+        if (!is_array($doc)) {
+            return $this->fail(__('Please check the form.'), ['file' => __('This is not a Kalban export (or it comes from a newer version).')]);
+        }
+        $count = (new DataTransfer(auth()))->import($doc);
+        $message = __('Imported :boards boards, :cards cards and :files attachments.', ['boards' => $count['boards'], 'cards' => $count['cards'], 'files' => $count['attachments']]);
+        if ($count['calendars']) {
+            $message .= ' ' . __('Calendars are not imported: connect them again from Settings.');
+        }
+
+        return $this->ok($message, ['redirect' => '/dashboard']);
     }
 
     /** Settings › API access: the switch. Turning it off deletes the token. */

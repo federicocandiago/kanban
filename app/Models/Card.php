@@ -17,7 +17,8 @@ final class Card extends Model
     public static function withDetails(string $where, array $params = [], string $order = 'c.position ASC, c.id ASC'): array
     {
         $rows = static::db()->select(
-            "SELECT c.*, l.name AS list_name, (SELECT COUNT(*) FROM attachments a WHERE a.card_id = c.id) AS attachment_count
+            "SELECT c.*, l.name AS list_name, (SELECT COUNT(*) FROM attachments a WHERE a.card_id = c.id) AS attachment_count,
+                    (SELECT COUNT(*) FROM card_activity n WHERE n.card_id = c.id AND n.field = 'note') AS note_count
              FROM cards c JOIN lists l ON l.id = c.list_id WHERE {$where} ORDER BY {$order}",
             $params
         );

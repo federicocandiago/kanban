@@ -34,6 +34,20 @@ final class AttachmentService
         return min($limits);
     }
 
+    /** The biggest upload PHP accepts (upload_max_filesize, post_max_size): for imports. */
+    public static function uploadBytes(): int
+    {
+        $limits = [];
+        foreach (['upload_max_filesize', 'post_max_size'] as $ini) {
+            $value = ini_parse_quantity((string) ini_get($ini));
+            if ($value > 0) {
+                $limits[] = $value;
+            }
+        }
+
+        return $limits ? min($limits) : 8 * 1024 * 1024;
+    }
+
     /** @return array{file: string, mime: string, size: int} */
     public function store(int $boardId, string $uploadedPath): array
     {

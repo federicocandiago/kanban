@@ -1,9 +1,21 @@
-<?php /** The event's change log; changes found while syncing are marked "outside the app". @var App\Models\Event $event @var App\Models\CalendarAccount $account */
-$entries = $event->activity((int) $account->id); ?>
-<section class="card-section" id="event-activity" <?= $entries ? '' : 'hidden' ?>>
-    <h3><?= component('icon', ['name' => 'activity']) ?> <?= e(__('Activity')) ?></h3>
+<?php
+/**
+ * The event's change log, with the notes (kept only here, not on the calendar server); changes found
+ * while syncing are marked "outside the app". @var App\Models\Event $event @var App\Models\CalendarAccount $account @var string|null $view
+ */
+$entries = $event->activity((int) $account->id);
+$view ??= null; ?>
+<section class="card-section" id="event-activity">
+    <div class="activity-head">
+        <h3><?= component('icon', ['name' => 'activity']) ?> <?= e(__('Activity')) ?></h3>
+        <?= partial('note-add', ['action' => url("/events/{$event->id}/notes"), 'view' => $view]) ?>
+    </div>
     <ul class="activity">
         <?php foreach ($entries as $entry): ?>
+            <?php if ($entry->field === 'note'): ?>
+                <?= partial('note', ['entry' => $entry, 'base' => '/event-notes/' . $entry->id, 'canDelete' => true, 'view' => $view]) ?>
+                <?php continue ?>
+            <?php endif ?>
             <li class="<?= $entry->isOutside() ? 'is-outside' : '' ?>">
                 <strong><?= e($entry->isOutside() ? __('Changed outside the app') : $entry->user_name) ?></strong>
                 <?php if ($entry->field === 'created'): ?>
