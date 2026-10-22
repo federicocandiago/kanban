@@ -13,7 +13,7 @@ $user = auth(); ?>
     <div class="topbar-group ms-auto">
         <?php if ($user): ?>
             <button class="topbar-btn" type="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="<?= e(__('Search')) ?>" title="<?= e(__('Search')) ?> (/)"><?= component('icon', ['name' => 'search']) ?></button>
-            <button class="topbar-btn" type="button" data-bs-toggle="modal" data-bs-target="#create-board-modal" aria-label="<?= e(__('Create board')) ?>" title="<?= e(__('Create board')) ?>"><?= component('icon', ['name' => 'plus']) ?></button>
+            <button class="topbar-btn topbar-create" type="button" data-bs-toggle="modal" data-bs-target="#create-board-modal" aria-label="<?= e(__('Create board')) ?>" title="<?= e(__('Create board')) ?>"><?= component('icon', ['name' => 'plus']) ?></button>
             <?= component('notifications', ['user' => $user]) ?>
             <a class="topbar-avatar" href="<?= base_url() ?>/account" title="<?= e(__('Settings')) ?>" aria-label="<?= e(__('Settings')) ?>">
                 <?= component('avatar', ['user' => $user, 'size' => 40]) ?>

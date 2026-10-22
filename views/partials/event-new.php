@@ -19,7 +19,7 @@ $minutes = auth()->eventMinutes(); ?>
         <div class="flex-grow-1">
             <textarea class="card-back-title" name="title" form="<?= $form ?>" rows="1" maxlength="500" required data-enter-submit aria-label="<?= e(__('Event title')) ?>"><?= e($title) ?></textarea>
             <div class="invalid-feedback" data-error-for="title"></div>
-            <p class="card-back-list"><?= e(__('New event: it is saved when you confirm.')) ?></p>
+            <p class="card-back-list"><?= e(__('New event: it is saved when you create it.')) ?></p>
         </div>
     </div>
 
@@ -67,7 +67,7 @@ $minutes = auth()->eventMinutes(); ?>
 
         <aside class="card-back-side">
             <div class="side-bottom">
-                <button class="btn btn-success side-confirm" type="submit" form="<?= $form ?>"><?= component('icon', ['name' => 'check']) ?> <?= e(__('Confirm')) ?></button>
+                <button class="btn btn-success side-confirm" type="submit" form="<?= $form ?>"><?= component('icon', ['name' => 'plus']) ?> <?= e(__('Create event')) ?></button>
             </div>
         </aside>
     </div>

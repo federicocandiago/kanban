@@ -737,10 +737,20 @@ tr.is-paused { opacity: .6; }
     /* full-screen windows on phones scroll themselves (the window is as tall as the screen) */
     .modal-fullscreen-sm-down .modal-content { overflow-y: auto; -webkit-overflow-scrolling: touch; }
     /* one column on phones: Confirm and the actions just follow the rest, nothing floats over it */
+    .topbar-create { display: none; }   /* phones: new boards from the dashboard tile */
+    .board-name input { padding: 0 16px; }
     .side-bottom { position: static; margin-top: 8px; padding-top: 16px; }
     /* Confirm moves up, before the log, so it is in reach without scrolling to the bottom */
     .side-confirm.confirm-inline { display: flex; margin: 8px 0 24px; }
-    .side-bottom .side-confirm:not(.confirm-inline) { display: none; }
+    .card-back:has(.confirm-inline) .side-bottom .side-confirm:not(.confirm-inline) { display: none; }
+    /* one column: Labels / Attachment come before Confirm and the log, the actions stay at the end */
+    .card-back-main { display: contents; }
+    .card-back-grid { gap: 0; }
+    .card-back-side { display: contents; }
+    .card-back-side > :not(.side-bottom) { order: 1; }
+    .card-back-main > .confirm-inline { order: 2; margin-top: 20px; }
+    #card-activity, #event-activity { order: 3; }
+    .side-bottom { order: 4; }
     .card-back-side h3:not(:first-child) { margin-top: 20px; }
     .card-back-grid { grid-template-columns: 1fr; }
     .topbar { padding: 8px; }

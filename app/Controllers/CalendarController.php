@@ -201,6 +201,16 @@ final class CalendarController extends Controller
             Session::set('event_nonces', array_slice([...$done, $nonce], -20));
         }
 
+        // the same title at the same moment in the same calendar is already there: not sent again
+        $startsAt = $allDay ? $start->format('Y-m-d 00:00:00') : $start->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d H:i:s');
+        $twin = \App\Core\Database::connection()->scalar(
+            'SELECT id FROM calendar_events WHERE calendar_id = ? AND summary = ? AND starts_at = ? AND all_day = ? LIMIT 1',
+            [$calendar->id, $title, $startsAt, (int) $allDay]
+        );
+        if ($twin !== false && $twin !== null) {
+            return $this->ok(__('This event is already in the calendar.'), ['close' => true, ...$this->redraw($account, $view)]);
+        }
+
         try {
             $event = (new CalendarService($account, auth()))->create($calendar, $title, $start, $allDay ? $end->modify('+1 day') : $end, $allDay, $description);
         } catch (CalDavException $e) {

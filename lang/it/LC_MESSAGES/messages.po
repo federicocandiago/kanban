@@ -131,7 +131,7 @@ msgstr "Accesso negato"
 msgid "Access removed."
 msgstr "Accesso rimosso."
 
-#: app/Controllers/AuthController.php:129
+#: app/Controllers/AuthController.php:130
 msgid "Account created, but the confirmation email could not be sent. Try again from «Need a new link?»."
 msgstr "Account creato, ma non è stato possibile inviare l'email di conferma. Riprova da qui."
 
@@ -147,7 +147,7 @@ msgstr "Account sospeso"
 msgid "Account, profile and service data: as long as your account exists. When you delete your account (or an administrator deletes it), your data, your profile picture and the boards you own are deleted immediately; on boards owned by others your cards stay, and the log keeps your name."
 msgstr "Dati dell’account, del profilo e del servizio: finché esiste il tuo account. Quando elimini l’account (o lo elimina un amministratore), i tuoi dati, la foto profilo e le bacheche di cui sei proprietario vengono cancellati subito; sulle bacheche di altri le tue schede restano, e lo storico conserva il tuo nome."
 
-#: views/partials/card.php:91 views/partials/event.php:115
+#: views/partials/card.php:92 views/partials/event.php:116
 msgid "Actions"
 msgstr "Azioni"
 
@@ -211,7 +211,7 @@ msgstr "Aggiungi evento"
 msgid "Add list"
 msgstr "Aggiungi lista"
 
-#: views/partials/card.php:60
+#: views/partials/card.php:61
 msgid "Add to card"
 msgstr "Aggiungi alla scheda"
 
@@ -227,7 +227,7 @@ msgstr "Admin"
 msgid "All day"
 msgstr "Tutto il giorno"
 
-#: app/Controllers/AuthController.php:132
+#: app/Controllers/AuthController.php:133
 msgid "Almost done! We sent a confirmation link to :email. Check the spam folder too."
 msgstr "Ci siamo quasi! Abbiamo inviato un link di conferma a :email. Controlla anche la cartella spam."
 
@@ -275,7 +275,7 @@ msgstr "Apple ID / nome utente"
 msgid "April"
 msgstr "Aprile"
 
-#: views/partials/card.php:95
+#: views/partials/card.php:96
 msgid "Archive"
 msgstr "Archivia"
 
@@ -303,7 +303,7 @@ msgstr "archiviata"
 msgid "Archived boards"
 msgstr "Bacheche archiviate"
 
-#: views/pages/dashboard.php:30
+#: views/pages/dashboard.php:34
 msgid "Archived boards are hidden from everyone. The owner can restore them or delete them for good."
 msgstr "Le bacheche archiviate sono nascoste a tutti. Il proprietario può ripristinarle o eliminarle definitivamente."
 
@@ -315,7 +315,7 @@ msgstr "Bacheche, liste e schede archiviate restano finché non vengono ripristi
 msgid "Archived items"
 msgstr "Elementi archiviati"
 
-#: views/pages/dashboard.php:40
+#: views/pages/dashboard.php:44
 msgid "Archived on :date"
 msgstr "Archiviata il :date"
 
@@ -339,7 +339,7 @@ msgstr "In fondo, oppure in \"position\" (0 = prima)."
 msgid "Attach a file"
 msgstr "Allega un file"
 
-#: views/partials/card.php:81 views/partials/event.php:105
+#: views/partials/card.php:82 views/partials/event.php:106
 msgid "Attachment"
 msgstr "Allegato"
 
@@ -379,7 +379,7 @@ msgstr "Auto"
 msgid "Automatic (like the system)"
 msgstr "Automatico (come il sistema)"
 
-#: views/pages/dashboard.php:30
+#: views/pages/dashboard.php:35
 msgid "Back to boards"
 msgstr "Torna alle bacheche"
 
@@ -479,7 +479,7 @@ msgstr "Impostazioni del calendario"
 msgid "Calendar, if you connect one"
 msgstr "Calendario, se ne colleghi uno"
 
-#: views/pages/dashboard.php:57 views/pages/account.php:67 views/partials/search-results.php:88
+#: views/pages/dashboard.php:61 views/pages/account.php:67 views/partials/search-results.php:88
 msgid "Calendars"
 msgstr "Calendari"
 
@@ -567,7 +567,7 @@ msgstr "Modifiche a questa informativa"
 msgid "Choose a background."
 msgstr "Scegli uno sfondo."
 
-#: app/Controllers/LabelController.php:59 app/Controllers/AuthController.php:105 app/Controllers/AccountController.php:53
+#: app/Controllers/LabelController.php:59 app/Controllers/AuthController.php:106 app/Controllers/AccountController.php:53
 msgid "Choose a colour."
 msgstr "Scegli un colore."
 
@@ -579,7 +579,7 @@ msgstr "Scegli una lista di questa bacheca."
 msgid "Choose a time zone."
 msgstr "Scegli un fuso orario."
 
-#: app/Controllers/CalendarController.php:241
+#: app/Controllers/CalendarController.php:251
 msgid "Choose one of your calendars."
 msgstr "Scegli uno dei tuoi calendari."
 
@@ -599,7 +599,7 @@ msgstr "Colore"
 msgid "Complying with legal obligations and requests from authorities."
 msgstr "Adempiere a obblighi di legge e a richieste delle autorità."
 
-#: views/components/confirm-modal.php:11 views/partials/card.php:90 views/partials/event.php:114 views/partials/event-new.php:70
+#: views/components/confirm-modal.php:11 views/partials/card.php:56 views/partials/card.php:91 views/partials/event.php:94 views/partials/event.php:115
 msgid "Confirm"
 msgstr "Conferma"
 
@@ -611,11 +611,11 @@ msgstr "Conferma la mia email"
 msgid "Confirm with your password"
 msgstr "Conferma con la tua password"
 
-#: app/Controllers/AuthController.php:159 views/pages/auth/resend.php:2
+#: app/Controllers/AuthController.php:160 views/pages/auth/resend.php:2
 msgid "Confirm your email"
 msgstr "Conferma la tua email"
 
-#: app/Controllers/AuthController.php:193
+#: app/Controllers/AuthController.php:194
 msgid "Confirm your email for :app"
 msgstr "Conferma la tua email per :app"
 
@@ -671,13 +671,17 @@ msgstr "Crea una scheda"
 msgid "Create a list"
 msgstr "Crea una lista"
 
-#: app/Controllers/AuthController.php:63 views/pages/auth/register.php:3 views/pages/auth/register.php:30
+#: app/Controllers/AuthController.php:64 views/pages/auth/register.php:3 views/pages/auth/register.php:30
 msgid "Create account"
 msgstr "Registrati"
 
 #: views/components/create-board.php:6 views/components/create-board.php:17 views/components/header.php:16
 msgid "Create board"
 msgstr "Crea bacheca"
+
+#: views/partials/event-new.php:70
+msgid "Create event"
+msgstr "Crea evento"
 
 #: views/partials/dashboard-boards.php:20
 msgid "Create new board…"
@@ -767,7 +771,7 @@ msgstr "Calendario predefinito"
 msgid "Defending our rights in legal proceedings."
 msgstr "Difendere i nostri diritti in sede giudiziaria."
 
-#: views/pages/dashboard.php:45 views/pages/admin/index.php:53 views/partials/card.php:99 views/partials/event.php:117 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/event-attachments.php:20 views/partials/card-attachments.php:15 views/partials/labels.php:21
+#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:100 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/event-attachments.php:20 views/partials/card-attachments.php:15 views/partials/labels.php:21
 msgid "Delete"
 msgstr "Elimina"
 
@@ -831,7 +835,7 @@ msgstr "Durata"
 msgid "Edit"
 msgstr "Modifica"
 
-#: views/partials/event.php:100
+#: views/partials/event.php:101
 msgid "Edit the event"
 msgstr "Modifica l’evento"
 
@@ -843,7 +847,7 @@ msgstr "Email"
 msgid "Email address"
 msgstr "Indirizzo email"
 
-#: app/Controllers/AuthController.php:152
+#: app/Controllers/AuthController.php:153
 msgid "Email confirmed. Welcome aboard, :name!"
 msgstr "Email confermata. Benvenuto a bordo, :name!"
 
@@ -907,7 +911,7 @@ msgstr "Cancellazione"
 msgid "Event"
 msgstr "Evento"
 
-#: app/Controllers/CalendarController.php:313
+#: app/Controllers/CalendarController.php:323
 msgid "Event deleted."
 msgstr "Evento eliminato."
 
@@ -979,7 +983,7 @@ msgstr "Dai un nome al calendario (fino a 100 caratteri)."
 msgid "Give the card a name."
 msgstr "Dai un nome alla scheda."
 
-#: app/Controllers/CalendarController.php:162 app/Controllers/CalendarController.php:230
+#: app/Controllers/CalendarController.php:162 app/Controllers/CalendarController.php:240
 msgid "Give the event a name."
 msgstr "Dai un nome all’evento."
 
@@ -1031,7 +1035,7 @@ msgstr "Accetto i <a href=\":terms\" target=\"_blank\">Termini di servizio</a> e
 msgid "iCloud"
 msgstr "iCloud"
 
-#: app/Controllers/AuthController.php:187
+#: app/Controllers/AuthController.php:188
 msgid "If :email is waiting for confirmation, a new link is on its way. Check the spam folder too."
 msgstr "Se :email è in attesa di conferma, un nuovo link è in arrivo. Controlla anche la cartella spam."
 
@@ -1079,7 +1083,7 @@ msgstr "Indaco"
 msgid "Interface"
 msgstr "Interfaccia"
 
-#: app/Controllers/CalendarController.php:233 app/Controllers/CalendarController.php:236 app/Controllers/CalendarController.php:295 app/Services/CardService.php:50 app/Services/CardService.php:53
+#: app/Controllers/CalendarController.php:243 app/Controllers/CalendarController.php:246 app/Controllers/CalendarController.php:305 app/Services/CardService.php:50 app/Services/CardService.php:53
 msgid "Invalid date."
 msgstr "Data non valida."
 
@@ -1087,7 +1091,7 @@ msgstr "Data non valida."
 msgid "Invalid fields: see \"errors\"."
 msgstr "Campi non validi: vedi \"errors\"."
 
-#: app/Controllers/AuthController.php:102 app/Controllers/AccountController.php:47
+#: app/Controllers/AuthController.php:103 app/Controllers/AccountController.php:47
 msgid "Invalid language."
 msgstr "Lingua non valida."
 
@@ -1195,7 +1199,7 @@ msgstr "Etichetta rimossa"
 msgid "Label saved."
 msgstr "Etichetta salvata."
 
-#: views/partials/card.php:62 views/partials/card.php:64 views/partials/card-labels.php:4
+#: views/partials/card.php:63 views/partials/card.php:65 views/partials/card-labels.php:4
 msgid "Labels"
 msgstr "Etichette"
 
@@ -1223,7 +1227,7 @@ msgstr "Ultimo aggiornamento: :date"
 msgid "Last used"
 msgstr "Ultimo utilizzo"
 
-#: views/pages/dashboard.php:48
+#: views/pages/dashboard.php:52
 msgid "Leave"
 msgstr "Abbandona"
 
@@ -1311,7 +1315,7 @@ msgstr "Liste di una bacheca, da sinistra a destra."
 msgid "Loading photos…"
 msgstr "Caricamento delle foto…"
 
-#: views/partials/card.php:74
+#: views/partials/card.php:75
 msgid "Manage my labels"
 msgstr "Gestisci le mie etichette"
 
@@ -1319,7 +1323,7 @@ msgstr "Gestisci le mie etichette"
 msgid "March"
 msgstr "Marzo"
 
-#: views/partials/card.php:85 views/partials/event.php:109
+#: views/partials/card.php:86 views/partials/event.php:110
 msgid "Maximum size: :size"
 msgstr "Dimensione massima: :size"
 
@@ -1388,8 +1392,8 @@ msgid "New app-specific password"
 msgstr "Nuova password per app"
 
 #: views/partials/event-new.php:22
-msgid "New event: it is saved when you confirm."
-msgstr "Nuovo evento: viene salvato quando confermi."
+msgid "New event: it is saved when you create it."
+msgstr "Nuovo evento: viene salvato quando lo crei."
 
 #: views/partials/calendar-settings.php:39
 msgid "New events are created in this one."
@@ -1415,7 +1419,7 @@ msgstr "Nuovo token creato: copialo ora, non verrà più mostrato."
 msgid "Newest first."
 msgstr "Dal più recente."
 
-#: views/pages/calendar.php:13
+#: views/pages/calendar.php:14
 msgid "Next month"
 msgstr "Mese successivo"
 
@@ -1427,7 +1431,7 @@ msgstr "Nextcloud, Fastmail, Synology, Radicale, Baïkal… (Google e Outlook no
 msgid "No account yet?"
 msgstr "Non hai un account?"
 
-#: views/pages/dashboard.php:32
+#: views/pages/dashboard.php:33
 msgid "No archived boards."
 msgstr "Nessuna bacheca archiviata."
 
@@ -1651,7 +1655,7 @@ msgstr "Foto da Unsplash"
 msgid "Pink"
 msgstr "Rosa"
 
-#: app/Core/ValidationException.php:16 app/Controllers/AuthController.php:111 app/Controllers/AuthController.php:167 app/Controllers/AccountController.php:63 app/Controllers/AccountController.php:146 app/Controllers/AccountController.php:164 app/Controllers/AccountController.php:201 app/Controllers/CalendarController.php:84 app/Controllers/CalendarController.php:132 app/Controllers/CalendarController.php:189 app/Controllers/CalendarController.php:260
+#: app/Core/ValidationException.php:16 app/Controllers/AuthController.php:112 app/Controllers/AuthController.php:168 app/Controllers/AccountController.php:63 app/Controllers/AccountController.php:146 app/Controllers/AccountController.php:164 app/Controllers/AccountController.php:201 app/Controllers/CalendarController.php:84 app/Controllers/CalendarController.php:132 app/Controllers/CalendarController.php:189 app/Controllers/CalendarController.php:270
 msgid "Please check the form."
 msgstr "Controlla i campi del modulo."
 
@@ -1659,7 +1663,7 @@ msgstr "Controlla i campi del modulo."
 msgid "Please check the request."
 msgstr "Controlla la richiesta."
 
-#: app/Controllers/CalendarController.php:326 app/Services/CardService.php:148
+#: app/Controllers/CalendarController.php:336 app/Services/CardService.php:148
 msgid "Please choose a file."
 msgstr "Scegli un file."
 
@@ -1671,11 +1675,11 @@ msgstr "Scegli un'immagine."
 msgid "Please confirm your email first: open the link we sent you (check the spam folder too)."
 msgstr "Prima conferma la tua email: apri il link che ti abbiamo inviato (controlla anche la cartella spam)."
 
-#: app/Controllers/AuthController.php:92 app/Controllers/AuthController.php:167 app/Controllers/ShareController.php:37
+#: app/Controllers/AuthController.php:93 app/Controllers/AuthController.php:168 app/Controllers/ShareController.php:37
 msgid "Please enter a valid email address."
 msgstr "Inserisci un indirizzo email valido."
 
-#: app/Controllers/AuthController.php:89 app/Controllers/AccountController.php:44
+#: app/Controllers/AuthController.php:90 app/Controllers/AccountController.php:44
 msgid "Please enter your name."
 msgstr "Inserisci il tuo nome."
 
@@ -1687,7 +1691,7 @@ msgstr "Portabilità"
 msgid "Press Enter to see all the results."
 msgstr "Premi Invio per vedere tutti i risultati."
 
-#: views/pages/calendar.php:11
+#: views/pages/calendar.php:12
 msgid "Previous month"
 msgstr "Mese precedente"
 
@@ -1787,7 +1791,7 @@ msgstr "Evento ricorrente"
 msgid "Recurring event: change it from your calendar app."
 msgstr "Evento ricorrente: modificalo dall’app del calendario."
 
-#: app/Controllers/CalendarController.php:382
+#: app/Controllers/CalendarController.php:392
 msgid "Recurring events can be changed from your calendar app."
 msgstr "Gli eventi ricorrenti si modificano dall’app del calendario."
 
@@ -1799,7 +1803,7 @@ msgstr "Rosso"
 msgid "Regenerate token"
 msgstr "Rigenera token"
 
-#: app/Controllers/AuthController.php:74
+#: app/Controllers/AuthController.php:75
 msgid "Registration is currently closed."
 msgstr "Le registrazioni sono chiuse."
 
@@ -1843,7 +1847,7 @@ msgstr "Richieste e risposte sono in JSON (allegati: multipart/form-data). Le ri
 msgid "Responses"
 msgstr "Risposte"
 
-#: views/pages/dashboard.php:43 views/partials/card.php:93 views/partials/archived.php:12 views/partials/archived.php:27
+#: views/pages/dashboard.php:47 views/partials/card.php:94 views/partials/archived.php:12 views/partials/archived.php:27
 msgid "Restore"
 msgstr "Ripristina"
 
@@ -2087,19 +2091,19 @@ msgstr "La bacheca verrà nascosta a te e ai suoi membri. Potrai ripristinarla d
 msgid "The board “:name” is archived: restore it to open it."
 msgstr "La bacheca “:name” è archiviata: ripristinala per aprirla."
 
-#: views/pages/dashboard.php:45
+#: views/pages/dashboard.php:49
 msgid "The board “:name”, its lists, cards and attachments will be deleted for everyone. This cannot be undone."
 msgstr "La bacheca “:name”, con liste, schede e allegati, verrà eliminata per tutti. L’operazione non si può annullare."
 
-#: app/Controllers/CalendarController.php:486
+#: app/Controllers/CalendarController.php:496
 msgid "The calendar server asks to wait a little (:s seconds): your changes are safe, try again shortly."
 msgstr "Il server del calendario chiede di aspettare un po’ (:s secondi): le tue modifiche sono al sicuro, riprova tra poco."
 
-#: app/Controllers/CalendarController.php:490
+#: app/Controllers/CalendarController.php:500
 msgid "The calendar server is not answering right now (:error)."
 msgstr "Il server del calendario al momento non risponde (:error)."
 
-#: app/Controllers/CalendarController.php:488
+#: app/Controllers/CalendarController.php:498
 msgid "The calendar server refused the credentials. For iCloud use an app-specific password."
 msgstr "Il server del calendario ha rifiutato le credenziali. Per iCloud usa una password specifica per app."
 
@@ -2107,7 +2111,7 @@ msgstr "Il server del calendario ha rifiutato le credenziali. Per iCloud usa una
 msgid "The calendar “:name” will be disconnected from this site; nothing changes on the calendar itself."
 msgstr "Il calendario “:name” verrà scollegato da questo sito; sul calendario non cambia nulla."
 
-#: views/partials/card.php:99 views/partials/archived.php:15
+#: views/partials/card.php:100 views/partials/archived.php:15
 msgid "The card “:name” and its attachments will be deleted for good."
 msgstr "La scheda “:name” e i suoi allegati verranno eliminati definitivamente."
 
@@ -2127,11 +2131,11 @@ msgstr "Il titolare del trattamento è:"
 msgid "The database has just been set up, please try again."
 msgstr "Il database è appena stato preparato, riprova."
 
-#: app/Controllers/AuthController.php:183
+#: app/Controllers/AuthController.php:184
 msgid "The email could not be sent right now. Please try again later."
 msgstr "Non è stato possibile inviare l'email. Riprova più tardi."
 
-#: app/Controllers/CalendarController.php:238
+#: app/Controllers/CalendarController.php:248
 msgid "The end comes before the start."
 msgstr "La fine è precedente all’inizio."
 
@@ -2143,7 +2147,7 @@ msgstr "La data di fine è precedente a quella di inizio."
 msgid "the European Union"
 msgstr "l'Unione europea"
 
-#: views/partials/event.php:117
+#: views/partials/event.php:118
 msgid "The event “:name” will be deleted from your calendar, on every device."
 msgstr "L’evento “:name” verrà eliminato dal tuo calendario, su tutti i dispositivi."
 
@@ -2151,7 +2155,7 @@ msgstr "L’evento “:name” verrà eliminato dal tuo calendario, su tutti i d
 msgid "The file"
 msgstr "Il file"
 
-#: app/Controllers/CalendarController.php:324 app/Services/CardService.php:145 views/partials/card.php:83 views/partials/event.php:107
+#: app/Controllers/CalendarController.php:334 app/Services/CardService.php:145 views/partials/card.php:84 views/partials/event.php:108
 msgid "The file is too large (max :size)."
 msgstr "Il file è troppo grande (massimo :size)."
 
@@ -2187,11 +2191,11 @@ msgstr "La lista “:name” e tutte le sue schede verranno eliminate definitiva
 msgid "The members of the boards you share: they see the board, its cards and its log, with your name and profile picture."
 msgstr "I membri delle bacheche che condividi: vedono la bacheca, le sue schede e lo storico delle modifiche, con il tuo nome e la tua foto profilo."
 
-#: app/Controllers/AuthController.php:97 app/Controllers/AccountController.php:141
+#: app/Controllers/AuthController.php:98 app/Controllers/AccountController.php:141
 msgid "The password must be at least 8 characters."
 msgstr "La password deve avere almeno 8 caratteri."
 
-#: app/Controllers/AuthController.php:99 app/Controllers/AccountController.php:143
+#: app/Controllers/AuthController.php:100 app/Controllers/AccountController.php:143
 msgid "The passwords do not match."
 msgstr "Le password non coincidono."
 
@@ -2243,7 +2247,7 @@ msgstr "il web server può registrare i normali log di accesso (indirizzo IP, da
 msgid "Theme"
 msgstr "Tema"
 
-#: app/Controllers/AuthController.php:78
+#: app/Controllers/AuthController.php:79
 msgid "There have been too many sign-up attempts on :app: please try again later."
 msgstr "Ci sono stati troppi tentativi di registrazione su :app: riprova più tardi."
 
@@ -2255,15 +2259,15 @@ msgstr "Questo account è già collegato come “:name”."
 msgid "This board is archived."
 msgstr "Questa bacheca è archiviata."
 
-#: app/Controllers/CalendarController.php:373
+#: app/Controllers/CalendarController.php:383
 msgid "This calendar is not among yours."
 msgstr "Questo calendario non è tra i tuoi."
 
-#: app/Controllers/CalendarController.php:382 views/partials/event.php:26
+#: app/Controllers/CalendarController.php:392 views/partials/event.php:26
 msgid "This calendar is read-only."
 msgstr "Questo calendario è in sola lettura."
 
-#: app/Controllers/CalendarController.php:321
+#: app/Controllers/CalendarController.php:331
 msgid "This calendar server does not accept attachments."
 msgstr "Questo server del calendario non accetta allegati."
 
@@ -2275,7 +2279,7 @@ msgstr "Questa scheda ha una descrizione."
 msgid "This card is archived."
 msgstr "Questa scheda è archiviata."
 
-#: app/Controllers/AuthController.php:146
+#: app/Controllers/AuthController.php:147
 msgid "This confirmation link is not valid or has already been used."
 msgstr "Questo link di conferma non è valido o è già stato usato."
 
@@ -2283,7 +2287,7 @@ msgstr "Questo link di conferma non è valido o è già stato usato."
 msgid "This deletes your account and the boards you own, with their cards and attachments, for every member. You will leave the boards shared with you. It cannot be undone."
 msgstr "Elimina il tuo account e le bacheche di cui sei proprietario, con schede e allegati, per tutti i membri. Uscirai dalle bacheche condivise con te. L’operazione non si può annullare."
 
-#: app/Controllers/AuthController.php:94
+#: app/Controllers/AuthController.php:95
 msgid "This email is already registered."
 msgstr "Questa email è già registrata."
 
@@ -2291,15 +2295,19 @@ msgstr "Questa email è già registrata."
 msgid "This event has a description."
 msgstr "Questo evento ha una descrizione."
 
-#: app/Controllers/CalendarController.php:379
+#: app/Controllers/CalendarController.php:211
+msgid "This event is already in the calendar."
+msgstr "Questo evento è già nel calendario."
+
+#: app/Controllers/CalendarController.php:389
 msgid "This event is no longer in the calendar."
 msgstr "Questo evento non è più nel calendario."
 
-#: app/Controllers/CalendarController.php:489
+#: app/Controllers/CalendarController.php:499
 msgid "This event is no longer on the calendar server."
 msgstr "Questo evento non è più sul server del calendario."
 
-#: app/Controllers/CalendarController.php:487
+#: app/Controllers/CalendarController.php:497
 msgid "This event was changed on another device in the meantime: reload the calendar and try again."
 msgstr "Nel frattempo questo evento è stato modificato su un altro dispositivo: ricarica il calendario e riprova."
 
@@ -2343,7 +2351,7 @@ msgstr "Per esercitare i tuoi diritti scrivi a :mail. Risponderemo senza ingiust
 msgid "to stop password guessing and abuse we count, for a short time, failed sign-ins and some requests per account. The counters are kept under a one-way hash of the account name, never with IP addresses, and are deleted when they expire."
 msgstr "per fermare i tentativi di indovinare le password e gli abusi contiamo, per poco tempo, gli accessi falliti e alcune richieste per ogni account. I contatori sono legati a un hash non reversibile del nome dell’account, mai all’indirizzo IP, e vengono cancellati quando scadono."
 
-#: views/pages/calendar.php:14
+#: views/pages/calendar.php:10
 msgid "Today"
 msgstr "Oggi"
 
@@ -2367,7 +2375,7 @@ msgstr "Troppi tentativi falliti per questo account: riprova tra :min minuti."
 msgid "Too Many Requests"
 msgstr "Troppe richieste"
 
-#: app/Controllers/AuthController.php:172
+#: app/Controllers/AuthController.php:173
 msgid "Too many requests for this address: try again in :min minutes."
 msgstr "Troppe richieste per questo indirizzo: riprova tra :min minuti."
 
@@ -2491,7 +2499,7 @@ msgstr "Log di accesso del web server: al massimo :days giorni, salvo necessità
 msgid "Wed"
 msgstr "mer"
 
-#: app/Controllers/AuthController.php:138
+#: app/Controllers/AuthController.php:139
 msgid "Welcome aboard, :name!"
 msgstr "Benvenuto a bordo, :name!"
 
@@ -2587,7 +2595,7 @@ msgstr "Hai inviato molti inviti: riprova tra :min minuti."
 msgid "You left the board “:name”."
 msgstr "Hai abbandonato la bacheca “:name”."
 
-#: app/Controllers/AuthController.php:108
+#: app/Controllers/AuthController.php:109
 msgid "You must accept the terms of service."
 msgstr "Devi accettare i termini di servizio."
 
@@ -2595,7 +2603,7 @@ msgstr "Devi accettare i termini di servizio."
 msgid "You own this board: archive it instead."
 msgstr "Sei il proprietario di questa bacheca: archiviala, invece."
 
-#: views/pages/dashboard.php:48 views/partials/board-menu.php:32
+#: views/pages/dashboard.php:52 views/partials/board-menu.php:32
 msgid "You will no longer see the board “:name”."
 msgstr "Non vedrai più la bacheca “:name”."
 
