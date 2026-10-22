@@ -155,7 +155,7 @@ msgstr "Account sospeso"
 msgid "Account, profile and service data: as long as your account exists. When you delete your account (or an administrator deletes it), your data, your profile picture and the boards you own are deleted immediately; on boards owned by others your cards stay, and the log keeps your name."
 msgstr "Dati dell’account, del profilo e del servizio: finché esiste il tuo account. Quando elimini l’account (o lo elimina un amministratore), i tuoi dati, la foto profilo e le bacheche di cui sei proprietario vengono cancellati subito; sulle bacheche di altri le tue schede restano, e lo storico conserva il tuo nome."
 
-#: views/partials/card.php:92 views/partials/event.php:116
+#: views/partials/card.php:97 views/partials/event.php:116
 msgid "Actions"
 msgstr "Azioni"
 
@@ -183,7 +183,7 @@ msgstr "Aggiungi una scheda"
 msgid "Add a list"
 msgstr "Aggiungi una lista"
 
-#: views/partials/card.php:52 views/partials/event.php:90 views/partials/event-new.php:64
+#: views/partials/card.php:57 views/partials/event.php:90 views/partials/event-new.php:64
 msgid "Add a more detailed description…"
 msgstr "Aggiungi una descrizione più dettagliata…"
 
@@ -227,7 +227,7 @@ msgstr "Aggiungi lista"
 msgid "Add note"
 msgstr "Aggiungi nota"
 
-#: views/partials/card.php:61
+#: views/partials/card.php:66
 msgid "Add to card"
 msgstr "Aggiungi alla scheda"
 
@@ -291,7 +291,7 @@ msgstr "Apple ID / nome utente"
 msgid "April"
 msgstr "Aprile"
 
-#: views/partials/card.php:96
+#: views/partials/card.php:101
 msgid "Archive"
 msgstr "Archivia"
 
@@ -355,7 +355,7 @@ msgstr "In fondo, oppure in \"position\" (0 = prima)."
 msgid "Attach a file"
 msgstr "Allega un file"
 
-#: views/partials/card.php:82 views/partials/event.php:106
+#: views/partials/card.php:87 views/partials/event.php:106
 msgid "Attachment"
 msgstr "Allegato"
 
@@ -619,7 +619,7 @@ msgstr "Colore"
 msgid "Complying with legal obligations and requests from authorities."
 msgstr "Adempiere a obblighi di legge e a richieste delle autorità."
 
-#: views/components/confirm-modal.php:11 views/partials/card.php:56 views/partials/card.php:91 views/partials/event.php:94 views/partials/event.php:115
+#: views/components/confirm-modal.php:11 views/partials/card.php:61 views/partials/card.php:96 views/partials/event.php:94 views/partials/event.php:115
 msgid "Confirm"
 msgstr "Conferma"
 
@@ -771,7 +771,7 @@ msgstr "Data di creazione"
 msgid "date of registration, last sign-in, the boards you are a member of and when you last opened them, notifications."
 msgstr "data di registrazione, ultimo accesso, le bacheche di cui fai parte e quando le hai aperte l’ultima volta, notifiche."
 
-#: views/partials/card-tile.php:17
+#: views/partials/card.php:38 views/partials/card-tile.php:17
 msgid "Dates"
 msgstr "Date"
 
@@ -791,7 +791,7 @@ msgstr "Calendario predefinito"
 msgid "Defending our rights in legal proceedings."
 msgstr "Difendere i nostri diritti in sede giudiziaria."
 
-#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:100 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:22 views/partials/event-attachments.php:20 views/partials/card-attachments.php:15 views/partials/labels.php:21
+#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:105 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:22 views/partials/event-attachments.php:20 views/partials/card-attachments.php:15 views/partials/labels.php:21
 msgid "Delete"
 msgstr "Elimina"
 
@@ -823,7 +823,7 @@ msgstr "Elimina il mio account"
 msgid "Deleted"
 msgstr "Eliminato"
 
-#: app/Models/Activity.php:19 app/Models/EventActivity.php:17 views/pages/api-docs.php:63 views/partials/card.php:50 views/partials/event.php:88 views/partials/event-new.php:63
+#: app/Models/Activity.php:19 app/Models/EventActivity.php:17 views/pages/api-docs.php:63 views/partials/card.php:55 views/partials/event.php:88 views/partials/event-new.php:63
 msgid "Description"
 msgstr "Descrizione"
 
@@ -891,7 +891,7 @@ msgstr "Email da confermare"
 msgid "End"
 msgstr "Fine"
 
-#: app/Models/Activity.php:21 views/partials/card.php:43
+#: app/Models/Activity.php:21 views/partials/card.php:47
 msgid "End date"
 msgstr "Data di fine"
 
@@ -1251,7 +1251,7 @@ msgstr "Etichetta rimossa"
 msgid "Label saved."
 msgstr "Etichetta salvata."
 
-#: views/partials/card.php:63 views/partials/card.php:65 views/partials/card-labels.php:4
+#: views/partials/card.php:68 views/partials/card.php:70 views/partials/card-labels.php:4
 msgid "Labels"
 msgstr "Etichette"
 
@@ -1367,7 +1367,7 @@ msgstr "Liste di una bacheca, da sinistra a destra."
 msgid "Loading photos…"
 msgstr "Caricamento delle foto…"
 
-#: views/partials/card.php:75
+#: views/partials/card.php:80
 msgid "Manage my labels"
 msgstr "Gestisci le mie etichette"
 
@@ -1375,7 +1375,7 @@ msgstr "Gestisci le mie etichette"
 msgid "March"
 msgstr "Marzo"
 
-#: views/partials/card.php:86 views/partials/event.php:110
+#: views/partials/card.php:91 views/partials/event.php:110
 msgid "Maximum size: :size"
 msgstr "Dimensione massima: :size"
 
@@ -1518,6 +1518,10 @@ msgstr "Nessuna bacheca condivisa."
 #: app/Services/ApiSpec.php:228
 msgid "No token, unknown, expired, or API access turned off by the user."
 msgstr "Token assente, sconosciuto, scaduto, oppure accesso API disattivato dall’utente."
+
+#: views/partials/card.php:39
+msgid "none"
+msgstr "nessuna"
 
 #: views/pages/legal/cookies.php:35
 msgid "none: your preferences, such as the theme and the language, are saved in your account on our server."
@@ -1927,7 +1931,7 @@ msgstr "Richieste e risposte sono in JSON (allegati: multipart/form-data). Le ri
 msgid "Responses"
 msgstr "Risposte"
 
-#: views/pages/dashboard.php:47 views/partials/card.php:94 views/partials/archived.php:12 views/partials/archived.php:27
+#: views/pages/dashboard.php:47 views/partials/card.php:99 views/partials/archived.php:12 views/partials/archived.php:27
 msgid "Restore"
 msgstr "Ripristina"
 
@@ -2123,7 +2127,7 @@ msgstr "Qualcosa è andato storto"
 msgid "Start"
 msgstr "Inizio"
 
-#: app/Models/Activity.php:20 views/partials/card.php:38
+#: app/Models/Activity.php:20 views/partials/card.php:42
 msgid "Start date"
 msgstr "Data di inizio"
 
@@ -2223,7 +2227,7 @@ msgstr "Il server del calendario ha rifiutato le credenziali. Per iCloud usa una
 msgid "The calendar “:name” will be disconnected from this site; nothing changes on the calendar itself."
 msgstr "Il calendario “:name” verrà scollegato da questo sito; sul calendario non cambia nulla."
 
-#: views/partials/card.php:100 views/partials/archived.php:15
+#: views/partials/card.php:105 views/partials/archived.php:15
 msgid "The card “:name” and its attachments will be deleted for good."
 msgstr "La scheda “:name” e i suoi allegati verranno eliminati definitivamente."
 
@@ -2267,7 +2271,7 @@ msgstr "L’evento “:name” verrà eliminato dal tuo calendario, su tutti i d
 msgid "The file"
 msgstr "Il file"
 
-#: app/Controllers/AccountController.php:198 app/Controllers/CalendarController.php:335 app/Services/CardService.php:145 views/partials/card.php:84 views/partials/event.php:108
+#: app/Controllers/AccountController.php:198 app/Controllers/CalendarController.php:335 app/Services/CardService.php:145 views/partials/card.php:89 views/partials/event.php:108
 msgid "The file is too large (max :size)."
 msgstr "Il file è troppo grande (massimo :size)."
 

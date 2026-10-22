@@ -630,6 +630,19 @@ tr.is-paused { opacity: .6; }
 .card-back-labels .label { height: 30px; line-height: 30px; min-width: 48px; padding: 0 14px; font-size: 13px; }
 .card-dates { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
 .card-dates label { display: flex; flex-direction: column; }
+/* a card's dates: folded by default (what is set shows in the title), the description gets the room */
+.card-dates-box { margin-bottom: 16px; }
+.card-dates-box > summary {
+    list-style: none; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 10px; border-radius: var(--r-pill);
+    background: var(--k-btn); color: var(--k-text); font-size: 14px; font-weight: 600; cursor: pointer; user-select: none;
+}
+.card-dates-box > summary::-webkit-details-marker { display: none; }
+.card-dates-box > summary::after { content: "›"; font-size: 16px; line-height: 1; color: var(--k-muted); transition: transform .15s; }
+.card-dates-box[open] > summary::after { transform: rotate(90deg); }
+.card-dates-box > summary:hover { background: var(--k-btn-hover); }
+.card-dates-box > summary .icon { color: var(--k-muted); }
+.card-dates-sum { color: var(--k-muted); font-weight: 400; }
+.card-dates-box[open] > .card-dates { margin: 12px 0 0; }
 .card-section { margin-bottom: 24px; }
 .card-section > h3, .activity-head > h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 8px -28px; font-size: 16px; font-weight: 700; }
 .card-section > h3 .icon, .activity-head > h3 .icon { color: var(--k-muted); width: 20px; }

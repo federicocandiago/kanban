@@ -77,7 +77,10 @@
         $$('[data-error-for]', root).forEach((el) => { el.textContent = ''; el.style.display = ''; });
         for (const [field, message] of Object.entries(errors)) {
             const input = form.elements.namedItem(field) ?? form.elements.namedItem(`${field}[]`);
-            (input instanceof RadioNodeList ? input[0] : input)?.classList.add('is-invalid');
+            const field = input instanceof RadioNodeList ? input[0] : input;
+            field?.classList.add('is-invalid');
+            const folded = field?.closest('details:not([open])');
+            if (folded) folded.open = true; // an error inside a closed section: show it
             const feedback = form.querySelector(`[data-error-for="${field}"]`) ?? root.querySelector(`[data-error-for="${field}"]`);
             if (feedback) {
                 feedback.textContent = message;
@@ -301,6 +304,21 @@
         $$('[data-filter-group]').forEach((group) => {
             group.hidden = text !== '' && !$$('[data-search]', group).some((el) => !el.hidden);
         });
+    });
+
+    // a card's folded dates: their title says what is set ("20 ott → 22 ott"), also while changing them
+    const shortDay = (value) => {
+        if (!value) return '';
+        const date = new Date(`${value}T12:00:00`);
+        const options = { day: 'numeric', month: 'short', ...(date.getFullYear() !== new Date().getFullYear() && { year: 'numeric' }) };
+        return new Intl.DateTimeFormat(document.documentElement.lang || undefined, options).format(date).replace('.', '');
+    };
+    document.addEventListener('change', (event) => {
+        const box = event.target.closest?.('.card-dates-box');
+        const sum = box?.querySelector('.card-dates-sum');
+        if (!sum) return;
+        const [start, end] = ['start_date', 'end_date'].map((name) => shortDay(box.querySelector(`[name="${name}"]`)?.value));
+        sum.textContent = [start, end].filter(Boolean).join(' → ') || sum.dataset.none;
     });
 
     // after a DOM patch the new elements are filtered like the others

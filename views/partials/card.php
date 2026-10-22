@@ -33,22 +33,27 @@ $onCard = $card->labelIds(); ?>
         <div class="card-back-main">
             <?= partial('card-labels', compact('card')) ?>
 
-            <div class="card-dates">
-                <label>
-                    <span class="card-back-label"><?= e(__('Start date')) ?></span>
-                    <input class="form-control form-control-sm" type="date" name="start_date" form="<?= $form ?>" value="<?= e($card->start_date) ?>">
-                    <span class="invalid-feedback" data-error-for="start_date"></span>
-                </label>
-                <label>
-                    <span class="card-back-label"><?= e(__('End date')) ?></span>
-                    <input class="form-control form-control-sm" type="date" name="end_date" form="<?= $form ?>" value="<?= e($card->end_date) ?>">
-                    <span class="invalid-feedback" data-error-for="end_date"></span>
-                </label>
-            </div>
+            <?php $dates = trim(format_day($card->start_date) . ($card->start_date && $card->end_date ? ' → ' : '') . format_day($card->end_date)); ?>
+            <details class="card-dates-box">
+                <summary><?= component('icon', ['name' => 'clock', 'size' => 16]) ?> <span><?= e(__('Dates')) ?></span>
+                    <small class="card-dates-sum" data-none="<?= e(__('none')) ?>"><?= $dates !== '' ? e($dates) : e(__('none')) ?></small></summary>
+                <div class="card-dates">
+                    <label>
+                        <span class="card-back-label"><?= e(__('Start date')) ?></span>
+                        <input class="form-control form-control-sm" type="date" name="start_date" form="<?= $form ?>" value="<?= e($card->start_date) ?>">
+                        <span class="invalid-feedback" data-error-for="start_date"></span>
+                    </label>
+                    <label>
+                        <span class="card-back-label"><?= e(__('End date')) ?></span>
+                        <input class="form-control form-control-sm" type="date" name="end_date" form="<?= $form ?>" value="<?= e($card->end_date) ?>">
+                        <span class="invalid-feedback" data-error-for="end_date"></span>
+                    </label>
+                </div>
+            </details>
 
             <section class="card-section">
                 <h3><?= component('icon', ['name' => 'text']) ?> <?= e(__('Description')) ?></h3>
-                <textarea class="form-control card-description" name="description" form="<?= $form ?>" rows="4"
+                <textarea class="form-control card-description" name="description" form="<?= $form ?>" rows="7"
                           placeholder="<?= e(__('Add a more detailed description…')) ?>"><?= e($card->description) ?></textarea>
             </section>
 
