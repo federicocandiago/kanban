@@ -47,7 +47,7 @@ msgstr ":email fa già parte di questa bacheca."
 msgid ":n h ago"
 msgstr ":n h fa"
 
-#: views/components/board-tile.php:11
+#: views/components/board-tile.php:8
 msgid ":n members"
 msgstr ":n membri"
 
@@ -315,7 +315,7 @@ msgstr "Archiviata"
 msgid "archived"
 msgstr "archiviata"
 
-#: app/Controllers/BoardController.php:24 views/components/side-menu.php:18 views/pages/dashboard.php:4
+#: app/Controllers/BoardController.php:27 views/components/side-menu.php:19 views/pages/dashboard.php:4
 msgid "Archived boards"
 msgstr "Bacheche archiviate"
 
@@ -387,7 +387,7 @@ msgstr "Agosto"
 msgid "Authentication: turn on API access in Settings, generate a token and send it in every request as \"Authorization: Bearer kalban_…\". A read-only token can call the GET operations; a read and change token all of them. A token lasts :days days."
 msgstr "Autenticazione: attiva l’accesso API nelle Impostazioni, genera un token e mandalo in ogni richiesta come \"Authorization: Bearer kalban_…\". Un token di sola lettura può chiamare le operazioni GET; uno di lettura e modifica tutte. Un token dura :days giorni."
 
-#: views/components/side-menu.php:25
+#: views/components/side-menu.php:26
 msgid "Auto"
 msgstr "Auto"
 
@@ -395,7 +395,7 @@ msgstr "Auto"
 msgid "Automatic (like the system)"
 msgstr "Automatico (come il sistema)"
 
-#: views/pages/dashboard.php:35
+#: views/pages/shared.php:20 views/pages/dashboard.php:35
 msgid "Back to boards"
 msgstr "Torna alle bacheche"
 
@@ -403,7 +403,7 @@ msgstr "Torna alle bacheche"
 msgid "Back to home"
 msgstr "Torna alla home"
 
-#: app/Controllers/AdminController.php:33 views/components/side-menu.php:21 views/pages/admin/index.php:2
+#: app/Controllers/AdminController.php:33 views/components/side-menu.php:22 views/pages/admin/index.php:2
 msgid "Back-office"
 msgstr "Back-office"
 
@@ -419,11 +419,11 @@ msgstr "Foto di sfondo"
 msgid "Blue"
 msgstr "Blu"
 
-#: app/Controllers/BoardController.php:85
+#: app/Controllers/BoardController.php:101
 msgid "Board archived. You can find it under «Archived boards»."
 msgstr "Bacheca archiviata. La trovi in «Bacheche archiviate»."
 
-#: app/Controllers/BoardController.php:102
+#: app/Controllers/BoardController.php:118
 msgid "Board deleted."
 msgstr "Bacheca eliminata."
 
@@ -439,7 +439,7 @@ msgstr "Solo il proprietario della bacheca."
 msgid "Board owner only: its cards and attachments go too."
 msgstr "Solo il proprietario della bacheca: vengono eliminati anche schede e allegati."
 
-#: app/Controllers/BoardController.php:93
+#: app/Controllers/BoardController.php:109
 msgid "Board restored."
 msgstr "Bacheca ripristinata."
 
@@ -447,7 +447,7 @@ msgstr "Bacheca ripristinata."
 msgid "Board title"
 msgstr "Titolo della bacheca"
 
-#: app/Controllers/AdminController.php:39 app/Controllers/BoardController.php:24 views/components/header.php:7 views/components/side-menu.php:10 views/pages/dashboard.php:4 views/pages/admin/index.php:27 views/partials/search-results.php:23
+#: app/Controllers/AdminController.php:39 app/Controllers/BoardController.php:27 views/components/header.php:7 views/components/side-menu.php:10 views/pages/dashboard.php:4 views/pages/admin/index.php:27 views/partials/search-results.php:23
 msgid "Boards"
 msgstr "Bacheche"
 
@@ -739,7 +739,7 @@ msgstr "Password attuale"
 msgid "Current photo by <a href=\":url\" target=\"_blank\" rel=\"noopener\">:name</a> on Unsplash"
 msgstr "Foto attuale di <a href=\":url\" target=\"_blank\" rel=\"noopener\">:name</a> su Unsplash"
 
-#: views/components/side-menu.php:25 views/pages/account.php:29
+#: views/components/side-menu.php:26 views/pages/account.php:29
 msgid "Dark"
 msgstr "Scuro"
 
@@ -1259,7 +1259,7 @@ msgstr "Etichette"
 msgid "Language"
 msgstr "Lingua"
 
-#: views/components/board-tile.php:8 views/pages/dashboard.php:14 views/pages/dashboard.php:18
+#: views/components/board-tile.php:11 views/pages/dashboard.php:14 views/pages/dashboard.php:18
 msgid "Last changed"
 msgstr "Ultima modifica"
 
@@ -1311,7 +1311,7 @@ msgstr "Legittimo interesse del titolare (art. 6, par. 1, lett. f GDPR)."
 msgid "Length of new events"
 msgstr "Durata degli eventi"
 
-#: views/components/side-menu.php:25 views/pages/account.php:29
+#: views/components/side-menu.php:26 views/pages/account.php:29
 msgid "Light"
 msgstr "Chiaro"
 
@@ -1511,6 +1511,10 @@ msgstr "Nessuna notifica."
 msgid "No photos found."
 msgstr "Nessuna foto trovata."
 
+#: views/pages/shared.php:18
+msgid "No shared boards."
+msgstr "Nessuna bacheca condivisa."
+
 #: app/Services/ApiSpec.php:228
 msgid "No token, unknown, expired, or API access turned off by the user."
 msgstr "Token assente, sconosciuto, scaduto, oppure accesso API disattivato dall’utente."
@@ -1659,7 +1663,7 @@ msgstr "Solo il proprietario, e solo dopo averla archiviata: vengono eliminati a
 msgid "Owner only."
 msgstr "Solo il proprietario."
 
-#: views/pages/board.php:19
+#: views/components/board-tile.php:8 views/pages/board.php:19
 msgid "Owner: :name"
 msgstr "Proprietario: :name"
 
@@ -1963,7 +1967,7 @@ msgstr "Schemi"
 msgid "Search"
 msgstr "Cerca"
 
-#: views/pages/dashboard.php:9
+#: views/pages/shared.php:9 views/pages/dashboard.php:9
 msgid "Search boards"
 msgstr "Cerca bacheche"
 
@@ -2035,7 +2039,7 @@ msgstr "Sessione scaduta"
 msgid "Set APP_KEY in .env first (php bin/key.php)."
 msgstr "Prima imposta APP_KEY nel .env (php bin/key.php)."
 
-#: views/components/header.php:18 views/components/side-menu.php:19 views/pages/admin/index.php:65
+#: views/components/header.php:18 views/components/side-menu.php:20 views/pages/admin/index.php:65
 msgid "Settings"
 msgstr "Impostazioni"
 
@@ -2047,13 +2051,41 @@ msgstr "Impostazioni salvate."
 msgid "Share"
 msgstr "Condividi"
 
+#: views/pages/shared.php:19
+msgid "Share a board from its Share button: the people you invite appear here, and so do the boards others share with you."
+msgstr "Condividi una bacheca dal suo pulsante Condividi: qui trovi quelle che condividi e quelle che altri condividono con te."
+
 #: views/pages/board.php:50
 msgid "Share board"
 msgstr "Condividi la bacheca"
 
+#: app/Models/Board.php:66
+msgid "Shared"
+msgstr "Condivisa"
+
+#: app/Controllers/BoardController.php:42 views/components/side-menu.php:18 views/pages/shared.php:4
+msgid "Shared boards"
+msgstr "Bacheche condivise"
+
 #: views/partials/calendar-settings.php:19
 msgid "shared by :name"
 msgstr "condiviso da :name"
+
+#: views/pages/shared.php:24
+msgid "Shared by me"
+msgstr "Condivise da me"
+
+#: app/Models/Board.php:65
+msgid "Shared with :name"
+msgstr "Condivisa con :name"
+
+#: app/Models/Board.php:59
+msgid "Shared with me"
+msgstr "Condivisa con me"
+
+#: views/pages/shared.php:24
+msgid "Shared with me (boards)"
+msgstr "Condivise con me"
 
 #: views/pages/board.php:22
 msgid "Show menu"
@@ -2063,7 +2095,7 @@ msgstr "Mostra menu"
 msgid "Sign in"
 msgstr "Accedi"
 
-#: views/components/side-menu.php:33 views/pages/stop.php:5
+#: views/components/side-menu.php:34 views/pages/stop.php:5
 msgid "Sign out"
 msgstr "Esci"
 
@@ -2163,7 +2195,7 @@ msgstr "La bacheca sul sito."
 msgid "The board will be hidden from you and its members. You can restore it from «Archived boards»."
 msgstr "La bacheca verrà nascosta a te e ai suoi membri. Potrai ripristinarla da «Bacheche archiviate»."
 
-#: app/Controllers/BoardController.php:37
+#: app/Controllers/BoardController.php:53
 msgid "The board “:name” is archived: restore it to open it."
 msgstr "La bacheca “:name” è archiviata: ripristinala per aprirla."
 
@@ -2327,7 +2359,7 @@ msgstr "Le etichette dell’utente"
 msgid "the web server may record standard access logs (IP address, date and time, requested page, browser type) for security purposes. The application itself does not store your IP address."
 msgstr "il web server può registrare i normali log di accesso (indirizzo IP, data e ora, pagina richiesta, tipo di browser) per finalità di sicurezza. L'applicazione in sé non salva il tuo indirizzo IP."
 
-#: views/components/side-menu.php:24 views/pages/account.php:27
+#: views/components/side-menu.php:25 views/pages/account.php:27
 msgid "Theme"
 msgstr "Tema"
 
@@ -2511,7 +2543,7 @@ msgstr "Non autorizzato"
 msgid "Under Articles 15–22 GDPR you have the right to:"
 msgstr "Ai sensi degli articoli 15–22 GDPR hai il diritto di:"
 
-#: app/Controllers/BoardController.php:123
+#: app/Controllers/BoardController.php:139
 msgid "Unsplash is not answering right now."
 msgstr "Unsplash al momento non risponde."
 
@@ -2687,7 +2719,7 @@ msgstr "Non puoi toglierti il ruolo di admin."
 msgid "You have sent many invitations: try again in :min minutes."
 msgstr "Hai inviato molti inviti: riprova tra :min minuti."
 
-#: app/Controllers/BoardController.php:110
+#: app/Controllers/BoardController.php:126
 msgid "You left the board “:name”."
 msgstr "Hai abbandonato la bacheca “:name”."
 

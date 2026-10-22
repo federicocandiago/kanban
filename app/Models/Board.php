@@ -49,6 +49,24 @@ final class Board extends Model
         return $this->role === 'owner';
     }
 
+    /**
+     * How the board is shared, for the dashboard tile: "Shared with me" (somebody else's), "Shared with
+     * Giulia" (mine, one other member), "Shared" (mine, more members), null (only mine). Needs User::boards().
+     */
+    public function shareLabel(): ?string
+    {
+        if (!$this->isOwner()) {
+            return __('Shared with me');
+        }
+        $others = (int) $this->member_count - 1;
+
+        return match (true) {
+            $others <= 0 => null,
+            $others === 1 => __('Shared with :name', ['name' => strtok((string) $this->other_name, ' ') ?: (string) $this->other_name]), // first name: it fits the tile
+            default => __('Shared'),
+        };
+    }
+
     public function isArchived(): bool
     {
         return $this->archived_at !== null;

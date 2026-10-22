@@ -15,6 +15,7 @@ $favorites = array_filter($user->boards(), static fn ($b) => (bool) $b->is_favor
             <?php endforeach ?>
             <div class="side-sep"></div>
         <?php endif ?>
+        <a href="<?= base_url() ?>/dashboard?shared=1"><?= component('icon', ['name' => 'users']) ?> <?= e(__('Shared boards')) ?></a>
         <a href="<?= base_url() ?>/dashboard?archived=1"><?= component('icon', ['name' => 'archive']) ?> <?= e(__('Archived boards')) ?></a>
         <a href="<?= base_url() ?>/account"><?= component('icon', ['name' => 'gear']) ?> <?= e(__('Settings')) ?></a>
         <?php if ($user->isAdmin()): ?>

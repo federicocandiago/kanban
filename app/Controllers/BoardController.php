@@ -17,6 +17,9 @@ final class BoardController extends Controller
     /** Dashboard: calendars, favourites, the other boards — or the archived ones (?archived=1). */
     public function index(Request $request): Response
     {
+        if ($request->input('shared')) {
+            return $this->shared();
+        }
         $archived = (bool) $request->input('archived');
         $boards = auth()->boards($archived);
 
@@ -27,6 +30,19 @@ final class BoardController extends Controller
             'archived' => $archived,
             'boards' => $boards,
             'calendars' => $archived ? [] : CalendarAccount::forUser(auth()),
+        ]);
+    }
+
+    /** From the side menu only: the shared boards, in two sections (with me / by me). */
+    private function shared(): Response
+    {
+        $boards = auth()->boards();
+
+        return view('pages/shared', [
+            'title' => __('Shared boards'),
+            'bodyClass' => 'is-dashboard',
+            'withMe' => array_values(array_filter($boards, static fn (Board $b): bool => !$b->isOwner())),
+            'byMe' => array_values(array_filter($boards, static fn (Board $b): bool => $b->isOwner() && (int) $b->member_count > 1)),
         ]);
     }
 

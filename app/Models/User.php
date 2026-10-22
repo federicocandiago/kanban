@@ -94,7 +94,8 @@ final class User extends Model
 
     /**
      * Boards this user can open, with their own role and favourite flag, and touched_at: the
-     * last time they opened it or someone changed it or its cards (the active ones come in that order).
+     * last time they opened it or someone changed it or its cards (the active ones come in that order);
+     * owner_name, and other_name: the one other member, when there is exactly one.
      * @return Board[]
      */
     public function boards(bool $archived = false): array
@@ -102,6 +103,8 @@ final class User extends Model
         $rows = static::db()->select(
             'SELECT b.*, m.role, m.is_favorite,
                     (SELECT COUNT(*) FROM board_members x WHERE x.board_id = b.id) AS member_count,
+                    (SELECT u.name FROM users u WHERE u.id = b.owner_id) AS owner_name,
+                    (SELECT u.name FROM board_members y JOIN users u ON u.id = y.user_id WHERE y.board_id = b.id AND y.user_id <> m.user_id LIMIT 1) AS other_name,
                     GREATEST(COALESCE(m.last_opened_at, b.created_at), b.updated_at,
                              COALESCE((SELECT MAX(c.updated_at) FROM cards c WHERE c.board_id = b.id), b.created_at)) AS touched_at
              FROM boards b JOIN board_members m ON m.board_id = b.id AND m.user_id = ?

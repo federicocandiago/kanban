@@ -47,7 +47,7 @@ msgstr ""
 msgid ":n h ago"
 msgstr ""
 
-#: views/components/board-tile.php:11
+#: views/components/board-tile.php:8
 msgid ":n members"
 msgstr ""
 
@@ -315,7 +315,7 @@ msgstr ""
 msgid "archived"
 msgstr ""
 
-#: app/Controllers/BoardController.php:24 views/components/side-menu.php:18 views/pages/dashboard.php:4
+#: app/Controllers/BoardController.php:27 views/components/side-menu.php:19 views/pages/dashboard.php:4
 msgid "Archived boards"
 msgstr ""
 
@@ -387,7 +387,7 @@ msgstr ""
 msgid "Authentication: turn on API access in Settings, generate a token and send it in every request as \"Authorization: Bearer kalban_…\". A read-only token can call the GET operations; a read and change token all of them. A token lasts :days days."
 msgstr ""
 
-#: views/components/side-menu.php:25
+#: views/components/side-menu.php:26
 msgid "Auto"
 msgstr ""
 
@@ -395,7 +395,7 @@ msgstr ""
 msgid "Automatic (like the system)"
 msgstr ""
 
-#: views/pages/dashboard.php:35
+#: views/pages/shared.php:20 views/pages/dashboard.php:35
 msgid "Back to boards"
 msgstr ""
 
@@ -403,7 +403,7 @@ msgstr ""
 msgid "Back to home"
 msgstr ""
 
-#: app/Controllers/AdminController.php:33 views/components/side-menu.php:21 views/pages/admin/index.php:2
+#: app/Controllers/AdminController.php:33 views/components/side-menu.php:22 views/pages/admin/index.php:2
 msgid "Back-office"
 msgstr ""
 
@@ -419,11 +419,11 @@ msgstr ""
 msgid "Blue"
 msgstr ""
 
-#: app/Controllers/BoardController.php:85
+#: app/Controllers/BoardController.php:101
 msgid "Board archived. You can find it under «Archived boards»."
 msgstr ""
 
-#: app/Controllers/BoardController.php:102
+#: app/Controllers/BoardController.php:118
 msgid "Board deleted."
 msgstr ""
 
@@ -439,7 +439,7 @@ msgstr ""
 msgid "Board owner only: its cards and attachments go too."
 msgstr ""
 
-#: app/Controllers/BoardController.php:93
+#: app/Controllers/BoardController.php:109
 msgid "Board restored."
 msgstr ""
 
@@ -447,7 +447,7 @@ msgstr ""
 msgid "Board title"
 msgstr ""
 
-#: app/Controllers/AdminController.php:39 app/Controllers/BoardController.php:24 views/components/header.php:7 views/components/side-menu.php:10 views/pages/dashboard.php:4 views/pages/admin/index.php:27 views/partials/search-results.php:23
+#: app/Controllers/AdminController.php:39 app/Controllers/BoardController.php:27 views/components/header.php:7 views/components/side-menu.php:10 views/pages/dashboard.php:4 views/pages/admin/index.php:27 views/partials/search-results.php:23
 msgid "Boards"
 msgstr ""
 
@@ -739,7 +739,7 @@ msgstr ""
 msgid "Current photo by <a href=\":url\" target=\"_blank\" rel=\"noopener\">:name</a> on Unsplash"
 msgstr ""
 
-#: views/components/side-menu.php:25 views/pages/account.php:29
+#: views/components/side-menu.php:26 views/pages/account.php:29
 msgid "Dark"
 msgstr ""
 
@@ -1259,7 +1259,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: views/components/board-tile.php:8 views/pages/dashboard.php:14 views/pages/dashboard.php:18
+#: views/components/board-tile.php:11 views/pages/dashboard.php:14 views/pages/dashboard.php:18
 msgid "Last changed"
 msgstr ""
 
@@ -1311,7 +1311,7 @@ msgstr ""
 msgid "Length of new events"
 msgstr ""
 
-#: views/components/side-menu.php:25 views/pages/account.php:29
+#: views/components/side-menu.php:26 views/pages/account.php:29
 msgid "Light"
 msgstr ""
 
@@ -1511,6 +1511,10 @@ msgstr ""
 msgid "No photos found."
 msgstr ""
 
+#: views/pages/shared.php:18
+msgid "No shared boards."
+msgstr ""
+
 #: app/Services/ApiSpec.php:228
 msgid "No token, unknown, expired, or API access turned off by the user."
 msgstr ""
@@ -1659,7 +1663,7 @@ msgstr ""
 msgid "Owner only."
 msgstr ""
 
-#: views/pages/board.php:19
+#: views/components/board-tile.php:8 views/pages/board.php:19
 msgid "Owner: :name"
 msgstr ""
 
@@ -1963,7 +1967,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: views/pages/dashboard.php:9
+#: views/pages/shared.php:9 views/pages/dashboard.php:9
 msgid "Search boards"
 msgstr ""
 
@@ -2035,7 +2039,7 @@ msgstr ""
 msgid "Set APP_KEY in .env first (php bin/key.php)."
 msgstr ""
 
-#: views/components/header.php:18 views/components/side-menu.php:19 views/pages/admin/index.php:65
+#: views/components/header.php:18 views/components/side-menu.php:20 views/pages/admin/index.php:65
 msgid "Settings"
 msgstr ""
 
@@ -2047,13 +2051,41 @@ msgstr ""
 msgid "Share"
 msgstr ""
 
+#: views/pages/shared.php:19
+msgid "Share a board from its Share button: the people you invite appear here, and so do the boards others share with you."
+msgstr ""
+
 #: views/pages/board.php:50
 msgid "Share board"
+msgstr ""
+
+#: app/Models/Board.php:66
+msgid "Shared"
+msgstr ""
+
+#: app/Controllers/BoardController.php:42 views/components/side-menu.php:18 views/pages/shared.php:4
+msgid "Shared boards"
 msgstr ""
 
 #: views/partials/calendar-settings.php:19
 msgid "shared by :name"
 msgstr ""
+
+#: views/pages/shared.php:24
+msgid "Shared by me"
+msgstr ""
+
+#: app/Models/Board.php:65
+msgid "Shared with :name"
+msgstr ""
+
+#: app/Models/Board.php:59
+msgid "Shared with me"
+msgstr ""
+
+#: views/pages/shared.php:24
+msgid "Shared with me (boards)"
+msgstr "Shared with me"
 
 #: views/pages/board.php:22
 msgid "Show menu"
@@ -2063,7 +2095,7 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: views/components/side-menu.php:33 views/pages/stop.php:5
+#: views/components/side-menu.php:34 views/pages/stop.php:5
 msgid "Sign out"
 msgstr ""
 
@@ -2163,7 +2195,7 @@ msgstr ""
 msgid "The board will be hidden from you and its members. You can restore it from «Archived boards»."
 msgstr ""
 
-#: app/Controllers/BoardController.php:37
+#: app/Controllers/BoardController.php:53
 msgid "The board “:name” is archived: restore it to open it."
 msgstr ""
 
@@ -2327,7 +2359,7 @@ msgstr ""
 msgid "the web server may record standard access logs (IP address, date and time, requested page, browser type) for security purposes. The application itself does not store your IP address."
 msgstr ""
 
-#: views/components/side-menu.php:24 views/pages/account.php:27
+#: views/components/side-menu.php:25 views/pages/account.php:27
 msgid "Theme"
 msgstr ""
 
@@ -2511,7 +2543,7 @@ msgstr ""
 msgid "Under Articles 15–22 GDPR you have the right to:"
 msgstr ""
 
-#: app/Controllers/BoardController.php:123
+#: app/Controllers/BoardController.php:139
 msgid "Unsplash is not answering right now."
 msgstr ""
 
@@ -2687,7 +2719,7 @@ msgstr ""
 msgid "You have sent many invitations: try again in :min minutes."
 msgstr ""
 
-#: app/Controllers/BoardController.php:110
+#: app/Controllers/BoardController.php:126
 msgid "You left the board “:name”."
 msgstr ""
 
