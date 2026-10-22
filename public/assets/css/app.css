@@ -698,6 +698,16 @@ tr.is-paused { opacity: .6; }
 }
 .side-btn:hover { background: var(--k-btn-hover); }
 .side-btn .icon { flex: none; }
+/* the card's list, at the top of the side column: a button-like select */
+.side-select { position: relative; display: flex; align-items: center; margin-bottom: 8px; }
+.side-select > .icon { position: absolute; left: 14px; pointer-events: none; }
+.side-select select {
+    appearance: none; width: 100%; padding: 7px 34px 7px 38px; border: 0; border-radius: var(--r-pill); cursor: pointer;
+    background: var(--k-btn) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238590a2' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center / 12px;
+    color: var(--k-text); font: inherit; font-weight: 600; text-overflow: ellipsis;
+}
+.side-select select:hover { background-color: var(--k-btn-hover); }
+.side-select select:focus-visible { outline: 0; box-shadow: 0 0 0 2px var(--k-focus); }
 .color-picker { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; max-width: 360px; }
 .color-option {
     position: relative; display: flex; align-items: center; justify-content: center; aspect-ratio: 1;

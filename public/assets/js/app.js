@@ -170,7 +170,8 @@
             if (data.ok && form.hasAttribute('data-reset')) form.reset();
             // a field error is enough: no toast on top of it
             if (data.ok || !Object.keys(data.errors ?? {}).length) handle(data, form);
-            if (data.ok && button?.hasAttribute('data-close')) $$('.modal.show').forEach((el) => bootstrap.Modal.getInstance(el)?.hide());
+            // only the button actually pressed closes the window (a form saving itself has no submitter)
+            if (data.ok && event.submitter?.hasAttribute('data-close')) $$('.modal.show').forEach((el) => bootstrap.Modal.getInstance(el)?.hide());
             // on document: the form may have just been redrawn away
             document.dispatchEvent(new CustomEvent('app:done', { detail: { data, form } }));
         });

@@ -19,13 +19,6 @@ $onCard = $card->labelIds(); ?>
         <div class="flex-grow-1">
             <textarea class="card-back-title" name="title" form="<?= $form ?>" rows="1" maxlength="255" required data-enter-submit aria-label="<?= e(__('Card title')) ?>"><?= e($card->title) ?></textarea>
             <div class="invalid-feedback" data-error-for="title"></div>
-            <label class="card-back-list"><?= e(__('in list')) ?>
-                <select name="list_id" form="<?= $form ?>" aria-label="<?= e(__('List')) ?>">
-                    <?php foreach ($lists as $list): ?>
-                        <option value="<?= (int) $list->id ?>" <?= (int) $list->id === (int) $card->list_id ? 'selected' : '' ?>><?= e($list->name) ?></option>
-                    <?php endforeach ?>
-                </select>
-            </label>
         </div>
     </div>
 
@@ -72,6 +65,15 @@ $onCard = $card->labelIds(); ?>
         </div>
 
         <aside class="card-back-side">
+            <h3><?= e(__('List')) ?></h3>
+            <label class="side-select">
+                <?= component('icon', ['name' => 'list']) ?>
+                <select name="list_id" form="<?= $form ?>" aria-label="<?= e(__('List')) ?>">
+                    <?php foreach ($lists as $list): ?>
+                        <option value="<?= (int) $list->id ?>" <?= (int) $list->id === (int) $card->list_id ? 'selected' : '' ?>><?= e($list->name) ?></option>
+                    <?php endforeach ?>
+                </select>
+            </label>
             <h3><?= e(__('Card items')) ?></h3>
             <div class="dropdown">
                 <button class="side-btn" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><?= component('icon', ['name' => 'tag']) ?> <?= e(__('Labels')) ?></button>
