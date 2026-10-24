@@ -18,6 +18,7 @@
  *   details[data-remember]   keeps open/closed across reloads (this tab; data-remember-in="local": always); opens when the address points to it (#id)
  *   [data-sort="sel"]        menu of [data-sort-by] choices: orders the children of sel by their data-sort-{key} (remembered); "app:patched" after every DOM patch
  *   textarea[data-enter-submit], details.quick-add, [data-close-details], [data-open-details]
+ *   Cmd/Ctrl+Enter           confirms the card / event window (its .side-confirm), or sends the form being typed in
  */
 (() => {
     'use strict';
@@ -81,9 +82,9 @@
         $$('[data-error-for]', root).forEach((el) => { el.textContent = ''; el.style.display = ''; });
         for (const [field, message] of Object.entries(errors)) {
             const input = form.elements.namedItem(field) ?? form.elements.namedItem(`${field}[]`);
-            const field = input instanceof RadioNodeList ? input[0] : input;
-            field?.classList.add('is-invalid');
-            const folded = field?.closest('details:not([open])');
+            const element = input instanceof RadioNodeList ? input[0] : input;
+            element?.classList.add('is-invalid');
+            const folded = element?.closest('details:not([open])');
             if (folded) folded.open = true; // an error inside a closed section: show it
             const feedback = form.querySelector(`[data-error-for="${field}"]`) ?? root.querySelector(`[data-error-for="${field}"]`);
             if (feedback) {
@@ -157,6 +158,9 @@
         if (!form.matches('form[data-ajax]')) return;
         event.preventDefault();
         if (form.dataset.ask && !(await confirmDialog(form.dataset.ask))) return;
+        // a form that saves itself: a name left empty is not a change, the last saved one comes back
+        const names = form.hasAttribute('data-autosubmit') ? [...form.elements].filter((el) => el.required && el.matches('textarea, input:not([type]), input[type="text"]')) : [];
+        names.forEach((el) => { if (el.value.trim() === '' && el.defaultValue.trim() !== '') el.value = el.defaultValue; });
 
         // a form that is sent on purpose (not saving itself on every change) goes once at a time:
         // a second tap on its buttons, or Enter, while it is on its way is ignored
@@ -172,6 +176,7 @@
             const data = await api(form.action, new FormData(form));
             showErrors(form, data.errors);
             if (data.ok && form.hasAttribute('data-reset')) form.reset();
+            if (data.ok) names.forEach((el) => { el.defaultValue = el.value; });
             // a field error is enough: no toast on top of it
             if (data.ok || !Object.keys(data.errors ?? {}).length) handle(data, form);
             // only the button actually pressed closes the window (a form saving itself has no submitter)
@@ -291,6 +296,21 @@
             field.value = '';
             field.dispatchEvent(new Event('input', { bubbles: true }));
             field.blur();
+        }
+        // Cmd/Ctrl+Enter: a card or event window is confirmed (new ones created); in another form (a note) that form is sent
+        if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
+            const back = field.closest?.('.card-back');
+            const confirm = back && [...back.querySelectorAll('.side-confirm')].find((el) => el.offsetParent);
+            if (confirm && (!field.form || field.form.id === confirm.getAttribute('form'))) {
+                event.preventDefault();
+                confirm.click();
+                return;
+            }
+            if (field.form?.matches('form[data-ajax]')) {
+                event.preventDefault();
+                field.form.requestSubmit();
+                return;
+            }
         }
         if (event.key === 'Enter' && !event.shiftKey && field.matches('textarea[data-enter-submit]')) {
             event.preventDefault();

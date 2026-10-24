@@ -63,6 +63,7 @@ $minutes = auth()->eventMinutes(); ?>
                 <h3><?= component('icon', ['name' => 'text']) ?> <?= e(__('Description')) ?></h3>
                 <textarea class="form-control card-description" name="description" form="<?= $form ?>" rows="4" placeholder="<?= e(__('Add a more detailed description…')) ?>"></textarea>
             </section>
+            <button class="btn btn-success side-confirm confirm-inline" type="submit" form="<?= $form ?>"><?= component('icon', ['name' => 'plus']) ?> <?= e(__('Create event')) ?></button><?php /* phones only: right under the description */ ?>
         </div>
 
         <aside class="card-back-side">

@@ -11,6 +11,10 @@ msgstr ""
 msgid "\"color:{name}\" (:colors) or \"photo:{Unsplash id}\". Default: the user's colour."
 msgstr "\"color:{nome}\" (:colors) oppure \"photo:{id Unsplash}\". Predefinito: il colore dell’utente."
 
+#: views/partials/card-activity.php:24 views/partials/event-activity.php:28
+msgid "(empty)"
+msgstr "(vuoto)"
+
 #: app/Services/DataTransfer.php:138
 msgid "(imported)"
 msgstr "(importata)"
@@ -319,7 +323,7 @@ msgstr "Archiviata"
 msgid "archived"
 msgstr "archiviata"
 
-#: app/Controllers/BoardController.php:27 views/components/side-menu.php:19 views/pages/dashboard.php:4
+#: app/Controllers/BoardController.php:27 views/components/side-menu.php:24 views/pages/dashboard.php:4
 msgid "Archived boards"
 msgstr "Bacheche archiviate"
 
@@ -391,7 +395,7 @@ msgstr "Agosto"
 msgid "Authentication: turn on API access in Settings, generate a token and send it in every request as \"Authorization: Bearer kalban_…\". A read-only token can call the GET operations; a read and change token all of them. A token lasts :days days."
 msgstr "Autenticazione: attiva l’accesso API nelle Impostazioni, genera un token e mandalo in ogni richiesta come \"Authorization: Bearer kalban_…\". Un token di sola lettura può chiamare le operazioni GET; uno di lettura e modifica tutte. Un token dura :days giorni."
 
-#: views/components/side-menu.php:26
+#: views/components/side-menu.php:31
 msgid "Auto"
 msgstr "Auto"
 
@@ -407,7 +411,7 @@ msgstr "Torna alle bacheche"
 msgid "Back to home"
 msgstr "Torna alla home"
 
-#: app/Controllers/AdminController.php:33 views/components/side-menu.php:22 views/pages/admin/index.php:2
+#: app/Controllers/AdminController.php:33 views/components/side-menu.php:27 views/pages/admin/index.php:2
 msgid "Back-office"
 msgstr "Back-office"
 
@@ -451,7 +455,7 @@ msgstr "Bacheca ripristinata."
 msgid "Board title"
 msgstr "Titolo della bacheca"
 
-#: app/Controllers/AdminController.php:39 app/Controllers/BoardController.php:27 views/components/header.php:7 views/components/side-menu.php:10 views/pages/dashboard.php:4 views/pages/admin/index.php:27 views/partials/search-results.php:23
+#: app/Controllers/AdminController.php:39 app/Controllers/BoardController.php:27 views/components/header.php:7 views/components/side-menu.php:15 views/pages/dashboard.php:4 views/pages/admin/index.php:27 views/partials/search-results.php:23
 msgid "Boards"
 msgstr "Bacheche"
 
@@ -643,7 +647,7 @@ msgstr "Scegli uno dei tuoi calendari."
 msgid "Choose what the token can do."
 msgstr "Scegli cosa può fare il token."
 
-#: views/components/search-modal.php:11 views/components/flash.php:4 views/components/create-board.php:11 views/components/confirm-modal.php:7 views/components/side-menu.php:7 views/pages/board.php:51 views/partials/card.php:11 views/partials/board-menu.php:5 views/partials/event.php:21 views/partials/event-new.php:15
+#: views/components/search-modal.php:11 views/components/flash.php:4 views/components/create-board.php:11 views/components/confirm-modal.php:7 views/components/side-menu.php:9 views/pages/board.php:51 views/partials/card.php:11 views/partials/board-menu.php:5 views/partials/event.php:21 views/partials/event-new.php:15
 msgid "Close"
 msgstr "Chiudi"
 
@@ -655,7 +659,7 @@ msgstr "Colore"
 msgid "Complying with legal obligations and requests from authorities."
 msgstr "Adempiere a obblighi di legge e a richieste delle autorità."
 
-#: views/components/confirm-modal.php:11 views/partials/card.php:63 views/partials/card.php:109 views/partials/event.php:94 views/partials/event.php:115
+#: views/components/confirm-modal.php:11 views/partials/card.php:61 views/partials/card.php:109 views/partials/event.php:92 views/partials/event.php:115
 msgid "Confirm"
 msgstr "Conferma"
 
@@ -735,7 +739,7 @@ msgstr "Registrati"
 msgid "Create board"
 msgstr "Crea bacheca"
 
-#: views/partials/event-new.php:70
+#: views/partials/event-new.php:66 views/partials/event-new.php:71
 msgid "Create event"
 msgstr "Crea evento"
 
@@ -775,7 +779,7 @@ msgstr "Password attuale"
 msgid "Current photo by <a href=\":url\" target=\"_blank\" rel=\"noopener\">:name</a> on Unsplash"
 msgstr "Foto attuale di <a href=\":url\" target=\"_blank\" rel=\"noopener\">:name</a> su Unsplash"
 
-#: views/components/side-menu.php:26 views/pages/account.php:29
+#: views/components/side-menu.php:31 views/pages/account.php:29
 msgid "Dark"
 msgstr "Scuro"
 
@@ -1003,7 +1007,7 @@ msgstr "File di esportazione"
 msgid "Export your data"
 msgstr "Esporta i tuoi dati"
 
-#: views/components/side-menu.php:12
+#: views/components/side-menu.php:17
 msgid "Favourite boards"
 msgstr "Bacheche preferite"
 
@@ -1343,7 +1347,7 @@ msgstr "Legittimo interesse del titolare (art. 6, par. 1, lett. f GDPR)."
 msgid "Length of new events"
 msgstr "Durata degli eventi"
 
-#: views/components/side-menu.php:26 views/pages/account.php:29
+#: views/components/side-menu.php:31 views/pages/account.php:29
 msgid "Light"
 msgstr "Chiaro"
 
@@ -2075,7 +2079,7 @@ msgstr "Sessione scaduta"
 msgid "Set APP_KEY in .env first (php bin/key.php)."
 msgstr "Prima imposta APP_KEY nel .env (php bin/key.php)."
 
-#: views/components/header.php:18 views/components/side-menu.php:20 views/pages/admin/index.php:65
+#: views/components/header.php:18 views/components/side-menu.php:25 views/pages/admin/index.php:65
 msgid "Settings"
 msgstr "Impostazioni"
 
@@ -2099,7 +2103,7 @@ msgstr "Condividi la bacheca"
 msgid "Shared"
 msgstr "Condivisa"
 
-#: app/Controllers/BoardController.php:42 views/components/side-menu.php:18 views/pages/shared.php:4
+#: app/Controllers/BoardController.php:42 views/components/side-menu.php:23 views/pages/shared.php:4
 msgid "Shared boards"
 msgstr "Bacheche condivise"
 
@@ -2135,7 +2139,7 @@ msgstr "Mostra la checklist al posto della descrizione"
 msgid "Sign in"
 msgstr "Accedi"
 
-#: views/components/side-menu.php:34 views/pages/stop.php:5
+#: views/components/side-menu.php:39 views/pages/stop.php:5
 msgid "Sign out"
 msgstr "Esci"
 
@@ -2399,7 +2403,7 @@ msgstr "Le etichette dell’utente"
 msgid "the web server may record standard access logs (IP address, date and time, requested page, browser type) for security purposes. The application itself does not store your IP address."
 msgstr "il web server può registrare i normali log di accesso (indirizzo IP, data e ora, pagina richiesta, tipo di browser) per finalità di sicurezza. L'applicazione in sé non salva il tuo indirizzo IP."
 
-#: views/components/side-menu.php:25 views/pages/account.php:27
+#: views/components/side-menu.php:30 views/pages/account.php:27
 msgid "Theme"
 msgstr "Tema"
 

@@ -91,7 +91,7 @@ window.Dnd = (() => {
             const { ghost, offset, item, pointer } = dragging;
             pointer.x = event.clientX;
             pointer.y = event.clientY;
-            ghost.style.transform = `translate(${pointer.x - offset.x - parseFloat(ghost.style.left)}px, ${pointer.y - offset.y - parseFloat(ghost.style.top)}px) rotate(4deg)`;
+            ghost.style.transform = `translate(${pointer.x - offset.x - parseFloat(ghost.style.left)}px, ${pointer.y - offset.y - parseFloat(ghost.style.top)}px)`;
 
             const target = zone(document.elementFromPoint(pointer.x, pointer.y) ?? document.body);
             if (!target) return;

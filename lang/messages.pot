@@ -11,6 +11,10 @@ msgstr ""
 msgid "\"color:{name}\" (:colors) or \"photo:{Unsplash id}\". Default: the user's colour."
 msgstr ""
 
+#: views/partials/card-activity.php:24 views/partials/event-activity.php:28
+msgid "(empty)"
+msgstr ""
+
 #: app/Services/DataTransfer.php:138
 msgid "(imported)"
 msgstr ""
@@ -319,7 +323,7 @@ msgstr ""
 msgid "archived"
 msgstr ""
 
-#: app/Controllers/BoardController.php:27 views/components/side-menu.php:19 views/pages/dashboard.php:4
+#: app/Controllers/BoardController.php:27 views/components/side-menu.php:24 views/pages/dashboard.php:4
 msgid "Archived boards"
 msgstr ""
 
@@ -391,7 +395,7 @@ msgstr ""
 msgid "Authentication: turn on API access in Settings, generate a token and send it in every request as \"Authorization: Bearer kalban_…\". A read-only token can call the GET operations; a read and change token all of them. A token lasts :days days."
 msgstr ""
 
-#: views/components/side-menu.php:26
+#: views/components/side-menu.php:31
 msgid "Auto"
 msgstr ""
 
@@ -407,7 +411,7 @@ msgstr ""
 msgid "Back to home"
 msgstr ""
 
-#: app/Controllers/AdminController.php:33 views/components/side-menu.php:22 views/pages/admin/index.php:2
+#: app/Controllers/AdminController.php:33 views/components/side-menu.php:27 views/pages/admin/index.php:2
 msgid "Back-office"
 msgstr ""
 
@@ -451,7 +455,7 @@ msgstr ""
 msgid "Board title"
 msgstr ""
 
-#: app/Controllers/AdminController.php:39 app/Controllers/BoardController.php:27 views/components/header.php:7 views/components/side-menu.php:10 views/pages/dashboard.php:4 views/pages/admin/index.php:27 views/partials/search-results.php:23
+#: app/Controllers/AdminController.php:39 app/Controllers/BoardController.php:27 views/components/header.php:7 views/components/side-menu.php:15 views/pages/dashboard.php:4 views/pages/admin/index.php:27 views/partials/search-results.php:23
 msgid "Boards"
 msgstr ""
 
@@ -643,7 +647,7 @@ msgstr ""
 msgid "Choose what the token can do."
 msgstr ""
 
-#: views/components/search-modal.php:11 views/components/flash.php:4 views/components/create-board.php:11 views/components/confirm-modal.php:7 views/components/side-menu.php:7 views/pages/board.php:51 views/partials/card.php:11 views/partials/board-menu.php:5 views/partials/event.php:21 views/partials/event-new.php:15
+#: views/components/search-modal.php:11 views/components/flash.php:4 views/components/create-board.php:11 views/components/confirm-modal.php:7 views/components/side-menu.php:9 views/pages/board.php:51 views/partials/card.php:11 views/partials/board-menu.php:5 views/partials/event.php:21 views/partials/event-new.php:15
 msgid "Close"
 msgstr ""
 
@@ -655,7 +659,7 @@ msgstr ""
 msgid "Complying with legal obligations and requests from authorities."
 msgstr ""
 
-#: views/components/confirm-modal.php:11 views/partials/card.php:63 views/partials/card.php:109 views/partials/event.php:94 views/partials/event.php:115
+#: views/components/confirm-modal.php:11 views/partials/card.php:61 views/partials/card.php:109 views/partials/event.php:92 views/partials/event.php:115
 msgid "Confirm"
 msgstr ""
 
@@ -735,7 +739,7 @@ msgstr ""
 msgid "Create board"
 msgstr ""
 
-#: views/partials/event-new.php:70
+#: views/partials/event-new.php:66 views/partials/event-new.php:71
 msgid "Create event"
 msgstr ""
 
@@ -775,7 +779,7 @@ msgstr ""
 msgid "Current photo by <a href=\":url\" target=\"_blank\" rel=\"noopener\">:name</a> on Unsplash"
 msgstr ""
 
-#: views/components/side-menu.php:26 views/pages/account.php:29
+#: views/components/side-menu.php:31 views/pages/account.php:29
 msgid "Dark"
 msgstr ""
 
@@ -1003,7 +1007,7 @@ msgstr ""
 msgid "Export your data"
 msgstr ""
 
-#: views/components/side-menu.php:12
+#: views/components/side-menu.php:17
 msgid "Favourite boards"
 msgstr ""
 
@@ -1343,7 +1347,7 @@ msgstr ""
 msgid "Length of new events"
 msgstr ""
 
-#: views/components/side-menu.php:26 views/pages/account.php:29
+#: views/components/side-menu.php:31 views/pages/account.php:29
 msgid "Light"
 msgstr ""
 
@@ -2075,7 +2079,7 @@ msgstr ""
 msgid "Set APP_KEY in .env first (php bin/key.php)."
 msgstr ""
 
-#: views/components/header.php:18 views/components/side-menu.php:20 views/pages/admin/index.php:65
+#: views/components/header.php:18 views/components/side-menu.php:25 views/pages/admin/index.php:65
 msgid "Settings"
 msgstr ""
 
@@ -2099,7 +2103,7 @@ msgstr ""
 msgid "Shared"
 msgstr ""
 
-#: app/Controllers/BoardController.php:42 views/components/side-menu.php:18 views/pages/shared.php:4
+#: app/Controllers/BoardController.php:42 views/components/side-menu.php:23 views/pages/shared.php:4
 msgid "Shared boards"
 msgstr ""
 
@@ -2135,7 +2139,7 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: views/components/side-menu.php:34 views/pages/stop.php:5
+#: views/components/side-menu.php:39 views/pages/stop.php:5
 msgid "Sign out"
 msgstr ""
 
@@ -2399,7 +2403,7 @@ msgstr ""
 msgid "the web server may record standard access logs (IP address, date and time, requested page, browser type) for security purposes. The application itself does not store your IP address."
 msgstr ""
 
-#: views/components/side-menu.php:25 views/pages/account.php:27
+#: views/components/side-menu.php:30 views/pages/account.php:27
 msgid "Theme"
 msgstr ""
 

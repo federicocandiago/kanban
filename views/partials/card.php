@@ -58,9 +58,9 @@ $onCard = $card->labelIds(); ?>
                     <?= partial('card-checklist', ['card' => $card, 'items' => $checks]) ?>
                 </div>
             </section>
+            <button class="btn btn-success side-confirm confirm-inline" type="submit" form="<?= $form ?>" data-close><?= component('icon', ['name' => 'check']) ?> <?= e(__('Confirm')) ?></button><?php /* phones only: right under the description, in reach */ ?>
 
             <?= partial('card-attachments', compact('card', 'board')) ?>
-            <button class="btn btn-success side-confirm confirm-inline" type="submit" form="<?= $form ?>" data-close><?= component('icon', ['name' => 'check']) ?> <?= e(__('Confirm')) ?></button><?php /* phones only: in reach before the log */ ?>
             <?= partial('card-activity', compact('card', 'board')) ?>
         </div>
 

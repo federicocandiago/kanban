@@ -25,7 +25,7 @@ $view ??= null; ?>
                     <?php if (str_starts_with($entry->field, 'attachment_')): ?>
                         <?= e($entry->value($entry->new_value ?? $entry->old_value)) ?>
                     <?php else: ?>
-                        <del><?= e($entry->value($entry->old_value)) ?></del> → <ins><?= e($entry->value($entry->new_value)) ?></ins>
+                        <?php if (($entry->new_value ?? '') === ''): ?><span class="activity-empty"><?= e(__('(empty)')) ?></span><?php else: ?><ins><?= e($entry->value($entry->new_value)) ?></ins><?php endif /* only what it is now: the line before says what it was */ ?>
                     <?php endif ?>
                 <?php endif ?>
                 <span class="d-block activity-time"><?= time_ago($entry->created_at) ?></span>

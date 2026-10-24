@@ -576,7 +576,7 @@ tr.is-paused { opacity: .6; }
 .quick-add[open] > summary { display: none; }
 .quick-add form { padding: 2px 12px 12px; }
 .quick-add-input {
-    display: block; width: 100%; min-height: 58px; padding: 9px 12px; margin-bottom: 6px; border: 0; border-radius: var(--r-sm); resize: none;
+    display: block; width: 100%; min-height: 64px; padding: 12px 12px; margin-bottom: 6px; border: 0; border-radius: var(--r-sm); resize: none;
     background: var(--k-card); box-shadow: var(--k-shadow); color: var(--k-text); overflow-wrap: anywhere;
 }
 .quick-add-input:focus { outline: 0; }
@@ -601,6 +601,8 @@ tr.is-paused { opacity: .6; }
 
 /* ── Card window ─────────────────────────────────────────────────────────── */
 .card-window { background: var(--k-surface); min-height: 200px; }
+/* between phones and desktop (576–991 px) Bootstrap keeps windows at 500 px: the card window takes the room there is */
+@media (min-width: 576px) and (max-width: 991.98px) { #card-modal .modal-dialog { --bs-modal-width: min(800px, calc(100vw - 32px)); } }
 .card-back { position: relative; padding: 22px 26px 26px; }
 .card-back-close { position: absolute; top: 14px; right: 14px; z-index: 2; }
 .card-back-loading { height: 240px; }
@@ -762,7 +764,7 @@ tr.is-paused { opacity: .6; }
 .attachment-name { display: block; font-weight: 700; color: var(--k-text); overflow-wrap: anywhere; }
 .activity { list-style: none; padding: 0; margin: 0; }
 .activity li { padding: 6px 0; overflow-wrap: anywhere; }
-.activity del { color: var(--k-muted); }
+.activity-empty { color: var(--k-muted); font-style: italic; }
 .activity ins { text-decoration: none; font-weight: 600; }
 .activity-field { color: var(--k-muted); }
 .activity time { font-size: 12px; color: var(--k-muted); }
@@ -820,7 +822,7 @@ tr.is-paused { opacity: .6; }
     .topbar-create { display: none; }   /* phones: new boards from the dashboard tile */
     .board-name input { padding: 0 16px; }
     .side-bottom { position: static; margin-top: 8px; padding-top: 16px; }
-    /* Confirm moves up, before the log, so it is in reach without scrolling to the bottom */
+    /* Confirm right under the description, always in the same place and in reach without scrolling */
     .side-confirm.confirm-inline { display: flex; margin: 8px 0 24px; }
     .card-back:has(.confirm-inline) .side-bottom .side-confirm:not(.confirm-inline) { display: none; }
     /* one column: Labels / Attachment come before Confirm and the log, the actions stay at the end */
@@ -828,7 +830,6 @@ tr.is-paused { opacity: .6; }
     .card-back-grid { gap: 0; }
     .card-back-side { display: contents; }
     .card-back-side > :not(.side-bottom) { order: 1; }
-    .card-back-main > .confirm-inline { order: 2; margin-top: 20px; }
     #card-activity, #event-activity { order: 3; }
     .side-bottom { order: 4; }
     .card-back-side h3:not(:first-child) { margin-top: 20px; }
@@ -886,6 +887,8 @@ tr.is-paused { opacity: .6; }
 .event-tile.is-dimmed:hover { opacity: .8; }
 .event-owner { display: block; font-size: 11px; font-weight: 700; color: var(--k-muted); margin-bottom: 1px; }
 .event-dates { align-items: flex-end; margin-bottom: 10px; }
+.event-dates .d-flex { flex-wrap: wrap; }
+.event-dates .d-flex > .form-control { width: auto; }   /* a narrow window: the time goes under the date instead of being cut */
 .card-back-main:has([name="all_day"]:checked) .event-dates input[type="time"] { display: none; }
 .event-all-day { display: flex; gap: 10px; align-items: center; margin: 0 0 20px; padding: 0; }
 .event-all-day .form-check-input { margin: 0; float: none; }
@@ -1055,6 +1058,8 @@ tr.is-paused { opacity: .6; }
         box-shadow: var(--list-shadow);
     }
     .board-page .day-list.is-weekend { background: var(--surface-dim); }
+    /* card and event windows: the same frost as the lists, a hint of the board's colour */
+    .board-page .card-window { background: var(--surface); -webkit-backdrop-filter: blur(22px) saturate(1.3); backdrop-filter: blur(22px) saturate(1.3); }
     .board-page .day-list.is-today { box-shadow: 0 0 0 2px var(--k-accent), var(--list-shadow); }
     .board-page .add-list { background: var(--tone); box-shadow: 0 1px 3px rgb(0 0 0 / .2); }
 
