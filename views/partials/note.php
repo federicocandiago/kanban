@@ -11,8 +11,7 @@ $hidden = $view ? '<input type="hidden" name="view" value="' . e($view) . '">' :
 <li class="is-note">
     <div class="note-head">
         <?php if ($author): ?><?= component('avatar', ['user' => $author, 'size' => 24]) ?><?php endif ?>
-        <strong><?= e($entry->user_name) ?></strong>
-        <span class="activity-time"><?= time_ago($entry->created_at) ?><?= $entry->updated_at !== $entry->created_at ? ' · ' . e(__('edited')) : '' ?></span>
+        <span class="activity-time"><?= e($entry->user_name) ?>, <?= time_ago($entry->created_at) ?><?= $entry->updated_at !== $entry->created_at ? ' · ' . e(__('edited')) : '' ?></span>
         <?php if ($mine || $canDelete): ?>
             <span class="note-actions">
                 <?php if ($mine): ?>

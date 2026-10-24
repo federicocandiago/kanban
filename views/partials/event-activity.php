@@ -17,9 +17,8 @@ $view ??= null; ?>
                 <?php continue ?>
             <?php endif ?>
             <li class="<?= $entry->isOutside() ? 'is-outside' : '' ?>">
-                <strong><?= e($entry->isOutside() ? __('Changed outside the app') : $entry->user_name) ?></strong>
                 <?php if ($entry->field === 'created'): ?>
-                    <?= e(__('created this event in :calendar', ['calendar' => $entry->new_value])) ?>
+                    <?= e(__('Event created in :calendar', ['calendar' => $entry->new_value])) ?>
                 <?php else: ?>
                     <span class="activity-field"><?= e($entry->fieldName()) ?>:</span>
                     <?php if (str_starts_with($entry->field, 'attachment_')): ?>
@@ -28,7 +27,7 @@ $view ??= null; ?>
                         <?php if (($entry->new_value ?? '') === ''): ?><span class="activity-empty"><?= e(__('(empty)')) ?></span><?php else: ?><ins><?= e($entry->value($entry->new_value)) ?></ins><?php endif /* only what it is now: the line before says what it was */ ?>
                     <?php endif ?>
                 <?php endif ?>
-                <span class="d-block activity-time"><?= time_ago($entry->created_at) ?></span>
+                <span class="d-block activity-time"><span class="activity-author"><?= e($entry->isOutside() ? __('Changed outside the app') : $entry->user_name) ?></span>, <?= time_ago($entry->created_at) ?></span>
             </li>
         <?php endforeach ?>
     </ul>

@@ -11,7 +11,7 @@ msgstr ""
 msgid "\"color:{name}\" (:colors) or \"photo:{Unsplash id}\". Default: the user's colour."
 msgstr ""
 
-#: views/partials/card-activity.php:24 views/partials/event-activity.php:28
+#: views/partials/card-activity.php:23 views/partials/event-activity.php:27
 msgid "(empty)"
 msgstr ""
 
@@ -527,7 +527,7 @@ msgstr ""
 msgid "Can"
 msgstr ""
 
-#: views/pages/board.php:49 views/partials/note-add.php:10 views/partials/note.php:33 views/partials/list.php:33 views/partials/calendar-days.php:24
+#: views/pages/board.php:49 views/partials/note-add.php:10 views/partials/note.php:32 views/partials/list.php:33 views/partials/calendar-days.php:24
 msgid "Cancel"
 msgstr ""
 
@@ -537,6 +537,10 @@ msgstr ""
 
 #: app/Controllers/CardController.php:127
 msgid "Card archived."
+msgstr ""
+
+#: views/partials/card-activity.php:15
+msgid "Card created in :list"
 msgstr ""
 
 #: app/Controllers/CardController.php:147
@@ -599,7 +603,7 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-#: views/partials/event-activity.php:20
+#: views/partials/event-activity.php:30
 msgid "Changed outside the app"
 msgstr ""
 
@@ -771,14 +775,6 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: views/partials/card-activity.php:16
-msgid "created this card in :list"
-msgstr ""
-
-#: views/partials/event-activity.php:22
-msgid "created this event in :calendar"
-msgstr ""
-
 #: views/pages/legal/privacy.php:40
 msgid "Creating and managing your account, signing you in, providing your boards and sharing them with the people you choose."
 msgstr ""
@@ -847,7 +843,7 @@ msgstr ""
 msgid "Defending our rights in legal proceedings."
 msgstr ""
 
-#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:126 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:22 views/partials/event-attachments.php:22 views/partials/card-attachments.php:17 views/partials/labels.php:21
+#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:126 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:21 views/partials/event-attachments.php:22 views/partials/card-attachments.php:17 views/partials/labels.php:21
 msgid "Delete"
 msgstr ""
 
@@ -911,7 +907,7 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
-#: views/partials/note.php:19 views/partials/calendar-settings.php:11
+#: views/partials/note.php:18 views/partials/calendar-settings.php:11
 msgid "Edit"
 msgstr ""
 
@@ -919,7 +915,7 @@ msgstr ""
 msgid "Edit the event"
 msgstr ""
 
-#: views/partials/note.php:15
+#: views/partials/note.php:14
 msgid "edited"
 msgstr ""
 
@@ -993,6 +989,10 @@ msgstr ""
 
 #: views/pages/calendar.php:29
 msgid "Event"
+msgstr ""
+
+#: views/partials/event-activity.php:21
+msgid "Event created in :calendar"
 msgstr ""
 
 #: app/Controllers/CalendarController.php:357
@@ -1599,7 +1599,7 @@ msgstr ""
 msgid "Not possible in this state (for example: the board is archived)."
 msgstr ""
 
-#: views/partials/note-add.php:7 views/partials/note.php:30
+#: views/partials/note-add.php:7 views/partials/note.php:29
 msgid "Note"
 msgstr ""
 
@@ -2063,7 +2063,7 @@ msgstr ""
 msgid "Sat"
 msgstr ""
 
-#: views/components/rename-modal.php:13 views/pages/account.php:56 views/partials/note.php:32 views/partials/calendar-settings.php:56
+#: views/components/rename-modal.php:13 views/pages/account.php:56 views/partials/note.php:31 views/partials/calendar-settings.php:56
 msgid "Save"
 msgstr ""
 
@@ -2415,7 +2415,7 @@ msgstr ""
 msgid "The members of the boards you share: they see the board, its cards and its log, with your name and profile picture."
 msgstr ""
 
-#: views/partials/note.php:22
+#: views/partials/note.php:21
 msgid "The note will be deleted."
 msgstr ""
 

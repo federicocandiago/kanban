@@ -11,7 +11,7 @@ msgstr ""
 msgid "\"color:{name}\" (:colors) or \"photo:{Unsplash id}\". Default: the user's colour."
 msgstr "\"color:{nome}\" (:colors) oppure \"photo:{id Unsplash}\". Predefinito: il colore dell’utente."
 
-#: views/partials/card-activity.php:24 views/partials/event-activity.php:28
+#: views/partials/card-activity.php:23 views/partials/event-activity.php:27
 msgid "(empty)"
 msgstr "(vuoto)"
 
@@ -527,7 +527,7 @@ msgstr "I calendari non vengono importati: ricollegali dalle Impostazioni."
 msgid "Can"
 msgstr "Può"
 
-#: views/pages/board.php:49 views/partials/note-add.php:10 views/partials/note.php:33 views/partials/list.php:33 views/partials/calendar-days.php:24
+#: views/pages/board.php:49 views/partials/note-add.php:10 views/partials/note.php:32 views/partials/list.php:33 views/partials/calendar-days.php:24
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -538,6 +538,10 @@ msgstr "Scheda"
 #: app/Controllers/CardController.php:127
 msgid "Card archived."
 msgstr "Scheda archiviata."
+
+#: views/partials/card-activity.php:15
+msgid "Card created in :list"
+msgstr "Scheda creata in :list"
 
 #: app/Controllers/CardController.php:147
 msgid "Card deleted."
@@ -599,7 +603,7 @@ msgstr "Storico di una scheda"
 msgid "Change password"
 msgstr "Cambia password"
 
-#: views/partials/event-activity.php:20
+#: views/partials/event-activity.php:30
 msgid "Changed outside the app"
 msgstr "Modificato fuori dall’app"
 
@@ -771,14 +775,6 @@ msgstr "Creane uno"
 msgid "Created"
 msgstr "Creata"
 
-#: views/partials/card-activity.php:16
-msgid "created this card in :list"
-msgstr "ha creato questa scheda in :list"
-
-#: views/partials/event-activity.php:22
-msgid "created this event in :calendar"
-msgstr "ha creato questo evento in :calendar"
-
 #: views/pages/legal/privacy.php:40
 msgid "Creating and managing your account, signing you in, providing your boards and sharing them with the people you choose."
 msgstr "Creare e gestire il tuo account, farti accedere, fornirti le bacheche e condividerle con le persone che scegli."
@@ -847,7 +843,7 @@ msgstr "Calendario predefinito"
 msgid "Defending our rights in legal proceedings."
 msgstr "Difendere i nostri diritti in sede giudiziaria."
 
-#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:126 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:22 views/partials/event-attachments.php:22 views/partials/card-attachments.php:17 views/partials/labels.php:21
+#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:126 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:21 views/partials/event-attachments.php:22 views/partials/card-attachments.php:17 views/partials/labels.php:21
 msgid "Delete"
 msgstr "Elimina"
 
@@ -911,7 +907,7 @@ msgstr "Scarica un allegato"
 msgid "Duration"
 msgstr "Durata"
 
-#: views/partials/note.php:19 views/partials/calendar-settings.php:11
+#: views/partials/note.php:18 views/partials/calendar-settings.php:11
 msgid "Edit"
 msgstr "Modifica"
 
@@ -919,7 +915,7 @@ msgstr "Modifica"
 msgid "Edit the event"
 msgstr "Modifica l’evento"
 
-#: views/partials/note.php:15
+#: views/partials/note.php:14
 msgid "edited"
 msgstr "modificata"
 
@@ -994,6 +990,10 @@ msgstr "Cancellazione"
 #: views/pages/calendar.php:29
 msgid "Event"
 msgstr "Evento"
+
+#: views/partials/event-activity.php:21
+msgid "Event created in :calendar"
+msgstr "Evento creato in :calendar"
 
 #: app/Controllers/CalendarController.php:357
 msgid "Event deleted."
@@ -1599,7 +1599,7 @@ msgstr "nessuno: le tue preferenze, come il tema e la lingua, sono salvate nel t
 msgid "Not possible in this state (for example: the board is archived)."
 msgstr "Non possibile in questo stato (per esempio: la bacheca è archiviata)."
 
-#: views/partials/note-add.php:7 views/partials/note.php:30
+#: views/partials/note-add.php:7 views/partials/note.php:29
 msgid "Note"
 msgstr "Nota"
 
@@ -2063,7 +2063,7 @@ msgstr "Revoca token API"
 msgid "Sat"
 msgstr "sab"
 
-#: views/components/rename-modal.php:13 views/pages/account.php:56 views/partials/note.php:32 views/partials/calendar-settings.php:56
+#: views/components/rename-modal.php:13 views/pages/account.php:56 views/partials/note.php:31 views/partials/calendar-settings.php:56
 msgid "Save"
 msgstr "Salva"
 
@@ -2415,7 +2415,7 @@ msgstr "La lista “:name” e tutte le sue schede verranno eliminate definitiva
 msgid "The members of the boards you share: they see the board, its cards and its log, with your name and profile picture."
 msgstr "I membri delle bacheche che condividi: vedono la bacheca, le sue schede e lo storico delle modifiche, con il tuo nome e la tua foto profilo."
 
-#: views/partials/note.php:22
+#: views/partials/note.php:21
 msgid "The note will be deleted."
 msgstr "La nota verrà eliminata."
 
