@@ -22,12 +22,19 @@ php bin/migrate.php         # optional: the site creates the tables and the admi
 - **Lists and cards** with drag & drop (mouse, and touch with press-and-hold), quick add at the bottom of each
   list (Enter adds, Esc closes), archive and restore from the board menu.
 - **Card**: name (the only required field), description, start date, end date, attachments, labels.
-  Every change goes to the card's log: date, user, field, old value → new value.
+  Every change goes to the card's log: date, user, field and its new value. The + in the top bar of a board opens
+  a "New card" window (name, list, dates, description); Cmd/Ctrl+Enter confirms a card or event window.
+- **Limits** per board: `BOARD_MAX_CARDS` (400) and `BOARD_MAX_LISTS` (50), archived ones not counted; past them
+  a message says so.
 - **Labels** belong to each user (six classic colours to start with), editable from Settings.
 - **Sharing**, per board only. The owner (whoever created the board) invites by email: users with an account get
   a notification with Accept / Decline; other addresses get an email and find the invitation waiting when they sign
   up (even with registration closed). People already met on other boards are offered as one-click chips.
   The owner can remove members and withdraw invitations; members can leave.
+- **Public boards**: in Share the owner can open the board to anyone with its address (off by default). Read only
+  (the default) lets visitors see lists, cards and logs and add notes; without it they can change and archive
+  anything, but never delete. Visitors without an account sign the log as "Public user"; members, the board menu
+  and the board's settings stay members-only.
 - **Notifications** in the bell dropdown next to the user menu.
 - **Global search** (magnifier in the top bar, or `/` / Cmd-Ctrl+K): a preview while typing, Enter for the full
   results page. It looks in what the user can see — boards, lists, cards (name, description, labels), attachments —
@@ -41,6 +48,7 @@ php bin/migrate.php         # optional: the site creates the tables and the admi
   the month opens `CALENDAR_START_OFFSET_DAYS` days from today (default -1: yesterday is visible too); phones open
   on today. Quick add makes whole-day events, or (each calendar's setting, starting from `CALENDAR_NEW_ALL_DAY`,
   default off) opens a "new event" window from now to the user's default length, saved only on "Confirm".
+  Each calendar has a ⋯ menu like a board's: rename, background (colour or Unsplash photo), settings.
 - **Checklist**: in the card window the description area switches to a checklist (tab "Checklist (3/5)"): tick,
   rename in place, remove, drag to reorder, add with Enter; every change goes to the card log, tiles show "3/5".
 - **Notes**: "Add a note" next to Activity, in cards and calendar events: notes go into the log in time order
@@ -64,8 +72,12 @@ php bin/migrate.php         # optional: the site creates the tables and the admi
 - **Palette**: twelve colours in `app/Services/Palette.php`, each with a primary shade (board backgrounds, labels,
   dashboard) and a more intense secondary one (top bar). The `.label-*` classes and the `--k-accent` / `--k-header`
   variables are generated from there, so it is the only list to edit.
+- **Signing in**: "Keep me signed in" (ticked by default) keeps the browser signed in for `REMEMBER_DAYS` (30)
+  from its last visit, also when the server drops the session; sessions live in `storage/sessions` for
+  `SESSION_MINUTES` (720). A page left open past its session gets a new token and sends again by itself.
 - **Attachments** up to `ATTACHMENT_MAX_MB` (lowered automatically to PHP's `upload_max_filesize` / `post_max_size`):
   the limit is shown next to the button and a larger file is refused in the browser before uploading.
+  Images and PDFs open in a viewer over the window (×, Esc or back to close); other files are downloaded.
 - **Back-office** for admins: users (admin role, pause, delete), registration open/closed.
 
 ## Structure
