@@ -31,6 +31,28 @@ final class CardController extends Controller
         return $this->ok('', ['append' => ["#list-{$list->id} [data-cards]" => $this->tile((int) $card->id)]]);
     }
 
+    /** "New card" window (the + in the top bar): nothing is saved until Create. */
+    public function new(Request $request, string $uuid): Response
+    {
+        $board = $this->board($uuid);
+        $lists = $board->lists();
+        if (!$lists) {
+            return $this->fail(__('Add a list first: cards live in lists.'));
+        }
+        $list = (int) $request->input('list', 0);
+
+        return Response::html(partial('card-new', ['board' => $board, 'lists' => $lists, 'listId' => $list ?: (int) $lists[0]->id]));
+    }
+
+    /** Creates the card of the "New card" window and adds it at the bottom of its list. */
+    public function add(Request $request, string $uuid): Response
+    {
+        $board = $this->board($uuid);
+        $card = $this->cards()->add($board, array_intersect_key($request->all(), array_flip(['title', 'list_id', 'description', 'start_date', 'end_date'])));
+
+        return $this->ok('', ['close' => true, 'append' => ["#list-{$card->list_id} [data-cards]" => $this->tile((int) $card->id)]]);
+    }
+
     /** The card "back", loaded into the card modal. */
     public function show(Request $request, string $id): Response
     {

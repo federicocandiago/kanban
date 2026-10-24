@@ -77,8 +77,11 @@ final class BoardController extends Controller
         $board = $this->board($uuid);
         $changes = array_intersect_key($request->all(), array_flip(['name', 'background']));
         $this->boards()->update($board, $changes);
+        if (isset($changes['background'])) {
+            return $this->ok('', ['reload' => true]);
+        }
 
-        return $this->ok('', isset($changes['background']) ? ['reload' => true] : []);
+        return $this->ok('', isset($changes['name']) ? $this->renamed((string) $board->name) : []);
     }
 
     public function favorite(Request $request, string $uuid): Response

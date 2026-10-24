@@ -7,7 +7,7 @@ $theme = auth()->theme(); ?>
 </head>
 <body class="board-page <?= $board->bg_type === 'photo' ? 'has-photo' : '' ?>">
     <div class="board-backdrop" style="<?= $board->backgroundStyle() ?>"></div>
-    <?= component('header') ?>
+    <?= component('header', ['name' => $board->name, 'newCard' => $board->url('/cards/new')]) ?>
     <?= component('flash') ?>
     <?= $content ?>
     <?= component('modals') ?>

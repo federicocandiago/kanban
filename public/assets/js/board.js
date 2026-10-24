@@ -58,21 +58,34 @@
     const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
     const content = modalEl.querySelector('[data-card-content]');
 
-    async function open(id) {
+    async function load(url) {
         bootstrap.Offcanvas.getInstance('#board-menu')?.hide();
         content.innerHTML = '<div class="card-back-loading"></div>';
         modal.show();
         try {
-            content.innerHTML = await App.get(`${cardsUrl}${id}${view ? `?view=${view}` : ''}`, 'text');
+            content.innerHTML = await App.get(url, 'text');
             document.dispatchEvent(new CustomEvent('app:patched'));
-            const params = new URLSearchParams(location.search);
-            params.set('card', id);
-            history.replaceState(null, '', `?${params}`);
+            return true;
         } catch (error) {
             modal.hide();
             App.toast(error.message, 'error');
+            return false;
         }
     }
+
+    async function open(id) {
+        if (!(await load(`${cardsUrl}${id}${view ? `?view=${view}` : ''}`))) return;
+        const params = new URLSearchParams(location.search);
+        params.set('card', id);
+        history.replaceState(null, '', `?${params}`);
+    }
+
+    // [data-new-card="url"] (the + in the top bar): the "New card" window, its name field ready
+    document.addEventListener('click', async (event) => {
+        const button = event.target.closest('[data-new-card]');
+        if (!button) return;
+        if (await load(button.dataset.newCard)) content.querySelector('[autofocus]')?.focus();
+    });
 
     document.addEventListener('click', (event) => {
         const link = event.target.closest('[data-cards] > .card-tile, [data-card-open]');

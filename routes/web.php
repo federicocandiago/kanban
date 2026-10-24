@@ -75,6 +75,8 @@ return static function (Router $r): void {
 
     // Cards
     $r->post('/lists/{id}/cards', [CardController::class, 'store'], ['auth']);
+    $r->get('/boards/{uuid}/cards/new', [CardController::class, 'new'], ['auth']);
+    $r->post('/boards/{uuid}/cards', [CardController::class, 'add'], ['auth']);
     $r->get('/cards/{id}', [CardController::class, 'show'], ['auth']);
     $r->post('/cards/{id}/update', [CardController::class, 'update'], ['auth']);
     $r->post('/cards/{id}/move', [CardController::class, 'move'], ['auth']);
@@ -99,6 +101,8 @@ return static function (Router $r): void {
     $r->get('/calendars/{id}', [CalendarController::class, 'show'], ['auth']);
     $r->post('/calendars/{id}/sync', [CalendarController::class, 'sync'], ['auth']);
     $r->post('/calendars/{id}/update', [CalendarController::class, 'edit'], ['auth']);
+    $r->post('/calendars/{id}/rename', [CalendarController::class, 'rename'], ['auth']);
+    $r->post('/calendars/{id}/background', [CalendarController::class, 'background'], ['auth']);
     $r->post('/calendars/{id}/delete', [CalendarController::class, 'disconnect'], ['auth']);
     $r->post('/calendars/{id}/days/{day}/events', [CalendarController::class, 'store'], ['auth']);
     $r->post('/calendars/{id}/events', [CalendarController::class, 'create'], ['auth']);

@@ -24,7 +24,7 @@
 
     // On board pages, header, lists and title are named only for the transition: a named element
     // bounds backdrop-filter, and the frost of the lists has to see the photo behind them.
-    const parts = [['.board-page .board-header', 'board-head'], ['.board-page .board-canvas', 'board-lists'], ['.board-name input, .calendar-title h1', 'board-title']];
+    const parts = [['.board-page .board-header', 'board-head'], ['.board-page .board-canvas', 'board-lists'], ['.topbar-title span', 'board-title']];
     const nameParts = (on) => parts.forEach(([selector, value]) => {
         document.querySelectorAll(selector).forEach((el) => { el.style.viewTransitionName = on ? value : ''; });
     });

@@ -49,7 +49,10 @@
     /** GET returning JSON (or text, when asked). */
     async function get(url, as = 'json') {
         const response = await fetch(url, { headers: { 'X-Requested-With': 'fetch' }, credentials: 'same-origin' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        if (!response.ok) {
+            const data = await response.json().catch(() => ({}));
+            throw new Error(data.message || `HTTP ${response.status}`);
+        }
         return as === 'text' ? response.text() : response.json();
     }
 
@@ -112,6 +115,7 @@
             $$(selector).forEach((el) => el.insertAdjacentHTML('beforeend', html));
         }
         (data.remove ?? []).forEach((selector) => $$(selector).forEach((el) => el.remove()));
+        if (data.title) document.title = data.title;
         if (data.close) $$('.modal.show').forEach((el) => bootstrap.Modal.getInstance(el)?.hide());
         if (data.toggle && trigger?.dataset.post) {
             // every button for the same action (a board can be on the page twice)
@@ -484,8 +488,9 @@
         toggle.querySelector('[data-unread]')?.remove();
     });
 
-    // A modal form starts clean every time it opens.
+    // A modal form starts clean every time it opens; a side menu it was opened from steps aside.
     document.addEventListener('show.bs.modal', (event) => {
+        $$('.offcanvas.show').forEach((el) => bootstrap.Offcanvas.getInstance(el)?.hide());
         const form = event.target.querySelector('form[data-ajax]');
         if (!form) return;
         showErrors(form);

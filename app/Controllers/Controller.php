@@ -31,6 +31,12 @@ abstract class Controller
         return Response::json(['ok' => true, 'message' => $message, ...$extra]);
     }
 
+    /** Answer to "Rename": the window closes, the name in the top bar and in the browser tab change. */
+    protected function renamed(string $name, ?string $hint = null): array
+    {
+        return ['close' => true, 'html' => ['.topbar-title' => component('topbar-title', ['name' => $name, 'hint' => $hint])], 'title' => $name . ' · ' . env('APP_NAME')];
+    }
+
     protected function fail(string $message, array $errors = [], int $status = 422): Response
     {
         return Response::json(['ok' => false, 'message' => $message, 'errors' => $errors], $status);

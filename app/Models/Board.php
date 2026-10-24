@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Services\AttachmentService;
-use App\Services\Palette;
 
 /**
  * A board. Loaded through User::boards() or Board::forMember() it also carries the
@@ -13,6 +12,8 @@ use App\Services\Palette;
  */
 final class Board extends Model
 {
+    use HasBackground;
+
     protected static string $table = 'boards';
 
     public static function findByUuid(string $uuid): ?self
@@ -75,31 +76,6 @@ final class Board extends Model
     public function url(string $path = ''): string
     {
         return url('/boards/' . $this->uuid . $path);
-    }
-
-    /** Inline style for the board page or a tile: a palette colour or an Unsplash photo. */
-    public function backgroundStyle(bool $thumb = false): string
-    {
-        if ($this->bg_type === 'photo') {
-            if ($thumb || !$this->bg_thumb) {
-                return 'background-color: #2c3e50; background-image: url(\'' . e($this->bg_thumb ?: $this->bg_value) . '\')';
-            }
-
-            // the thumbnail (already seen on the dashboard) shows at once, the full photo covers it when loaded
-            return 'background-color: #2c3e50; background-image: url(\'' . e($this->bg_value) . '\'), url(\'' . e($this->bg_thumb) . '\')';
-        }
-
-        return 'background-color: ' . Palette::primary((string) $this->bg_value);
-    }
-
-    /** The colour the glass of the board page is tinted with: the photo's average colour, or the board's colour. */
-    public function tint(): string
-    {
-        if ($this->bg_type === 'photo') {
-            return $this->bg_tint ?: '#2c3e50';
-        }
-
-        return Palette::primary((string) $this->bg_value);
     }
 
     /** @return BoardList[] */
@@ -174,6 +150,25 @@ final class Board extends Model
     public function nextListPosition(): int
     {
         return (int) static::db()->scalar('SELECT COALESCE(MAX(position), -1) + 1 FROM lists WHERE board_id = ?', [$this->id]);
+    }
+
+    /**
+     * BOARD_MAX_CARDS / BOARD_MAX_LISTS (.env): stops with a readable error when $cards more cards
+     * or $lists more lists would go over them. Archived ones don't count (archiving makes room).
+     */
+    public function assertRoom(int $cards = 0, int $lists = 0): void
+    {
+        $maxLists = (int) env('BOARD_MAX_LISTS', 50);
+        if ($lists > 0 && (int) static::db()->scalar('SELECT COUNT(*) FROM lists WHERE board_id = ? AND archived_at IS NULL', [$this->id]) + $lists > $maxLists) {
+            abort(409, __('This board already has :max lists, the most it can hold: archive one to make room.', ['max' => $maxLists]));
+        }
+        $maxCards = (int) env('BOARD_MAX_CARDS', 400);
+        if ($cards > 0 && (int) static::db()->scalar(
+            'SELECT COUNT(*) FROM cards c JOIN lists l ON l.id = c.list_id WHERE l.board_id = ? AND c.archived_at IS NULL AND l.archived_at IS NULL',
+            [$this->id]
+        ) + $cards > $maxCards) {
+            abort(409, __('This board already has :max cards, the most it can hold: archive some to make room.', ['max' => $maxCards]));
+        }
     }
 
     /** Saves the order of the lists: $ids from left to right (ids of other boards are ignored). */

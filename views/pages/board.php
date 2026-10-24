@@ -1,10 +1,7 @@
 <?php /** @var App\Models\Board $board @var App\Models\BoardList[] $lists @var array $cards @var App\Models\User[] $members */
 $star = $board->is_favorite ? __('Remove from favourites') : __('Add to favourites'); ?>
 <div class="board-header">
-    <form class="board-name" method="post" action="<?= e($board->url('/update')) ?>" data-ajax data-autosubmit>
-        <?= csrf_field() ?>
-        <input name="name" value="<?= e($board->name) ?>" maxlength="100" required aria-label="<?= e(__('Board title')) ?>" autocomplete="off">
-    </form>
+    <a class="board-btn board-back" href="<?= base_url() ?>/dashboard" title="<?= e(__('Back to the boards')) ?>" aria-label="<?= e(__('Back to the boards')) ?>"><?= component('icon', ['name' => 'back', 'size' => 20]) ?></a>
     <button class="board-btn board-star-btn <?= $board->is_favorite ? 'is-on' : '' ?>" type="button" data-post="<?= e($board->url('/favorite')) ?>"
             aria-pressed="<?= $board->is_favorite ? 'true' : 'false' ?>" title="<?= e($star) ?>" aria-label="<?= e($star) ?>"><?= component('icon', ['name' => 'star']) ?></button>
     <span class="board-sep"></span>
@@ -42,6 +39,7 @@ $star = $board->is_favorite ? __('Remove from favourites') : __('Add to favourit
 </div>
 
 <?= partial('board-menu', ['board' => $board]) ?>
+<?= component('rename-modal', ['action' => $board->url('/update'), 'name' => $board->name]) ?>
 
 <div class="modal fade" id="share-modal" tabindex="-1" aria-labelledby="share-title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

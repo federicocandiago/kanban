@@ -3,10 +3,7 @@
 $prev = date('Y-m', mktime(0, 0, 0, $m - 1, 1, $y));
 $next = date('Y-m', mktime(0, 0, 0, $m + 1, 1, $y)); ?>
 <div class="board-header">
-    <div class="calendar-title">
-        <h1><?= e($account->name) ?></h1>
-        <small><?= e($account->label()) ?></small>
-    </div>
+    <a class="board-btn board-back" href="<?= base_url() ?>/dashboard" title="<?= e(__('Back to the boards')) ?>" aria-label="<?= e(__('Back to the boards')) ?>"><?= component('icon', ['name' => 'back', 'size' => 20]) ?></a>
     <a class="board-btn calendar-today" href="<?= e($account->url()) ?>" data-today title="<?= e(__('Today')) ?>" aria-label="<?= e(__('Today')) ?>"><?= component('icon', ['name' => 'target']) ?></a>
     <span class="board-sep"></span>
     <a class="board-btn" href="?month=<?= e($prev) ?>" title="<?= e(__('Previous month')) ?>" aria-label="<?= e(__('Previous month')) ?>">‹</a>
@@ -18,8 +15,11 @@ $next = date('Y-m', mktime(0, 0, 0, $m + 1, 1, $y)); ?>
         <input type="search" placeholder="<?= e(__('Filter events')) ?>" aria-label="<?= e(__('Filter events')) ?>" data-filter=".board-canvas [data-search]">
     </div>
     <span class="board-btn calendar-sync" data-sync-state title="<?= e(__('Last sync: :date', ['date' => format_date($account->synced_at)])) ?>"><?= component('icon', ['name' => 'restore']) ?></span>
-    <a class="board-btn calendar-settings" href="<?= base_url() ?>/account#calendar-<?= (int) $account->id ?>" title="<?= e(__('Calendar settings')) ?>" aria-label="<?= e(__('Calendar settings')) ?>"><?= component('icon', ['name' => 'gear']) ?></a>
+    <button class="board-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#board-menu" aria-controls="board-menu"
+            title="<?= e(__('Show menu')) ?>" aria-label="<?= e(__('Show menu')) ?>"><?= component('icon', ['name' => 'more']) ?></button>
 </div>
+<?= partial('calendar-menu', ['account' => $account]) ?>
+<?= component('rename-modal', ['action' => $account->url('/rename'), 'name' => $account->name]) ?>
 
 <div class="board-canvas" data-cards-url="<?= e(url('/events/')) ?>" data-view="<?= e($month) ?>" data-start-offset="<?= (int) env('CALENDAR_START_OFFSET_DAYS', -1) ?>"
      data-sync="<?= e($account->url('/sync?month=' . $month)) ?>">

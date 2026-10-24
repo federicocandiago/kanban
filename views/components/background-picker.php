@@ -4,12 +4,12 @@
  * Unsplash photos (search included). The colours start open only when there are no photos.
  * Radios named "background": "color:{key}" or "photo:{unsplash id}".
  * @var string $id unique prefix @var string|null $preview selector of the element that previews the choice
- * @var App\Models\Board|null $board current board (preselects its colour)
+ * @var App\Models\Board|App\Models\CalendarAccount|null $board current board or calendar (preselects its colour)
  */
 use App\Services\Palette;
 use App\Services\Unsplash;
 
-$current = isset($board) ? ($board->bg_type === 'color' ? $board->bg_value : null) : auth()->color();
+$current = isset($board) ? ($board->bg_type === 'color' ? $board->bg_value : ($board->hasBackground() ? null : auth()->color())) : auth()->color();
 $preview ??= null;
 $photos = Unsplash::enabled(); ?>
 <div class="bg-picker">

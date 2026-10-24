@@ -26,9 +26,44 @@ final class CardService
     /** New card at the bottom of $list (only the name, as the quick add). */
     public function create(BoardList $list, string $title): Card
     {
+        Board::find((int) $list->board_id)->assertRoom(cards: 1);
         $card = Card::create([
             'board_id' => $list->board_id, 'list_id' => $list->id, 'title' => $this->title($title),
             'position' => $list->nextCardPosition(), 'created_by' => $this->user->id,
+        ]);
+        $card->log($this->user, 'created', null, $list->name);
+
+        return Card::detailed((int) $card->id);
+    }
+
+    /**
+     * New card from the "New card" window: name, list, description and dates in one go, at the
+     * bottom of the list; the log only says it was created.
+     * @param array{title?: string, list_id?: int, description?: ?string, start_date?: ?string, end_date?: ?string} $input
+     */
+    public function add(Board $board, array $input): Card
+    {
+        $errors = [];
+        $title = $this->title((string) ($input['title'] ?? ''), $errors);
+        $list = $this->list($board, (int) ($input['list_id'] ?? 0), $errors);
+        [$start, $end] = [$this->date($input['start_date'] ?? null), $this->date($input['end_date'] ?? null)];
+        if ($start === false) {
+            $errors['start_date'] = __('Invalid date.');
+        }
+        if ($end === false) {
+            $errors['end_date'] = __('Invalid date.');
+        } elseif ($start && $end && $end < $start) {
+            $errors['end_date'] = __('The end date comes before the start date.');
+        }
+        if ($errors) {
+            throw new ValidationException($errors);
+        }
+        $board->assertRoom(cards: 1);
+
+        $card = Card::create([
+            'board_id' => $board->id, 'list_id' => $list->id, 'title' => $title, 'position' => $list->nextCardPosition(), 'created_by' => $this->user->id,
+            'description' => trim(str_replace("\r\n", "\n", (string) ($input['description'] ?? ''))) ?: null,
+            'start_date' => $start ?: null, 'end_date' => $end ?: null,
         ]);
         $card->log($this->user, 'created', null, $list->name);
 
@@ -179,6 +214,7 @@ final class CardService
         if ($list->isArchived()) {
             throw ValidationException::field('list_id', __('Its list “:name” is archived: restore the list first.', ['name' => $list->name]));
         }
+        Board::find((int) $list->board_id)->assertRoom(cards: 1);
         $card->update(['archived_at' => null, 'position' => $list->nextCardPosition()]);
         $card->log($this->user, 'restored');
 

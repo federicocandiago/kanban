@@ -17,6 +17,7 @@ use App\Services\AttachmentService;
 use App\Services\CalDav;
 use App\Services\CalDavException;
 use App\Services\CalendarService;
+use App\Services\Unsplash;
 use DateTimeImmutable;
 
 /**
@@ -90,6 +91,38 @@ final class CalendarController extends Controller
         }
 
         return $this->save($request, $account);
+    }
+
+    /** Background from the calendar's ⋯ menu, as a board's; reset=1: back to the user's colour. */
+    public function background(Request $request, string $id): Response
+    {
+        $account = $this->account($id);
+        if ($request->input('reset')) {
+            $columns = array_fill_keys(['bg_type', 'bg_value', 'bg_thumb', 'bg_tint', 'bg_credit_name', 'bg_credit_url'], null);
+        } else {
+            try {
+                $columns = Unsplash::background((string) $request->input('background', ''));
+            } catch (\RuntimeException $e) {
+                error_log('Kalban: ' . $e->getMessage());
+                $columns = null;
+            }
+        }
+        if ($columns === null) {
+            return $this->fail(__('Please check the form.'), ['background' => __('Choose a background.')]);
+        }
+        $account->update($columns);
+
+        return $this->ok('', ['reload' => true]);
+    }
+
+    /** "Rename" from the calendar's ⋯ menu. */
+    public function rename(Request $request, string $id): Response
+    {
+        $account = $this->account($id);
+        $name = $this->name($request) ?? abort(422, __('Give the calendar a name (up to 100 characters).'));
+        $account->update(['name' => $name]);
+
+        return $this->ok('', $this->renamed($name, $name . ' · ' . $account->label()));
     }
 
     public function disconnect(Request $request, string $id): Response

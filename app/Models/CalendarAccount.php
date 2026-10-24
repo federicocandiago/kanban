@@ -10,6 +10,8 @@ use App\Services\CalDav;
 /** A CalDAV account of the user, with the name they gave it ("Personale", "Lavoro"): a user can have several. */
 final class CalendarAccount extends Model
 {
+    use HasBackground;
+
     protected static string $table = 'calendar_accounts';
 
     /** @return self[] by name */

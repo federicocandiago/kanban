@@ -15,6 +15,7 @@ final class ListService
     /** New list at the end, or at $position (0 = first). */
     public function create(Board $board, string $name, ?int $position = null): BoardList
     {
+        $board->assertRoom(lists: 1);
         $list = BoardList::create(['board_id' => $board->id, 'name' => $this->name($name), 'position' => $board->nextListPosition()]);
         if ($position !== null) {
             $this->moveTo($board, $list, $position);
@@ -52,6 +53,10 @@ final class ListService
 
     public function restore(BoardList $list): void
     {
+        Board::find((int) $list->board_id)->assertRoom(
+            (int) Database::connection()->scalar('SELECT COUNT(*) FROM cards WHERE list_id = ? AND archived_at IS NULL', [$list->id]),
+            1
+        );
         $list->update(['archived_at' => null, 'position' => (int) Database::connection()->scalar(
             'SELECT COALESCE(MAX(position), -1) + 1 FROM lists WHERE board_id = ? AND archived_at IS NULL',
             [$list->board_id]

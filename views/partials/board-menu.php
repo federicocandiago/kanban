@@ -5,6 +5,9 @@
         <button type="button" class="pop-close" data-bs-dismiss="offcanvas" aria-label="<?= e(__('Close')) ?>"><?= component('icon', ['name' => 'x']) ?></button>
     </div>
     <div class="board-menu-body">
+        <div class="menu-section">
+            <button class="menu-link" type="button" data-bs-toggle="modal" data-bs-target="#rename-modal"><?= component('icon', ['name' => 'text']) ?> <?= e(__('Rename')) ?></button>
+        </div>
         <details class="menu-section">
             <summary><?= component('icon', ['name' => 'image']) ?> <?= e(__('Change background')) ?></summary>
             <form method="post" action="<?= e($board->url('/update')) ?>" data-ajax data-autosubmit>
