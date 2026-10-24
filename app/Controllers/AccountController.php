@@ -151,6 +151,7 @@ final class AccountController extends Controller
         $user->update(['password' => password_hash($new, PASSWORD_DEFAULT)]);
         Throttle::clear('password|' . $user->id);
         Session::regenerate();
+        Auth::forgetBrowsers($user);
 
         return $this->ok(__('Password changed.'));
     }

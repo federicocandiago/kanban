@@ -30,6 +30,7 @@ return static function (Router $r): void {
     $r->get('/cookies', [PageController::class, 'cookies']);
     $r->get('/about', [PageController::class, 'about']);
     $r->get('/locale/{code}', [PageController::class, 'locale']);
+    $r->get('/csrf', [PageController::class, 'csrf']);
 
     // Auth
     $r->get('/login', [AuthController::class, 'showLogin'], ['guest']);

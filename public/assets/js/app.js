@@ -23,15 +23,34 @@
 (() => {
     'use strict';
 
-    const csrf = document.querySelector('meta[name="csrf-token"]')?.content ?? '';
+    let csrf = document.querySelector('meta[name="csrf-token"]')?.content ?? '';
     const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
     // the browser bars take the top bar's colour (the root's background, see app.css): theme-color for Chrome and older Safari
     const themeColor = document.querySelector('meta[name="theme-color"]');
     if (themeColor) themeColor.content = getComputedStyle(document.documentElement).backgroundColor;
 
+    /**
+     * The session ended while the page was open (419): the server signs in again from the "keep me
+     * signed in" cookie and hands a new token, used from now on. False: the user has to sign in.
+     */
+    async function renewCsrf() {
+        const base = document.querySelector('meta[name="base-url"]')?.content ?? '';
+        try {
+            const response = await fetch(`${base}/csrf`, { headers: { 'Accept': 'application/json' }, credentials: 'same-origin', cache: 'no-store' });
+            const data = await response.json();
+            if (!data.signedIn || !data.token) return false;
+            csrf = data.token;
+            document.querySelector('meta[name="csrf-token"]')?.setAttribute('content', csrf);
+            $$('input[name="_token"]').forEach((el) => { el.value = csrf; });
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
     /** POST (FormData or plain object) → parsed JSON ({ok, message, errors, ...}). */
-    async function api(url, body = null) {
+    async function api(url, body = null, retry = true) {
         if (body && !(body instanceof FormData)) body = toFormData(body);
         const response = await fetch(url, {
             method: 'POST',
@@ -39,6 +58,7 @@
             body,
             credentials: 'same-origin',
         });
+        if (response.status === 419 && retry && await renewCsrf()) return api(url, body, false);
         try {
             return await response.json();
         } catch {

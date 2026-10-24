@@ -12,6 +12,15 @@ final class Session
             return;
         }
         session_name((string) env('SESSION_NAME', 'kalban_session'));
+        // in storage/sessions, kept SESSION_MINUTES: on shared hosting the common folder is often
+        // emptied after ~24 idle minutes by any site's clean-up (the "keep me signed in" cookie covers the rest)
+        $dir = BASE_PATH . '/storage/sessions';
+        if (is_dir($dir) || @mkdir($dir, 0700, true)) {
+            if (is_writable($dir)) {
+                session_save_path($dir);
+                ini_set('session.gc_maxlifetime', (string) (max(30, (int) env('SESSION_MINUTES', 720)) * 60));
+            }
+        }
         session_set_cookie_params([
             'httponly' => true,
             'samesite' => 'Lax',

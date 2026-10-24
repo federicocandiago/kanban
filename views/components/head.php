@@ -8,6 +8,7 @@ $color = auth()?->color() ?? Palette::DEFAULT; ?>
 <title><?= e(isset($title) ? $title . ' · ' . env('APP_NAME') : env('APP_NAME')) ?></title>
 <meta name="description" content="<?= e(__((string) env('APP_DESCRIPTION', ''))) ?>">
 <meta name="csrf-token" content="<?= e(csrf_token()) ?>">
+<meta name="base-url" content="<?= e(base_url()) ?>">
 <meta name="theme-color" content="<?= e(Palette::secondary($color)) ?>">
 <?php if ($theme === 'auto'): /* follow the system, before the first paint */ ?>
 <script>document.documentElement.dataset.bsTheme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';</script>

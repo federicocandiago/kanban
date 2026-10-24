@@ -115,7 +115,7 @@ msgstr ""
 msgid "A token can do what its user can do on the site: it sees only the boards they are a member of, and only board owners delete for good. Changes appear in the card log as \"Name (API)\"."
 msgstr ""
 
-#: app/Controllers/PageController.php:32 views/components/footer.php:3 views/pages/legal/about.php:2
+#: app/Controllers/PageController.php:38 views/components/footer.php:3 views/pages/legal/about.php:2
 msgid "About"
 msgstr ""
 
@@ -519,7 +519,7 @@ msgstr ""
 msgid "Calendars"
 msgstr ""
 
-#: app/Controllers/AccountController.php:208
+#: app/Controllers/AccountController.php:209
 msgid "Calendars are not imported: connect them again from Settings."
 msgstr ""
 
@@ -655,7 +655,7 @@ msgstr ""
 msgid "Choose one of your calendars."
 msgstr ""
 
-#: app/Controllers/AccountController.php:237
+#: app/Controllers/AccountController.php:238
 msgid "Choose what the token can do."
 msgstr ""
 
@@ -703,7 +703,7 @@ msgstr ""
 msgid "Contacts and updates"
 msgstr ""
 
-#: app/Controllers/PageController.php:27 views/components/footer.php:6 views/pages/legal/cookies.php:7
+#: app/Controllers/PageController.php:33 views/components/footer.php:6 views/pages/legal/cookies.php:7
 msgid "Cookie Policy"
 msgstr ""
 
@@ -763,7 +763,7 @@ msgstr ""
 msgid "Create new board…"
 msgstr ""
 
-#: views/pages/auth/login.php:13
+#: views/pages/auth/login.php:17
 msgid "Create one"
 msgstr ""
 
@@ -883,7 +883,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: views/pages/auth/login.php:10
+#: views/pages/auth/login.php:14
 msgid "Didn't get the confirmation email?"
 msgstr ""
 
@@ -1151,7 +1151,7 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
-#: app/Controllers/AccountController.php:206
+#: app/Controllers/AccountController.php:207
 msgid "Imported :boards boards, :cards cards and :files attachments."
 msgstr ""
 
@@ -1265,6 +1265,10 @@ msgstr ""
 
 #: app/helpers.php:151
 msgid "just now"
+msgstr ""
+
+#: views/pages/auth/login.php:9
+msgid "Keep me signed in"
 msgstr ""
 
 #: views/pages/legal/cookies.php:25
@@ -1523,7 +1527,7 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: app/Controllers/AccountController.php:241
+#: app/Controllers/AccountController.php:242
 msgid "New token created: copy it now, it won't be shown again."
 msgstr ""
 
@@ -1539,7 +1543,7 @@ msgstr ""
 msgid "Nextcloud, Fastmail, Synology, Radicale, Baïkal… (Google and Outlook are not supported)."
 msgstr ""
 
-#: views/pages/auth/login.php:13
+#: views/pages/auth/login.php:17
 msgid "No account yet?"
 msgstr ""
 
@@ -1747,7 +1751,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: app/Controllers/AccountController.php:155
+#: app/Controllers/AccountController.php:156
 msgid "Password changed."
 msgstr ""
 
@@ -1799,7 +1803,7 @@ msgstr ""
 msgid "Pink"
 msgstr ""
 
-#: app/Core/ValidationException.php:16 app/Controllers/AuthController.php:112 app/Controllers/AuthController.php:168 app/Controllers/AccountController.php:65 app/Controllers/AccountController.php:148 app/Controllers/AccountController.php:166 app/Controllers/AccountController.php:203 app/Controllers/AccountController.php:237 app/Controllers/CalendarController.php:86 app/Controllers/CalendarController.php:111 app/Controllers/CalendarController.php:166 app/Controllers/CalendarController.php:223 app/Controllers/CalendarController.php:304
+#: app/Core/ValidationException.php:16 app/Controllers/AuthController.php:112 app/Controllers/AuthController.php:168 app/Controllers/AccountController.php:65 app/Controllers/AccountController.php:148 app/Controllers/AccountController.php:167 app/Controllers/AccountController.php:204 app/Controllers/AccountController.php:238 app/Controllers/CalendarController.php:86 app/Controllers/CalendarController.php:111 app/Controllers/CalendarController.php:166 app/Controllers/CalendarController.php:223 app/Controllers/CalendarController.php:304
 msgid "Please check the form."
 msgstr ""
 
@@ -1807,7 +1811,7 @@ msgstr ""
 msgid "Please check the request."
 msgstr ""
 
-#: app/Controllers/AccountController.php:198 app/Controllers/CalendarController.php:370 app/Services/CardService.php:183
+#: app/Controllers/AccountController.php:199 app/Controllers/CalendarController.php:370 app/Services/CardService.php:183
 msgid "Please choose a file."
 msgstr ""
 
@@ -1839,7 +1843,7 @@ msgstr ""
 msgid "Previous month"
 msgstr ""
 
-#: app/Controllers/PageController.php:22 views/components/footer.php:5 views/pages/legal/privacy.php:8
+#: app/Controllers/PageController.php:28 views/components/footer.php:5 views/pages/legal/privacy.php:8
 msgid "Privacy Policy"
 msgstr ""
 
@@ -2163,7 +2167,7 @@ msgstr ""
 msgid "Show the checklist instead of the description"
 msgstr ""
 
-#: app/Controllers/AuthController.php:22 views/components/header.php:41 views/pages/auth/resend.php:9 views/pages/auth/login.php:2 views/pages/auth/login.php:7 views/pages/auth/register.php:32 views/pages/home.php:10
+#: app/Controllers/AuthController.php:22 views/components/header.php:41 views/pages/auth/resend.php:9 views/pages/auth/login.php:2 views/pages/auth/login.php:11 views/pages/auth/register.php:32 views/pages/home.php:10
 msgid "Sign in"
 msgstr ""
 
@@ -2223,7 +2227,7 @@ msgstr ""
 msgid "Termination"
 msgstr ""
 
-#: app/Controllers/PageController.php:17 views/components/footer.php:4 views/pages/legal/terms.php:2
+#: app/Controllers/PageController.php:23 views/components/footer.php:4 views/pages/legal/terms.php:2
 msgid "Terms of Service"
 msgstr ""
 
@@ -2303,7 +2307,7 @@ msgstr ""
 msgid "The cookie is marked HttpOnly (not readable by scripts) and SameSite=Lax (not sent on requests started by other sites), and it is sent only over HTTPS when the site uses it. It does not contain personal data: only a random identifier of your session."
 msgstr ""
 
-#: app/Controllers/AccountController.php:139 app/Controllers/AccountController.php:166
+#: app/Controllers/AccountController.php:139 app/Controllers/AccountController.php:167
 msgid "The current password is wrong."
 msgstr ""
 
@@ -2339,7 +2343,7 @@ msgstr ""
 msgid "The file"
 msgstr ""
 
-#: app/Controllers/AccountController.php:198 app/Controllers/CalendarController.php:368 app/Services/CardService.php:180 views/partials/card.php:100 views/partials/event.php:108
+#: app/Controllers/AccountController.php:199 app/Controllers/CalendarController.php:368 app/Services/CardService.php:180 views/partials/card.php:100 views/partials/event.php:108
 msgid "The file is too large (max :size)."
 msgstr ""
 
@@ -2511,7 +2515,7 @@ msgstr ""
 msgid "This invitation has already been answered or withdrawn."
 msgstr ""
 
-#: app/Controllers/AccountController.php:203 app/Services/DataTransfer.php:116
+#: app/Controllers/AccountController.php:204 app/Services/DataTransfer.php:116
 msgid "This is not a Kalban export (or it comes from a newer version)."
 msgstr ""
 
@@ -2587,7 +2591,7 @@ msgstr ""
 msgid "Too many requests: wait as many seconds as Retry-After says."
 msgstr ""
 
-#: app/Controllers/AccountController.php:253
+#: app/Controllers/AccountController.php:254
 msgid "Too many wrong passwords: try again in :min minutes."
 msgstr ""
 
@@ -2771,7 +2775,7 @@ msgstr ""
 msgid "You are responsible for your credentials and for everything done with your account."
 msgstr ""
 
-#: app/Controllers/AccountController.php:169
+#: app/Controllers/AccountController.php:170
 msgid "You are the only administrator: promote another user before deleting your account."
 msgstr ""
 
@@ -2827,7 +2831,7 @@ msgstr ""
 msgid "Your account and the boards you own will be deleted forever. Continue?"
 msgstr ""
 
-#: app/Controllers/AccountController.php:175
+#: app/Controllers/AccountController.php:176
 msgid "Your account has been deleted. Goodbye!"
 msgstr ""
 

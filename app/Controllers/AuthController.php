@@ -46,7 +46,7 @@ final class AuthController extends Controller
                 'email' => __('Email not confirmed yet.'),
             ]);
         }
-        Auth::login($user);
+        Auth::login($user, (bool) $request->input('remember'));
 
         return $this->ok('', ['redirect' => '/dashboard']);
     }

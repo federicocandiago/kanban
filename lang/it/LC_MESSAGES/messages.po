@@ -115,7 +115,7 @@ msgstr "un hash non reversibile del token (mai il token stesso), cosa può fare,
 msgid "A token can do what its user can do on the site: it sees only the boards they are a member of, and only board owners delete for good. Changes appear in the card log as \"Name (API)\"."
 msgstr "Un token può fare ciò che il suo utente può fare sul sito: vede solo le bacheche di cui è membro, e solo i proprietari eliminano definitivamente. Le modifiche compaiono nello storico delle schede come \"Nome (API)\"."
 
-#: app/Controllers/PageController.php:32 views/components/footer.php:3 views/pages/legal/about.php:2
+#: app/Controllers/PageController.php:38 views/components/footer.php:3 views/pages/legal/about.php:2
 msgid "About"
 msgstr "Info"
 
@@ -519,7 +519,7 @@ msgstr "Calendario, se ne colleghi uno"
 msgid "Calendars"
 msgstr "Calendari"
 
-#: app/Controllers/AccountController.php:208
+#: app/Controllers/AccountController.php:209
 msgid "Calendars are not imported: connect them again from Settings."
 msgstr "I calendari non vengono importati: ricollegali dalle Impostazioni."
 
@@ -655,7 +655,7 @@ msgstr "Scegli un fuso orario."
 msgid "Choose one of your calendars."
 msgstr "Scegli uno dei tuoi calendari."
 
-#: app/Controllers/AccountController.php:237
+#: app/Controllers/AccountController.php:238
 msgid "Choose what the token can do."
 msgstr "Scegli cosa può fare il token."
 
@@ -703,7 +703,7 @@ msgstr "Collega i tuoi calendari (iCloud o altri server CalDAV, quanti ne vuoi):
 msgid "Contacts and updates"
 msgstr "Contatti e aggiornamenti"
 
-#: app/Controllers/PageController.php:27 views/components/footer.php:6 views/pages/legal/cookies.php:7
+#: app/Controllers/PageController.php:33 views/components/footer.php:6 views/pages/legal/cookies.php:7
 msgid "Cookie Policy"
 msgstr "Cookie policy"
 
@@ -763,7 +763,7 @@ msgstr "Crea evento"
 msgid "Create new board…"
 msgstr "Crea una nuova bacheca…"
 
-#: views/pages/auth/login.php:13
+#: views/pages/auth/login.php:17
 msgid "Create one"
 msgstr "Creane uno"
 
@@ -883,7 +883,7 @@ msgstr "Eliminato"
 msgid "Description"
 msgstr "Descrizione"
 
-#: views/pages/auth/login.php:10
+#: views/pages/auth/login.php:14
 msgid "Didn't get the confirmation email?"
 msgstr "Non hai ricevuto l'email di conferma?"
 
@@ -1151,7 +1151,7 @@ msgstr "Se non conosci :name, ignora pure questa email."
 msgid "Import"
 msgstr "Importa"
 
-#: app/Controllers/AccountController.php:206
+#: app/Controllers/AccountController.php:207
 msgid "Imported :boards boards, :cards cards and :files attachments."
 msgstr "Importate :boards bacheche, :cards schede e :files allegati."
 
@@ -1266,6 +1266,10 @@ msgstr "Giugno"
 #: app/helpers.php:151
 msgid "just now"
 msgstr "adesso"
+
+#: views/pages/auth/login.php:9
+msgid "Keep me signed in"
+msgstr "Mantieni l'accesso"
 
 #: views/pages/legal/cookies.php:25
 msgid "Keeps you signed in, protects forms against cross-site request forgery, remembers the language you chose and shows confirmation messages."
@@ -1523,7 +1527,7 @@ msgstr "Nome della nuova etichetta (facoltativo)"
 msgid "New password"
 msgstr "Nuova password"
 
-#: app/Controllers/AccountController.php:241
+#: app/Controllers/AccountController.php:242
 msgid "New token created: copy it now, it won't be shown again."
 msgstr "Nuovo token creato: copialo ora, non verrà più mostrato."
 
@@ -1539,7 +1543,7 @@ msgstr "Mese successivo"
 msgid "Nextcloud, Fastmail, Synology, Radicale, Baïkal… (Google and Outlook are not supported)."
 msgstr "Nextcloud, Fastmail, Synology, Radicale, Baïkal… (Google e Outlook non sono supportati)."
 
-#: views/pages/auth/login.php:13
+#: views/pages/auth/login.php:17
 msgid "No account yet?"
 msgstr "Non hai un account?"
 
@@ -1747,7 +1751,7 @@ msgstr "Parametri"
 msgid "Password"
 msgstr "Password"
 
-#: app/Controllers/AccountController.php:155
+#: app/Controllers/AccountController.php:156
 msgid "Password changed."
 msgstr "Password modificata."
 
@@ -1799,7 +1803,7 @@ msgstr "Foto da Unsplash"
 msgid "Pink"
 msgstr "Rosa"
 
-#: app/Core/ValidationException.php:16 app/Controllers/AuthController.php:112 app/Controllers/AuthController.php:168 app/Controllers/AccountController.php:65 app/Controllers/AccountController.php:148 app/Controllers/AccountController.php:166 app/Controllers/AccountController.php:203 app/Controllers/AccountController.php:237 app/Controllers/CalendarController.php:86 app/Controllers/CalendarController.php:111 app/Controllers/CalendarController.php:166 app/Controllers/CalendarController.php:223 app/Controllers/CalendarController.php:304
+#: app/Core/ValidationException.php:16 app/Controllers/AuthController.php:112 app/Controllers/AuthController.php:168 app/Controllers/AccountController.php:65 app/Controllers/AccountController.php:148 app/Controllers/AccountController.php:167 app/Controllers/AccountController.php:204 app/Controllers/AccountController.php:238 app/Controllers/CalendarController.php:86 app/Controllers/CalendarController.php:111 app/Controllers/CalendarController.php:166 app/Controllers/CalendarController.php:223 app/Controllers/CalendarController.php:304
 msgid "Please check the form."
 msgstr "Controlla i campi del modulo."
 
@@ -1807,7 +1811,7 @@ msgstr "Controlla i campi del modulo."
 msgid "Please check the request."
 msgstr "Controlla la richiesta."
 
-#: app/Controllers/AccountController.php:198 app/Controllers/CalendarController.php:370 app/Services/CardService.php:183
+#: app/Controllers/AccountController.php:199 app/Controllers/CalendarController.php:370 app/Services/CardService.php:183
 msgid "Please choose a file."
 msgstr "Scegli un file."
 
@@ -1839,7 +1843,7 @@ msgstr "Premi Invio per vedere tutti i risultati."
 msgid "Previous month"
 msgstr "Mese precedente"
 
-#: app/Controllers/PageController.php:22 views/components/footer.php:5 views/pages/legal/privacy.php:8
+#: app/Controllers/PageController.php:28 views/components/footer.php:5 views/pages/legal/privacy.php:8
 msgid "Privacy Policy"
 msgstr "Informativa sulla privacy"
 
@@ -2163,7 +2167,7 @@ msgstr "Mostra menu"
 msgid "Show the checklist instead of the description"
 msgstr "Mostra la checklist al posto della descrizione"
 
-#: app/Controllers/AuthController.php:22 views/components/header.php:41 views/pages/auth/resend.php:9 views/pages/auth/login.php:2 views/pages/auth/login.php:7 views/pages/auth/register.php:32 views/pages/home.php:10
+#: app/Controllers/AuthController.php:22 views/components/header.php:41 views/pages/auth/resend.php:9 views/pages/auth/login.php:2 views/pages/auth/login.php:11 views/pages/auth/register.php:32 views/pages/home.php:10
 msgid "Sign in"
 msgstr "Accedi"
 
@@ -2223,7 +2227,7 @@ msgstr "Tecnico, di prima parte"
 msgid "Termination"
 msgstr "Cessazione"
 
-#: app/Controllers/PageController.php:17 views/components/footer.php:4 views/pages/legal/terms.php:2
+#: app/Controllers/PageController.php:23 views/components/footer.php:4 views/pages/legal/terms.php:2
 msgid "Terms of Service"
 msgstr "Termini di servizio"
 
@@ -2303,7 +2307,7 @@ msgstr "La scheda “:name” e i suoi allegati verranno eliminati definitivamen
 msgid "The cookie is marked HttpOnly (not readable by scripts) and SameSite=Lax (not sent on requests started by other sites), and it is sent only over HTTPS when the site uses it. It does not contain personal data: only a random identifier of your session."
 msgstr "Il cookie è impostato come HttpOnly (non leggibile dagli script) e SameSite=Lax (non inviato nelle richieste avviate da altri siti), e viaggia solo su HTTPS quando il sito lo usa. Non contiene dati personali: solo un identificativo casuale della tua sessione."
 
-#: app/Controllers/AccountController.php:139 app/Controllers/AccountController.php:166
+#: app/Controllers/AccountController.php:139 app/Controllers/AccountController.php:167
 msgid "The current password is wrong."
 msgstr "La password attuale è errata."
 
@@ -2339,7 +2343,7 @@ msgstr "L’evento “:name” verrà eliminato dal tuo calendario, su tutti i d
 msgid "The file"
 msgstr "Il file"
 
-#: app/Controllers/AccountController.php:198 app/Controllers/CalendarController.php:368 app/Services/CardService.php:180 views/partials/card.php:100 views/partials/event.php:108
+#: app/Controllers/AccountController.php:199 app/Controllers/CalendarController.php:368 app/Services/CardService.php:180 views/partials/card.php:100 views/partials/event.php:108
 msgid "The file is too large (max :size)."
 msgstr "Il file è troppo grande (massimo :size)."
 
@@ -2511,7 +2515,7 @@ msgstr "Nel frattempo questo evento è stato modificato su un altro dispositivo:
 msgid "This invitation has already been answered or withdrawn."
 msgstr "Questo invito ha già avuto una risposta o è stato ritirato."
 
-#: app/Controllers/AccountController.php:203 app/Services/DataTransfer.php:116
+#: app/Controllers/AccountController.php:204 app/Services/DataTransfer.php:116
 msgid "This is not a Kalban export (or it comes from a newer version)."
 msgstr "Questo non è un file esportato da Kalban (o viene da una versione più recente)."
 
@@ -2587,7 +2591,7 @@ msgstr "Troppe richieste: riprova tra :s secondi."
 msgid "Too many requests: wait as many seconds as Retry-After says."
 msgstr "Troppe richieste: aspetta i secondi indicati da Retry-After."
 
-#: app/Controllers/AccountController.php:253
+#: app/Controllers/AccountController.php:254
 msgid "Too many wrong passwords: try again in :min minutes."
 msgstr "Troppe password sbagliate: riprova tra :min minuti."
 
@@ -2771,7 +2775,7 @@ msgstr "Non hai i permessi per farlo."
 msgid "You are responsible for your credentials and for everything done with your account."
 msgstr "Sei responsabile delle tue credenziali e di tutto ciò che viene fatto con il tuo account."
 
-#: app/Controllers/AccountController.php:169
+#: app/Controllers/AccountController.php:170
 msgid "You are the only administrator: promote another user before deleting your account."
 msgstr "Sei l'unico amministratore: promuovi un altro utente prima di eliminare il tuo account."
 
@@ -2827,7 +2831,7 @@ msgstr "Il tuo account"
 msgid "Your account and the boards you own will be deleted forever. Continue?"
 msgstr "Il tuo account e le bacheche di cui sei proprietario verranno eliminati per sempre. Continuare?"
 
-#: app/Controllers/AccountController.php:175
+#: app/Controllers/AccountController.php:176
 msgid "Your account has been deleted. Goodbye!"
 msgstr "Il tuo account è stato eliminato. Ciao!"
 

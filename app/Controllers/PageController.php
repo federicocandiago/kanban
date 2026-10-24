@@ -12,6 +12,12 @@ use App\Core\Translator;
 
 final class PageController extends Controller
 {
+    /** A fresh CSRF token for a page whose session expired meanwhile (app.js asks after a 419). */
+    public function csrf(Request $request): Response
+    {
+        return Response::json(['token' => \App\Core\Csrf::token(), 'signedIn' => Auth::check()])->withHeader('Cache-Control', 'no-store');
+    }
+
     public function terms(Request $request): Response
     {
         return view('pages/legal/terms', ['title' => __('Terms of Service')]);
