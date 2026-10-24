@@ -602,6 +602,29 @@ tr.is-paused { opacity: .6; }
 .list.dnd-placeholder { background: rgba(0, 0, 0, .2) !important; }
 .is-dragging, .is-dragging * { cursor: grabbing !important; user-select: none; }
 
+/* ── Attachment viewer (app.js) ─────────────────────────────────────────── */
+.viewer {
+    position: fixed; inset: 0; z-index: 1090; display: flex; flex-direction: column; outline: 0;
+    background: rgb(10 14 20 / .95); color: #fff; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+.viewer-bar { display: flex; align-items: center; gap: 8px; padding: 10px 12px 10px 20px; }
+.viewer-name { flex: 1; min-width: 0; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.viewer-btn, .viewer-nav {
+    display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 50%;
+    background: rgb(255 255 255 / .14); color: #fff; text-decoration: none;
+}
+.viewer-btn:hover, .viewer-nav:hover { background: rgb(255 255 255 / .26); color: #fff; }
+.viewer-stage { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 0 64px 20px; }
+.viewer-stage img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; box-shadow: 0 10px 40px rgb(0 0 0 / .5); }
+.viewer-stage iframe { width: 100%; max-width: 1000px; height: 100%; border: 0; border-radius: 6px; background: #fff; }
+.viewer-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 28px; line-height: 1; padding-bottom: 4px; }
+.viewer-nav.is-prev { left: 12px; }
+.viewer-nav.is-next { right: 12px; }
+@media (max-width: 575.98px) {
+    .viewer-stage { padding: 0 8px 12px; }
+    .viewer-nav { top: auto; bottom: calc(16px + env(safe-area-inset-bottom)); transform: none; }
+}
+
 /* ── Card window ─────────────────────────────────────────────────────────── */
 .card-window { background: var(--k-surface); min-height: 200px; }
 /* between phones and desktop (576–991 px) Bootstrap keeps windows at 500 px: the card window takes the room there is */

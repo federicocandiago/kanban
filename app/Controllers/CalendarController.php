@@ -403,12 +403,13 @@ final class CalendarController extends Controller
             abort(502, $this->message($e));
         }
         $name = str_replace(['"', "\r", "\n"], '', $file['name']);
-        $inline = $request->input('inline') && str_starts_with($file['type'], 'image/');
+        $inline = $request->input('inline') && (str_starts_with($file['type'], 'image/') || $file['type'] === 'application/pdf');
 
         return (new Response($content['body'], 200, [
             'Content-Type' => $inline ? $file['type'] : 'application/octet-stream',
             'Content-Disposition' => ($inline ? 'inline' : 'attachment') . '; filename="' . $name . '"; filename*=UTF-8\'\'' . rawurlencode($name),
             'Cache-Control' => 'private, max-age=3600',
+            'X-Content-Type-Options' => 'nosniff',
         ]));
     }
 

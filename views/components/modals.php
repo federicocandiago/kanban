@@ -5,4 +5,5 @@
     <?= component('search-modal') ?>
 <?php endif ?>
 <?= component('confirm-modal') ?>
+<?= component('viewer') ?>
 <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toasts"></div>

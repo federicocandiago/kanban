@@ -107,7 +107,7 @@ final class CardController extends Controller
         $attachment = Attachment::find((int) $id) ?? abort(404);
         [, $board] = $this->card((int) $attachment->card_id);
 
-        return self::sendAttachment($attachment, $board, $attachment->isImage() && $request->input('inline'));
+        return self::sendAttachment($attachment, $board, $attachment->viewer() !== null && $request->input('inline'));
     }
 
     public function detach(Request $request, string $id): Response
@@ -155,7 +155,8 @@ final class CardController extends Controller
 
         return Response::file($path, $inline ? (string) $attachment->mime : 'application/octet-stream')
             ->withHeader('Content-Disposition', ($inline ? 'inline' : 'attachment') . '; filename="' . $name . '"; filename*=UTF-8\'\'' . rawurlencode($name))
-            ->withHeader('Cache-Control', 'private, max-age=86400');
+            ->withHeader('Cache-Control', 'private, max-age=86400')
+            ->withHeader('X-Content-Type-Options', 'nosniff');
     }
 
     /** A note in the card's log (any member). */

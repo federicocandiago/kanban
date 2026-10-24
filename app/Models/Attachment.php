@@ -13,6 +13,12 @@ final class Attachment extends Model
         return in_array($this->mime, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'], true);
     }
 
+    /** Shown in the viewer over the card window (images and PDFs); other files are downloaded. */
+    public function viewer(): ?string
+    {
+        return $this->isImage() ? 'image' : ($this->mime === 'application/pdf' ? 'pdf' : null);
+    }
+
     public function url(): string
     {
         return url('/attachments/' . $this->id);

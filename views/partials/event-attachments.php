@@ -5,14 +5,16 @@ $query = !empty($view) ? '?view=' . rawurlencode($view) : ''; ?>
     <h3><?= component('icon', ['name' => 'clip']) ?> <?= e(__('Attachments')) ?></h3>
     <?php foreach ($files as $i => $file):
         $url = url("/events/{$event->id}/attachments/{$i}");
-        $image = str_starts_with($file['type'], 'image/'); ?>
+        $image = str_starts_with($file['type'], 'image/');
+        $viewer = $image ? 'image' : ($file['type'] === 'application/pdf' ? 'pdf' : null);
+        $open = $viewer ? 'data-viewer="' . $viewer . '" data-viewer-src="' . e($url) . '?inline=1" data-viewer-name="' . e($file['name']) . '"' : 'download'; ?>
         <div class="attachment">
-            <a class="attachment-thumb" href="<?= e($url) ?><?= $image ? '?inline=1' : '' ?>" target="_blank" rel="noopener"
+            <a class="attachment-thumb" href="<?= e($url) ?>" <?= $open ?>
                <?= $image ? 'style="background-image: url(\'' . e($url) . '?inline=1\')"' : '' ?>>
                 <?php if (!$image): ?><?= e(strtoupper(pathinfo($file['name'], PATHINFO_EXTENSION) ?: '?')) ?><?php endif ?>
             </a>
             <div class="min-w-0">
-                <a class="attachment-name" href="<?= e($url) ?>"><?= e($file['name']) ?></a>
+                <a class="attachment-name" href="<?= e($url) ?>" <?= $open ?>><?= e($file['name']) ?></a>
                 <small class="text-muted d-block">
                     <?= $file['size'] ? e(format_bytes((int) $file['size'])) : '' ?>
                     <?php if ($event->isEditable()): ?>

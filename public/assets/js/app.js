@@ -549,5 +549,67 @@
     openTarget();
     addEventListener('hashchange', openTarget);
 
+    // Attachments with data-viewer ("image" | "pdf") open over the window they are in, the others are
+    // downloaded: no new tab (in the installed app that meant a full-screen page with no way back).
+    // Closed with ×, Esc or the browser's back; ‹ › (or the arrow keys) go through the attachments.
+    let viewer = null;
+    const viewerItems = (link) => [...(link.closest('.card-section') ?? document).querySelectorAll('.attachment-name[data-viewer]')];
+    function viewerShow(items, index) {
+        const item = items[(index + items.length) % items.length];
+        viewer.dataset.index = String(items.indexOf(item));
+        const stage = viewer.querySelector('.viewer-stage');
+        stage.replaceChildren();
+        const media = document.createElement(item.dataset.viewer === 'pdf' ? 'iframe' : 'img');
+        media.src = item.dataset.viewerSrc;
+        if (media instanceof HTMLImageElement) media.alt = item.dataset.viewerName;
+        else media.title = item.dataset.viewerName;
+        stage.append(media);
+        viewer.querySelector('.viewer-name').textContent = item.dataset.viewerName;
+        viewer.querySelector('[data-viewer-download]').href = item.href;
+        viewer.querySelectorAll('.viewer-nav').forEach((el) => { el.hidden = items.length < 2; });
+    }
+    function viewerOpen(link) {
+        const items = viewerItems(link);
+        if (!viewer) {
+            viewer = document.getElementById('viewer-template').content.firstElementChild.cloneNode(true);
+            (link.closest('.modal') ?? document.body).append(viewer); // inside the window: its focus trap lets the buttons work
+            viewer.items = items;
+            history.pushState({ viewer: true }, '');
+        }
+        viewerShow(items, Math.max(0, items.findIndex((el) => el.dataset.viewerSrc === link.dataset.viewerSrc)));
+        viewer.focus();
+    }
+    function viewerClose(fromHistory = false) {
+        if (!viewer) return;
+        viewer.remove();
+        viewer = null;
+        if (!fromHistory && history.state?.viewer) history.back();
+    }
+    document.addEventListener('click', (event) => {
+        const link = event.target.closest('a[data-viewer]');
+        if (link && !event.metaKey && !event.ctrlKey) {
+            event.preventDefault();
+            viewerOpen(link);
+            return;
+        }
+        if (!viewer || !viewer.contains(event.target)) return;
+        const step = event.target.closest('[data-viewer-step]');
+        if (step) viewerShow(viewer.items, Number(viewer.dataset.index) + Number(step.dataset.viewerStep));
+        else if (event.target.closest('[data-viewer-close]') || event.target.matches('.viewer-stage')) viewerClose();
+    });
+    // capture: Esc closes the viewer only, not the card window under it
+    document.addEventListener('keydown', (event) => {
+        if (!viewer) return;
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            event.stopPropagation();
+            viewerClose();
+        } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+            viewerShow(viewer.items, Number(viewer.dataset.index) + (event.key === 'ArrowLeft' ? -1 : 1));
+        }
+    }, true);
+    addEventListener('popstate', () => viewerClose(true));
+    document.addEventListener('hide.bs.modal', () => viewerClose());
+
     window.App = { api, get, handle, toast, confirm: confirmDialog };
 })();
