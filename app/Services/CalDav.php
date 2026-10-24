@@ -21,8 +21,14 @@ final class CalDav
 
     private const NS = ['D' => 'DAV:', 'C' => 'urn:ietf:params:xml:ns:caldav', 'CS' => 'http://calendarserver.org/ns/', 'I' => 'http://apple.com/ns/ical/'];
 
+    /** One connection for all the requests of this client: no new TLS handshake each time. */
+    private ?\CurlHandle $curl = null;
+    /** Over https Basic goes straight away; asking the server first (Basic or Digest) costs a round trip each time. */
+    private int $auth;
+
     public function __construct(private readonly string $url, private readonly string $user, private readonly string $password)
     {
+        $this->auth = str_starts_with(strtolower($url), 'https:') ? CURLAUTH_BASIC : CURLAUTH_BASIC | CURLAUTH_DIGEST;
     }
 
     /**
@@ -203,12 +209,14 @@ final class CalDav
     private function request(string $method, string $url, ?string $body = null, array $headers = []): array
     {
         $responseHeaders = [];
-        $curl = curl_init($url);
+        $curl = $this->curl ??= curl_init();
+        curl_reset($curl); // the options go, the open connection stays
         curl_setopt_array($curl, [
+            CURLOPT_URL => $url,
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_USERPWD => $this->user . ':' . $this->password,
-            CURLOPT_HTTPAUTH => CURLAUTH_BASIC | CURLAUTH_DIGEST,
+            CURLOPT_HTTPAUTH => $this->auth,
             CURLOPT_HTTPHEADER => [...$headers, 'User-Agent: ' . env('APP_NAME', 'Kalban') . '/1.0'],
             CURLOPT_CONNECTTIMEOUT => 5,
             CURLOPT_TIMEOUT => 20,
@@ -229,6 +237,11 @@ final class CalDav
 
         if ($result === false) {
             throw new CalDavException('Connection failed: ' . $error);
+        }
+        if ($status === 401 && $this->auth === CURLAUTH_BASIC) { // a server that wants Digest: ask it from now on
+            $this->auth = CURLAUTH_BASIC | CURLAUTH_DIGEST;
+
+            return $this->request($method, $url, $body, $headers);
         }
         if ($status >= 300) {
             $retry = isset($responseHeaders['retry-after']) ? (int) $responseHeaders['retry-after'] : null;

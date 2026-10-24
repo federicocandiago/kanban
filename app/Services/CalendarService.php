@@ -126,10 +126,10 @@ final class CalendarService
 
         $url = rtrim((string) $calendar->url, '/') . '/' . $uid . '.ics';
         $dav = $this->account->client();
-        $dav->put($url, $ics, null);
+        $etag = $dav->put($url, $ics, null);
         $this->log($uid, 'created', null, (string) $calendar->name);
 
-        return $this->reload($dav, $calendar, $url);
+        return $this->reload($dav, $calendar, $url, $etag !== '' ? ['ics' => $ics, 'etag' => $etag] : null);
     }
 
     /**
@@ -138,50 +138,69 @@ final class CalendarService
      */
     public function update(Event $event, array $changes): Event
     {
-        $dav = $this->account->client();
-        $current = $dav->get((string) $event->url);
-        $tree = ICal::parse($current['ics']);
-        $index = $this->master($tree);
-        $vevent = $tree['children'][$index];
-
-        $old = $this->describe($vevent);
-        if (array_key_exists('title', $changes)) {
-            $vevent = ICal::setText($vevent, 'SUMMARY', $changes['title']);
+        // what is already so costs nothing: no request at all when nothing changes
+        if (array_key_exists('title', $changes) && $changes['title'] === (string) $event->summary) {
+            unset($changes['title']);
         }
-        if (array_key_exists('description', $changes)) {
-            $vevent = ICal::setText($vevent, 'DESCRIPTION', $changes['description']);
+        if (array_key_exists('description', $changes) && trim((string) $changes['description']) === trim((string) $event->description)) {
+            unset($changes['description']);
         }
-        if (isset($changes['start'], $changes['end'])) {
-            $vevent = $this->dates($vevent, $changes['start'], $changes['end'], (bool) $changes['all_day']);
-        }
-        $sequence = (int) (ICal::text($vevent, 'SEQUENCE') ?? 0);
-        $vevent = ICal::set($vevent, 'SEQUENCE', (string) ($sequence + 1));
-        $vevent = ICal::set($vevent, 'DTSTAMP', gmdate('Ymd\THis\Z'));
-        $vevent = ICal::set($vevent, 'LAST-MODIFIED', gmdate('Ymd\THis\Z'));
-        $tree['children'][$index] = $vevent;
-        $ics = ICal::serialize($tree);
-
-        $url = (string) $event->url;
-        $etag = $dav->put($url, $ics, $current['etag'] ?: (string) $event->etag);
-
         $calendar = Calendar::find((int) $event->calendar_id);
         $target = $changes['calendar'] ?? null;
-        if ($target && (int) $target->id !== (int) $calendar->id) {
-            // to another sub-calendar, as a whole (attachments included)
+        $moving = $target && (int) $target->id !== (int) $calendar->id;
+        $content = array_key_exists('title', $changes) || array_key_exists('description', $changes) || isset($changes['start'], $changes['end']);
+        if (!$content && !$moving) {
+            return $event;
+        }
+
+        $dav = $this->account->client();
+        $url = (string) $event->url;
+        $written = null; // the object as just written, when the server confirmed it with its ETag
+        $etag = null;
+        if ($content) {
+            $current = $dav->get($url);
+            $tree = ICal::parse($current['ics']);
+            $index = $this->master($tree);
+            $vevent = $tree['children'][$index];
+
+            $old = $this->describe($vevent);
+            if (array_key_exists('title', $changes)) {
+                $vevent = ICal::setText($vevent, 'SUMMARY', $changes['title']);
+            }
+            if (array_key_exists('description', $changes)) {
+                $vevent = ICal::setText($vevent, 'DESCRIPTION', $changes['description']);
+            }
+            if (isset($changes['start'], $changes['end'])) {
+                $vevent = $this->dates($vevent, $changes['start'], $changes['end'], (bool) $changes['all_day']);
+            }
+            $sequence = (int) (ICal::text($vevent, 'SEQUENCE') ?? 0);
+            $vevent = ICal::set($vevent, 'SEQUENCE', (string) ($sequence + 1));
+            $vevent = ICal::set($vevent, 'DTSTAMP', gmdate('Ymd\THis\Z'));
+            $vevent = ICal::set($vevent, 'LAST-MODIFIED', gmdate('Ymd\THis\Z'));
+            $tree['children'][$index] = $vevent;
+            $ics = ICal::serialize($tree);
+
+            $etag = $dav->put($url, $ics, $current['etag'] ?: (string) $event->etag);
+            $written = $etag !== '' ? ['ics' => $ics, 'etag' => $etag] : null;
+
+            foreach ($this->describe($vevent) as $field => $value) {
+                if ($value !== $old[$field]) {
+                    $this->log((string) $event->uid, $field, $old[$field], $value);
+                }
+            }
+        }
+
+        if ($moving) {
+            // to another sub-calendar, as a whole (attachments included); a move doesn't change the content,
+            // so without a change just made there is no ETag to hold it to
             $destination = rtrim((string) $target->url, '/') . '/' . basename($url);
             $dav->move($url, $destination, $etag ?: null);
             Database::connection()->query('DELETE FROM calendar_events WHERE calendar_id = ? AND url_hash = ?', [$calendar->id, sha1($url)]);
             $this->log((string) $event->uid, 'calendar', (string) $calendar->name, (string) $target->name);
-            [$url, $calendar] = [$destination, $target];
+            [$url, $calendar, $written] = [$destination, $target, null]; // the ETag may change with the address: read it again
         }
 
-        foreach ($this->describe($vevent) as $field => $value) {
-            if ($value !== $old[$field]) {
-                $this->log((string) $event->uid, $field, $old[$field], $value);
-            }
-        }
-
-        return $this->reload($dav, $calendar, $url);
+        return $this->reload($dav, $calendar, $url, $written);
     }
 
     /** Drag & drop to another day: same time of day (or whole days), same length. */
@@ -300,10 +319,14 @@ final class CalendarService
         }
     }
 
-    /** Fetches one object again after a change and stores its occurrences. */
-    private function reload(CalDav $dav, Calendar $calendar, string $url): Event
+    /**
+     * Stores the occurrences of one object after a change: $known is what was just written with the ETag
+     * the server gave it (stored as it is, so no need to ask), otherwise the object is fetched again.
+     * @param array{ics: string, etag: string}|null $known
+     */
+    private function reload(CalDav $dav, Calendar $calendar, string $url, ?array $known = null): Event
     {
-        $current = $dav->get($url);
+        $current = $known ?? $dav->get($url);
         $rows = $this->occurrences($current['ics'], $url, $current['etag']);
         $db = Database::connection();
         foreach ($rows as $row) {
