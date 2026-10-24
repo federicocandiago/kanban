@@ -12,8 +12,10 @@ $attachments = $card->attachments(); ?>
             <div class="min-w-0">
                 <a class="attachment-name" href="<?= e($file->url()) ?>" <?= $open ?>><?= e($file->name) ?></a>
                 <small class="text-muted d-block"><?= e(format_date($file->created_at)) ?> · <?= e(format_bytes((int) $file->size)) ?>
+                    <?php if (($access ?? 'member') === 'member'): /* visitors of a public board never delete */ ?>
                     · <button type="button" class="link-btn" data-action="<?= e(url("/attachments/{$file->id}/delete")) ?>"
-                              data-confirm="<?= e(__('The attachment “:name” will be deleted.', ['name' => $file->name])) ?>"><?= e(__('Delete')) ?></button></small>
+                              data-confirm="<?= e(__('The attachment “:name” will be deleted.', ['name' => $file->name])) ?>"><?= e(__('Delete')) ?></button>
+                    <?php endif ?></small>
             </div>
         </div>
     <?php endforeach ?>

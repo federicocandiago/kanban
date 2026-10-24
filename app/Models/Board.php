@@ -33,6 +33,21 @@ final class Board extends Model
         return $row ? new self($row) : null;
     }
 
+    /**
+     * A public board for someone who is not a member (or not signed in): role "public", never a favourite.
+     * Archived boards are not public.
+     */
+    public static function forVisitor(string|int $key): ?self
+    {
+        $row = static::db()->selectOne(
+            'SELECT b.*, \'public\' AS role, 0 AS is_favorite FROM boards b
+             WHERE b.' . (is_int($key) ? 'id' : 'uuid') . ' = ? AND b.public_mode IN (\'read\', \'edit\') AND b.archived_at IS NULL',
+            [$key]
+        );
+
+        return $row ? new self($row) : null;
+    }
+
     /** New board, with its creator as owner. */
     public static function open(User $owner, string $name, array $background): self
     {
@@ -48,6 +63,18 @@ final class Board extends Model
     public function isOwner(): bool
     {
         return $this->role === 'owner';
+    }
+
+    /** Opened through its public address by someone who is not a member. */
+    public function isVisitor(): bool
+    {
+        return $this->role === 'public';
+    }
+
+    /** What the viewer may do: "member" (everything their role allows), "edit" (public: all but deleting), "read" (public: notes only). */
+    public function access(): string
+    {
+        return $this->isVisitor() ? ($this->public_mode === 'edit' ? 'edit' : 'read') : 'member';
     }
 
     /**

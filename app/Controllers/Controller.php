@@ -6,9 +6,11 @@ namespace App\Controllers;
 
 use App\Core\Response;
 use App\Core\Session;
+use App\Core\View;
 use App\Models\Board;
 use App\Models\BoardList;
 use App\Models\Card;
+use App\Models\User;
 
 abstract class Controller
 {
@@ -45,10 +47,17 @@ abstract class Controller
     /**
      * A board the signed-in user is a member of (404 otherwise, so boards of others don't even "exist").
      * Archived boards can only be restored or deleted; $owner restricts the action to the owner.
+     * $visitors opens the action to public boards too: "read" (looking), "note" (adding notes, allowed
+     * on every public board), "edit" (changing things, only when the board is public for editing).
+     * The views get $access (Board::access()) to show only what can be done.
      */
-    protected function board(string|int $key, bool $owner = false, bool $archived = false): Board
+    protected function board(string|int $key, bool $owner = false, bool $archived = false, ?string $visitors = null): Board
     {
-        $board = Board::forMember($key, auth()) ?? abort(404);
+        $board = (auth() ? Board::forMember($key, auth()) : null) ?? ($visitors ? Board::forVisitor($key) : null) ?? abort(404);
+        if ($visitors === 'edit' && $board->access() === 'read') {
+            abort(403, __('This board is public to read: you can add notes.'));
+        }
+        View::share('access', $board->access());
         if ($owner && !$board->isOwner()) {
             abort(403, __('Only the owner of the board can do this.'));
         }
@@ -66,18 +75,24 @@ abstract class Controller
     }
 
     /** @return array{0: BoardList, 1: Board} */
-    protected function list(int $id, bool $owner = false): array
+    protected function list(int $id, bool $owner = false, ?string $visitors = null): array
     {
         $list = BoardList::find($id) ?? abort(404);
 
-        return [$list, $this->board((int) $list->board_id, $owner)];
+        return [$list, $this->board((int) $list->board_id, $owner, visitors: $visitors)];
     }
 
     /** @return array{0: Card, 1: Board} */
-    protected function card(int $id, bool $owner = false): array
+    protected function card(int $id, bool $owner = false, ?string $visitors = null): array
     {
         $card = Card::detailed($id) ?? abort(404);
 
-        return [$card, $this->board((int) $card->board_id, $owner)];
+        return [$card, $this->board((int) $card->board_id, $owner, visitors: $visitors)];
+    }
+
+    /** Who is acting: the signed-in user, or "Public user" on a public board (for the log). */
+    protected function actor(): User
+    {
+        return auth() ?? User::visitor();
     }
 }

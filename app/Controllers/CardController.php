@@ -25,7 +25,7 @@ final class CardController extends Controller
     /** Quick create from the bottom of a list: only the name. */
     public function store(Request $request, string $id): Response
     {
-        [$list] = $this->list((int) $id);
+        [$list] = $this->list((int) $id, visitors: 'edit');
         $card = $this->cards()->create($list, (string) $request->input('title', ''));
 
         return $this->ok('', ['append' => ["#list-{$list->id} [data-cards]" => $this->tile((int) $card->id)]]);
@@ -34,7 +34,7 @@ final class CardController extends Controller
     /** "New card" window (the + in the top bar): nothing is saved until Create. */
     public function new(Request $request, string $uuid): Response
     {
-        $board = $this->board($uuid);
+        $board = $this->board($uuid, visitors: 'edit');
         $lists = $board->lists();
         if (!$lists) {
             return $this->fail(__('Add a list first: cards live in lists.'));
@@ -47,7 +47,7 @@ final class CardController extends Controller
     /** Creates the card of the "New card" window and adds it at the bottom of its list. */
     public function add(Request $request, string $uuid): Response
     {
-        $board = $this->board($uuid);
+        $board = $this->board($uuid, visitors: 'edit');
         $card = $this->cards()->add($board, array_intersect_key($request->all(), array_flip(['title', 'list_id', 'description', 'start_date', 'end_date'])));
 
         return $this->ok('', ['close' => true, 'append' => ["#list-{$card->list_id} [data-cards]" => $this->tile((int) $card->id)]]);
@@ -56,7 +56,7 @@ final class CardController extends Controller
     /** The card "back", loaded into the card modal. */
     public function show(Request $request, string $id): Response
     {
-        [$card, $board] = $this->card((int) $id);
+        [$card, $board] = $this->card((int) $id, visitors: 'read');
 
         return Response::html(partial('card', $this->details($card, $board)));
     }
@@ -64,7 +64,7 @@ final class CardController extends Controller
     /** Name, description, dates and list: the form saves itself on every change. */
     public function update(Request $request, string $id): Response
     {
-        [$card, $board] = $this->card((int) $id);
+        [$card, $board] = $this->card((int) $id, visitors: 'edit');
         $input = array_intersect_key($request->all(), array_flip(['title', 'description', 'start_date', 'end_date', 'list_id']));
         $movedTo = $this->cards()->update($card, $board, $input);
 
@@ -74,7 +74,7 @@ final class CardController extends Controller
     /** Drag & drop: the card lands in list_id, whose cards are now ordered as ids. */
     public function move(Request $request, string $id): Response
     {
-        [$card, $board] = $this->card((int) $id);
+        [$card, $board] = $this->card((int) $id, visitors: 'edit');
         $list = BoardList::find((int) $request->input('list_id'));
         if (!$list || (int) $list->board_id !== (int) $board->id) {
             return $this->fail(__('Choose a list of this board.'));
@@ -87,7 +87,7 @@ final class CardController extends Controller
     /** The user's own labels on this card: label_ids[] is the complete new selection. */
     public function labels(Request $request, string $id): Response
     {
-        [$card, $board] = $this->card((int) $id);
+        [$card, $board] = $this->card((int) $id, visitors: 'edit');
         $this->cards()->setLabels($card, (array) $request->input('label_ids', []));
 
         return $this->ok('', $this->redraw((int) $card->id, $board));
@@ -95,7 +95,7 @@ final class CardController extends Controller
 
     public function attach(Request $request, string $id): Response
     {
-        [$card, $board] = $this->card((int) $id);
+        [$card, $board] = $this->card((int) $id, visitors: 'edit');
         $file = $request->files('file')[0] ?? null;
         $this->cards()->attach($card, $board, $file, $file === null && $request->contentLength() > 0);
 
@@ -105,7 +105,7 @@ final class CardController extends Controller
     public function download(Request $request, string $id): Response
     {
         $attachment = Attachment::find((int) $id) ?? abort(404);
-        [, $board] = $this->card((int) $attachment->card_id);
+        [, $board] = $this->card((int) $attachment->card_id, visitors: 'read');
 
         return self::sendAttachment($attachment, $board, $attachment->viewer() !== null && $request->input('inline'));
     }
@@ -121,7 +121,7 @@ final class CardController extends Controller
 
     public function archive(Request $request, string $id): Response
     {
-        [$card, $board] = $this->card((int) $id);
+        [$card, $board] = $this->card((int) $id, visitors: 'edit');
         $this->cards()->archive($card);
 
         return $this->ok(__('Card archived.'), ['remove' => ["#card-{$card->id}"], 'close' => true, ...$this->archivedPanel($board)]);
@@ -129,7 +129,7 @@ final class CardController extends Controller
 
     public function restore(Request $request, string $id): Response
     {
-        [$card, $board] = $this->card((int) $id);
+        [$card, $board] = $this->card((int) $id, visitors: 'edit');
         $list = $this->cards()->restore($card);
 
         return $this->ok(__('Card restored.'), [
@@ -162,9 +162,9 @@ final class CardController extends Controller
     /** A note in the card's log (any member). */
     public function addNote(Request $request, string $id): Response
     {
-        [$card, $board] = $this->card((int) $id);
+        [$card, $board] = $this->card((int) $id, visitors: 'note');
         $text = $this->noteText($request) ?? abort(422, __('Write the note first.'));
-        $card->log(auth(), 'note', null, $text);
+        $card->log($this->actor(), 'note', null, $text);
         $card->update([]); // the board counts as changed (dashboard order)
 
         return $this->ok('', $this->redraw((int) $card->id, $board));
@@ -173,8 +173,8 @@ final class CardController extends Controller
     /** Its author changes the text. */
     public function updateNote(Request $request, string $id): Response
     {
-        [$note, $card, $board] = $this->note((int) $id);
-        if ((int) $note->user_id !== (int) auth()->id) {
+        [$note, $card, $board] = $this->note((int) $id, 'note');
+        if ($note->user_id === null || (int) $note->user_id !== (int) auth()?->id) {
             abort(403, __('Only its author can change a note.'));
         }
         $text = $this->noteText($request) ?? abort(422, __('Write the note first.'));
@@ -187,7 +187,7 @@ final class CardController extends Controller
     public function deleteNote(Request $request, string $id): Response
     {
         [$note, $card, $board] = $this->note((int) $id);
-        if ((int) $note->user_id !== (int) auth()->id && !$board->isOwner()) {
+        if ((int) $note->user_id !== (int) auth()?->id && !$board->isOwner()) {
             abort(403, __('Only its author or the board owner can delete a note.'));
         }
         $note->delete();
@@ -198,11 +198,11 @@ final class CardController extends Controller
     /** Checklist: a new item at the bottom. */
     public function addCheck(Request $request, string $id): Response
     {
-        [$card, $board] = $this->card((int) $id);
+        [$card, $board] = $this->card((int) $id, visitors: 'edit');
         $text = $this->checkText($request) ?? abort(422, __('Write the item first.'));
         $position = (int) Database::connection()->scalar('SELECT COALESCE(MAX(position) + 1, 0) FROM checklist_items WHERE card_id = ?', [$card->id]);
         ChecklistItem::create(['card_id' => $card->id, 'text' => $text, 'done' => 0, 'position' => $position]);
-        $card->log(auth(), 'check_added', null, $text);
+        $card->log($this->actor(), 'check_added', null, $text);
         $card->update([]);
 
         return $this->ok('', $this->redraw((int) $card->id, $board));
@@ -211,18 +211,18 @@ final class CardController extends Controller
     /** Checklist: tick / untick (done) or rename (text). */
     public function updateCheck(Request $request, string $id): Response
     {
-        [$item, $card, $board] = $this->check((int) $id);
+        [$item, $card, $board] = $this->check((int) $id, 'edit');
         if ($request->input('text') !== null) {
             $text = $this->checkText($request) ?? abort(422, __('Write the item first.'));
             if ($text !== $item->text) {
-                $card->log(auth(), 'check_renamed', (string) $item->text, $text);
+                $card->log($this->actor(), 'check_renamed', (string) $item->text, $text);
                 $item->update(['text' => $text]);
             }
         } else {
             $done = (bool) $request->input('done');
             if ($done !== (bool) $item->done) {
                 $item->update(['done' => (int) $done]);
-                $card->log(auth(), $done ? 'check_done' : 'check_undone', null, (string) $item->text);
+                $card->log($this->actor(), $done ? 'check_done' : 'check_undone', null, (string) $item->text);
             }
         }
         $card->update([]);
@@ -234,7 +234,7 @@ final class CardController extends Controller
     {
         [$item, $card, $board] = $this->check((int) $id);
         $item->delete();
-        $card->log(auth(), 'check_removed', (string) $item->text, null);
+        $card->log($this->actor(), 'check_removed', (string) $item->text, null);
         $card->update([]);
 
         return $this->ok('', $this->redraw((int) $card->id, $board));
@@ -243,7 +243,7 @@ final class CardController extends Controller
     /** Checklist: the items in their new order (drag & drop). */
     public function orderChecks(Request $request, string $id): Response
     {
-        [$card] = $this->card((int) $id);
+        [$card] = $this->card((int) $id, visitors: 'edit');
         foreach (array_values((array) $request->input('ids', [])) as $position => $itemId) {
             Database::connection()->query('UPDATE checklist_items SET position = ? WHERE id = ? AND card_id = ?', [$position, (int) $itemId, $card->id]);
         }
@@ -252,10 +252,10 @@ final class CardController extends Controller
     }
 
     /** @return array{0: ChecklistItem, 1: Card, 2: Board} */
-    private function check(int $id): array
+    private function check(int $id, ?string $visitors = null): array
     {
         $item = ChecklistItem::find($id) ?? abort(404);
-        [$card, $board] = $this->card((int) $item->card_id);
+        [$card, $board] = $this->card((int) $item->card_id, visitors: $visitors);
 
         return [$item, $card, $board];
     }
@@ -268,13 +268,13 @@ final class CardController extends Controller
     }
 
     /** @return array{0: Activity, 1: Card, 2: Board} */
-    private function note(int $id): array
+    private function note(int $id, ?string $visitors = null): array
     {
         $note = Activity::find($id);
         if (!$note || $note->field !== 'note') {
             abort(404);
         }
-        [$card, $board] = $this->card((int) $note->card_id);
+        [$card, $board] = $this->card((int) $note->card_id, visitors: $visitors);
 
         return [$note, $card, $board];
     }
@@ -288,7 +288,7 @@ final class CardController extends Controller
 
     private function cards(): CardService
     {
-        return new CardService(auth());
+        return new CardService($this->actor());
     }
 
     /** Everything the card back shows. */
@@ -298,7 +298,7 @@ final class CardController extends Controller
             'card' => $card,
             'board' => $board,
             'lists' => $board->lists(),
-            'myLabels' => auth()->labels(),
+            'myLabels' => auth()?->labels() ?? [],
         ];
     }
 

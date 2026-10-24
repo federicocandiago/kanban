@@ -14,6 +14,12 @@ final class User extends Model
 
     public const THEMES = ['auto', 'light', 'dark'];
 
+    /** Somebody without an account on a public board: never saved, only their name goes in the log. */
+    public static function visitor(): self
+    {
+        return new self(['id' => null, 'name' => __('Public user')]);
+    }
+
     public static function findByEmail(string $email): ?self
     {
         return self::first('email = ?', [mb_strtolower(trim($email))]);

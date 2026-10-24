@@ -3,6 +3,7 @@
  * Needs app.js and dnd.js. What differs is read from .board-canvas:
  *   data-cards-url    base URL of the items (/cards/ or /events/): opened at {url}{id}, moved at {url}{id}/move
  *   data-lists-order  lists can be reordered (boards only)
+ *   data-readonly     a public board open to read: no drag & drop
  *   data-sync         calendar: asked on load and every few minutes, redraws what changed
  *   data-view         calendar: the month on screen, sent along so the server redraws that one
  *   data-start-offset calendar: days from today to start the month at (wider screens only)
@@ -20,7 +21,8 @@
         if (!data.ok || redraw) App.handle(data);
     };
 
-    Dnd.sortable({
+    const readonly = 'readonly' in canvas.dataset; // a public board to read: nothing moves
+    if (!readonly) Dnd.sortable({
         items: '[data-cards] > .card-tile:not(.is-dimmed)',
         zone: (el) => el.closest('.list')?.querySelector('[data-cards]'),
         scroller: canvas,
@@ -35,7 +37,7 @@
     });
 
     // a card's checklist, by its grip
-    Dnd.sortable({
+    if (!readonly) Dnd.sortable({
         items: '[data-checks] > .check-item',
         handle: '.check-grip',
         zone: (el) => el.closest('[data-checks]'),

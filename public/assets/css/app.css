@@ -495,7 +495,12 @@ tr.is-paused { opacity: .6; }
     border: 0; border-radius: var(--r-pill); background: rgba(0, 0, 0, .14); color: #fff; text-decoration: none; font-size: 16px;
 }
 .board-btn:hover { background: rgba(0, 0, 0, .24); color: #fff; }
-.board-back { min-width: calc(var(--control) * 1.6); }   /* back to the boards: longer than the round buttons next to it */
+.board-back { min-width: calc(var(--control) * 1.6); }
+.board-public {   /* a public board seen by a visitor: what it is, where the members would be */
+    display: inline-flex; align-items: center; gap: 6px; height: var(--control); padding: 0 14px; border-radius: var(--r-pill);
+    background: rgba(0, 0, 0, .14); color: #fff; font-size: 14px; font-weight: 700; white-space: nowrap;
+}
+.share-public .form-check { margin-bottom: 6px; }   /* back to the boards: longer than the round buttons next to it */
 .board-sep { width: 1px; height: 18px; margin: 0 4px; background: rgba(255, 255, 255, .3); }
 .board-members { display: flex; align-items: center; gap: 6px; }
 .board-members .avatar { box-shadow: 0 0 0 1px rgba(0, 0, 0, .1); }
@@ -1063,7 +1068,7 @@ tr.is-paused { opacity: .6; }
     }
     :root:has(> .board-page) { --k-topbar: oklch(from var(--tint, #2c3e50) min(l, .42) min(c, .13) h); }
     .board-page .topbar, .board-page.has-photo .topbar { background: var(--k-topbar); }
-    .board-page .board-btn, .board-page .board-filter input, .board-page .calendar-month {
+    .board-page .board-btn, .board-page .board-filter input, .board-page .calendar-month, .board-page .board-public {
         background: var(--tone); color: var(--on-tone); box-shadow: 0 1px 3px rgb(0 0 0 / .2);
     }
     .board-page .board-btn:hover { background: var(--tone-hover); color: var(--on-tone); }

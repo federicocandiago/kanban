@@ -5,7 +5,7 @@
  * @var string|null $view
  */
 $view ??= null;
-$mine = $entry->user_id !== null && (int) $entry->user_id === (int) auth()->id;
+$mine = $entry->user_id !== null && (int) $entry->user_id === (int) auth()?->id;
 $author = $entry->user_id ? App\Models\User::find((int) $entry->user_id) : null;
 $hidden = $view ? '<input type="hidden" name="view" value="' . e($view) . '">' : ''; ?>
 <li class="is-note">

@@ -16,6 +16,8 @@ final class Middleware
     {
         return match ($name) {
             'auth' => self::auth($request),
+            // public boards: signed in or not; who may do what is decided by Controller::board()
+            'visitor' => Auth::user() ? self::auth($request) : null,
             'guest' => Auth::check() ? Response::redirect('/dashboard') : null,
             'admin' => Auth::user()?->isAdmin() ? null : self::deny($request, 403, '/'),
             'api' => self::api($request),

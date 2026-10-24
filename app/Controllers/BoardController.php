@@ -48,12 +48,17 @@ final class BoardController extends Controller
 
     public function show(Request $request, string $uuid): Response
     {
-        $board = $this->board($uuid, archived: true);
+        if (!auth() && !Board::forVisitor($uuid)) {
+            return redirect('/login'); // not public: as for any page that needs signing in
+        }
+        $board = $this->board($uuid, archived: true, visitors: 'read');
         if ($board->isArchived()) {
             Session::flash('error', __('The board “:name” is archived: restore it to open it.', ['name' => $board->name]));
             return redirect('/dashboard?archived=1');
         }
-        $board->touch(auth());
+        if (!$board->isVisitor()) {
+            $board->touch(auth());
+        }
 
         return view('pages/board', [
             'title' => $board->name,

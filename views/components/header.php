@@ -10,6 +10,9 @@ $name ??= null;
 $hint ??= null;
 $newCard ??= null; ?>
 <header class="topbar <?= $user ? '' : 'is-guest' ?>" id="topbar">
+    <?php if (!$user && $name !== null): ?>
+        <div class="topbar-group"><?php if ($newCard): ?><button class="topbar-btn" type="button" data-new-card="<?= e($newCard) ?>" title="<?= e(__('New card')) ?>" aria-label="<?= e(__('New card')) ?>"><?= component('icon', ['name' => 'plus']) ?></button><?php endif ?></div><?php /* a public board: the name stays in the middle */ ?>
+    <?php endif ?>
     <?php if ($user): ?>
         <div class="topbar-group">
             <button class="topbar-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#side-menu" aria-controls="side-menu" aria-label="<?= e(__('Menu')) ?>"><?= component('icon', ['name' => 'menu']) ?></button>

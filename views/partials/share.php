@@ -36,6 +36,38 @@ $contacts = $board->isOwner()
         <p class="form-text"><?= e(__('Only the owner of the board can invite or remove people.')) ?></p>
     <?php endif ?>
 
+    <h3 class="share-heading"><?= e(__('Public link')) ?></h3>
+    <?php $mode = $board->public_mode; ?>
+    <?php if ($board->isOwner()): ?>
+        <form class="share-public" method="post" action="<?= e($board->url('/public')) ?>" data-ajax data-autosubmit>
+            <?= csrf_field() ?>
+            <label class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" name="public" value="1" <?= $mode ? 'checked' : '' ?>>
+                <span class="form-check-label"><?= e(__('Public: anyone with the address can open it')) ?></span>
+            </label>
+            <?php if ($mode): ?>
+                <input type="hidden" name="readonly" value="0">
+                <label class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" name="readonly" value="1" <?= $mode === 'read' ? 'checked' : '' ?>>
+                    <span class="form-check-label"><?= e(__('Read only: visitors can only add notes')) ?></span>
+                </label>
+            <?php else: ?>
+                <input type="hidden" name="readonly" value="1"><?php /* turned on: read only first */ ?>
+            <?php endif ?>
+        </form>
+    <?php endif ?>
+    <?php if ($mode): ?>
+        <div class="d-flex gap-2 mt-2">
+            <input class="form-control" id="public-link" value="<?= e(absolute_url('/boards/' . $board->uuid)) ?>" readonly aria-label="<?= e(__('Public link')) ?>">
+            <button class="btn btn-secondary" type="button" data-copy="#public-link" data-copied="<?= e(__('Copied.')) ?>"><?= e(__('Copy')) ?></button>
+        </div>
+        <p class="form-text"><?= e($mode === 'read'
+            ? __('Visitors see lists, cards and their log, and can add notes. Without an account they sign as “Public user”.')
+            : __('Visitors can change and archive anything, but not delete. Without an account they sign as “Public user”.')) ?></p>
+    <?php elseif (!$board->isOwner()): ?>
+        <p class="form-text"><?= e(__('Only members can open this board.')) ?></p>
+    <?php endif ?>
+
     <h3 class="share-heading"><?= e(__('Members')) ?></h3>
     <ul class="member-list">
         <?php foreach ($members as $member): ?>

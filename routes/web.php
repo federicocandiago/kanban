@@ -50,7 +50,7 @@ return static function (Router $r): void {
     $r->get('/dashboard', [BoardController::class, 'index'], ['auth']);
     $r->get('/backgrounds', [BoardController::class, 'photos'], ['auth']);
     $r->post('/boards', [BoardController::class, 'store'], ['auth']);
-    $r->get('/boards/{uuid}', [BoardController::class, 'show'], ['auth']);
+    $r->get('/boards/{uuid}', [BoardController::class, 'show'], ['visitor']);
     $r->post('/boards/{uuid}/update', [BoardController::class, 'update'], ['auth']);
     $r->post('/boards/{uuid}/favorite', [BoardController::class, 'favorite'], ['auth']);
     $r->post('/boards/{uuid}/archive', [BoardController::class, 'archive'], ['auth']);
@@ -60,40 +60,42 @@ return static function (Router $r): void {
 
     // Sharing (boards only, never single cards)
     $r->post('/boards/{uuid}/invites', [ShareController::class, 'invite'], ['auth']);
+    $r->post('/boards/{uuid}/public', [ShareController::class, 'publish'], ['auth']);
     $r->post('/boards/{uuid}/members/{id}/remove', [ShareController::class, 'remove'], ['auth']);
     $r->post('/invites/{id}/cancel', [ShareController::class, 'cancel'], ['auth']);
     $r->post('/invites/{id}/accept', [ShareController::class, 'accept'], ['auth']);
     $r->post('/invites/{id}/decline', [ShareController::class, 'decline'], ['auth']);
     $r->post('/notifications/read', [NotificationController::class, 'read'], ['auth']);
 
+    // Lists and cards: 'visitor' routes also work on public boards (Controller::board() decides what each may do)
     // Lists
-    $r->post('/boards/{uuid}/lists', [ListController::class, 'store'], ['auth']);
-    $r->post('/boards/{uuid}/lists/order', [ListController::class, 'order'], ['auth']);
-    $r->post('/lists/{id}/update', [ListController::class, 'update'], ['auth']);
-    $r->post('/lists/{id}/archive', [ListController::class, 'archive'], ['auth']);
-    $r->post('/lists/{id}/restore', [ListController::class, 'restore'], ['auth']);
+    $r->post('/boards/{uuid}/lists', [ListController::class, 'store'], ['visitor']);
+    $r->post('/boards/{uuid}/lists/order', [ListController::class, 'order'], ['visitor']);
+    $r->post('/lists/{id}/update', [ListController::class, 'update'], ['visitor']);
+    $r->post('/lists/{id}/archive', [ListController::class, 'archive'], ['visitor']);
+    $r->post('/lists/{id}/restore', [ListController::class, 'restore'], ['visitor']);
     $r->post('/lists/{id}/delete', [ListController::class, 'destroy'], ['auth']);
 
     // Cards
-    $r->post('/lists/{id}/cards', [CardController::class, 'store'], ['auth']);
-    $r->get('/boards/{uuid}/cards/new', [CardController::class, 'new'], ['auth']);
-    $r->post('/boards/{uuid}/cards', [CardController::class, 'add'], ['auth']);
-    $r->get('/cards/{id}', [CardController::class, 'show'], ['auth']);
-    $r->post('/cards/{id}/update', [CardController::class, 'update'], ['auth']);
-    $r->post('/cards/{id}/move', [CardController::class, 'move'], ['auth']);
-    $r->post('/cards/{id}/labels', [CardController::class, 'labels'], ['auth']);
-    $r->post('/cards/{id}/attachments', [CardController::class, 'attach'], ['auth']);
-    $r->post('/cards/{id}/checklist', [CardController::class, 'addCheck'], ['auth']);
-    $r->post('/cards/{id}/checklist/order', [CardController::class, 'orderChecks'], ['auth']);
-    $r->post('/checklist/{id}/update', [CardController::class, 'updateCheck'], ['auth']);
+    $r->post('/lists/{id}/cards', [CardController::class, 'store'], ['visitor']);
+    $r->get('/boards/{uuid}/cards/new', [CardController::class, 'new'], ['visitor']);
+    $r->post('/boards/{uuid}/cards', [CardController::class, 'add'], ['visitor']);
+    $r->get('/cards/{id}', [CardController::class, 'show'], ['visitor']);
+    $r->post('/cards/{id}/update', [CardController::class, 'update'], ['visitor']);
+    $r->post('/cards/{id}/move', [CardController::class, 'move'], ['visitor']);
+    $r->post('/cards/{id}/labels', [CardController::class, 'labels'], ['visitor']);
+    $r->post('/cards/{id}/attachments', [CardController::class, 'attach'], ['visitor']);
+    $r->post('/cards/{id}/checklist', [CardController::class, 'addCheck'], ['visitor']);
+    $r->post('/cards/{id}/checklist/order', [CardController::class, 'orderChecks'], ['visitor']);
+    $r->post('/checklist/{id}/update', [CardController::class, 'updateCheck'], ['visitor']);
     $r->post('/checklist/{id}/delete', [CardController::class, 'deleteCheck'], ['auth']);
-    $r->post('/cards/{id}/notes', [CardController::class, 'addNote'], ['auth']);
-    $r->post('/notes/{id}/update', [CardController::class, 'updateNote'], ['auth']);
+    $r->post('/cards/{id}/notes', [CardController::class, 'addNote'], ['visitor']);
+    $r->post('/notes/{id}/update', [CardController::class, 'updateNote'], ['visitor']);
     $r->post('/notes/{id}/delete', [CardController::class, 'deleteNote'], ['auth']);
-    $r->post('/cards/{id}/archive', [CardController::class, 'archive'], ['auth']);
-    $r->post('/cards/{id}/restore', [CardController::class, 'restore'], ['auth']);
+    $r->post('/cards/{id}/archive', [CardController::class, 'archive'], ['visitor']);
+    $r->post('/cards/{id}/restore', [CardController::class, 'restore'], ['visitor']);
     $r->post('/cards/{id}/delete', [CardController::class, 'destroy'], ['auth']);
-    $r->get('/attachments/{id}', [CardController::class, 'download'], ['auth']);
+    $r->get('/attachments/{id}', [CardController::class, 'download'], ['visitor']);
     $r->post('/attachments/{id}/delete', [CardController::class, 'detach'], ['auth']);
 
     // Calendars (the user's CalDAV accounts, any number)

@@ -13,7 +13,7 @@ final class ListController extends Controller
 {
     public function store(Request $request, string $uuid): Response
     {
-        $board = $this->board($uuid);
+        $board = $this->board($uuid, visitors: 'edit');
         $list = (new ListService())->create($board, (string) $request->input('name', ''));
 
         return $this->ok('', ['append' => ['[data-lists]' => partial('list', ['list' => $list, 'cards' => []])]]);
@@ -22,14 +22,14 @@ final class ListController extends Controller
     /** Drag & drop of lists: ids from left to right. */
     public function order(Request $request, string $uuid): Response
     {
-        (new ListService())->reorder($this->board($uuid), (array) $request->input('ids', []));
+        (new ListService())->reorder($this->board($uuid, visitors: 'edit'), (array) $request->input('ids', []));
 
         return $this->ok();
     }
 
     public function update(Request $request, string $id): Response
     {
-        [$list] = $this->list((int) $id);
+        [$list] = $this->list((int) $id, visitors: 'edit');
         (new ListService())->rename($list, (string) $request->input('name', ''));
 
         return $this->ok();
@@ -37,7 +37,7 @@ final class ListController extends Controller
 
     public function archive(Request $request, string $id): Response
     {
-        [$list, $board] = $this->list((int) $id);
+        [$list, $board] = $this->list((int) $id, visitors: 'edit');
         (new ListService())->archive($list);
 
         return $this->ok(__('List archived.'), ['remove' => ["#list-{$list->id}"], ...$this->archivedPanel($board)]);
@@ -45,7 +45,7 @@ final class ListController extends Controller
 
     public function restore(Request $request, string $id): Response
     {
-        [$list] = $this->list((int) $id);
+        [$list] = $this->list((int) $id, visitors: 'edit');
         (new ListService())->restore($list);
 
         return $this->ok(__('List restored.'), ['reload' => true]);

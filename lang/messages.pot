@@ -23,7 +23,7 @@ msgstr ""
 msgid "(no title)"
 msgstr ""
 
-#: views/partials/share.php:45
+#: views/partials/share.php:77
 msgid "(you)"
 msgstr ""
 
@@ -87,7 +87,7 @@ msgstr ""
 msgid ":name shared a board with you on :app"
 msgstr ""
 
-#: views/partials/share.php:52
+#: views/partials/share.php:84
 msgid ":name will no longer see this board."
 msgstr ""
 
@@ -131,11 +131,11 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: app/Core/App.php:97 app/Core/Middleware.php:22 app/Core/Middleware.php:69
+#: app/Core/App.php:97 app/Core/Middleware.php:24 app/Core/Middleware.php:71
 msgid "Access denied"
 msgstr ""
 
-#: app/Controllers/ShareController.php:80
+#: app/Controllers/ShareController.php:91
 msgid "Access removed."
 msgstr ""
 
@@ -151,7 +151,7 @@ msgstr ""
 msgid "Account data"
 msgstr ""
 
-#: app/Core/Middleware.php:37 app/Core/Middleware.php:38
+#: app/Core/Middleware.php:39 app/Core/Middleware.php:40
 msgid "Account suspended"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr ""
 msgid "Account, profile and service data: as long as your account exists. When you delete your account (or an administrator deletes it), your data, your profile picture and the boards you own are deleted immediately; on boards owned by others your cards stay, and the log keeps your name."
 msgstr ""
 
-#: views/partials/card.php:110 views/partials/event.php:116
+#: views/partials/card.php:118 views/partials/event.php:116
 msgid "Actions"
 msgstr ""
 
@@ -179,11 +179,11 @@ msgstr ""
 msgid "Add a calendar"
 msgstr ""
 
-#: views/partials/list.php:23
+#: views/partials/list.php:27
 msgid "Add a card"
 msgstr ""
 
-#: views/pages/board.php:29
+#: views/pages/board.php:43
 msgid "Add a list"
 msgstr ""
 
@@ -191,7 +191,7 @@ msgstr ""
 msgid "Add a list first: cards live in lists."
 msgstr ""
 
-#: views/partials/card.php:55 views/partials/event.php:90 views/partials/card-new.php:42 views/partials/event-new.php:64
+#: views/partials/card.php:58 views/partials/event.php:90 views/partials/card-new.php:42 views/partials/event-new.php:64
 msgid "Add a more detailed description…"
 msgstr ""
 
@@ -203,19 +203,19 @@ msgstr ""
 msgid "Add an event"
 msgstr ""
 
-#: views/partials/card-checklist.php:30
+#: views/partials/card-checklist.php:34
 msgid "Add an item"
 msgstr ""
 
-#: views/partials/card-checklist.php:30
+#: views/partials/card-checklist.php:34
 msgid "Add an item…"
 msgstr ""
 
-#: views/partials/list.php:23
+#: views/partials/list.php:27
 msgid "Add another card"
 msgstr ""
 
-#: views/pages/board.php:29
+#: views/pages/board.php:43
 msgid "Add another list"
 msgstr ""
 
@@ -223,11 +223,11 @@ msgstr ""
 msgid "Add board title"
 msgstr ""
 
-#: views/partials/list.php:28
+#: views/partials/list.php:32
 msgid "Add card"
 msgstr ""
 
-#: views/partials/list.php:12
+#: views/partials/list.php:14
 msgid "Add card…"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgstr ""
 msgid "Add event"
 msgstr ""
 
-#: views/pages/board.php:34
+#: views/pages/board.php:48
 msgid "Add list"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgstr ""
 msgid "Add note"
 msgstr ""
 
-#: views/components/board-tile.php:15 views/pages/board.php:2
+#: views/components/board-tile.php:15 views/pages/board.php:6
 msgid "Add to favourites"
 msgstr ""
 
@@ -303,7 +303,7 @@ msgstr ""
 msgid "April"
 msgstr ""
 
-#: views/partials/card.php:114
+#: views/partials/card.php:122
 msgid "Archive"
 msgstr ""
 
@@ -315,7 +315,7 @@ msgstr ""
 msgid "Archive the board first."
 msgstr ""
 
-#: views/partials/list.php:13
+#: views/partials/list.php:15
 msgid "Archive this list"
 msgstr ""
 
@@ -367,7 +367,7 @@ msgstr ""
 msgid "Attach a file"
 msgstr ""
 
-#: views/partials/card.php:98 views/partials/event.php:106
+#: views/partials/card.php:104 views/partials/event.php:106
 msgid "Attachment"
 msgstr ""
 
@@ -419,7 +419,7 @@ msgstr ""
 msgid "Back to my colour"
 msgstr ""
 
-#: views/pages/calendar.php:6 views/pages/board.php:4
+#: views/pages/calendar.php:6 views/pages/board.php:10
 msgid "Back to the boards"
 msgstr ""
 
@@ -439,11 +439,11 @@ msgstr ""
 msgid "Blue"
 msgstr ""
 
-#: app/Controllers/BoardController.php:104
+#: app/Controllers/BoardController.php:109
 msgid "Board archived. You can find it under «Archived boards»."
 msgstr ""
 
-#: app/Controllers/BoardController.php:121
+#: app/Controllers/BoardController.php:126
 msgid "Board deleted."
 msgstr ""
 
@@ -459,7 +459,7 @@ msgstr ""
 msgid "Board owner only: its cards and attachments go too."
 msgstr ""
 
-#: app/Controllers/BoardController.php:112
+#: app/Controllers/BoardController.php:117
 msgid "Board restored."
 msgstr ""
 
@@ -467,7 +467,7 @@ msgstr ""
 msgid "Board title"
 msgstr ""
 
-#: app/Controllers/AdminController.php:39 app/Controllers/BoardController.php:27 views/components/header.php:19 views/components/side-menu.php:15 views/pages/dashboard.php:4 views/pages/admin/index.php:27 views/partials/search-results.php:23
+#: app/Controllers/AdminController.php:39 app/Controllers/BoardController.php:27 views/components/header.php:22 views/components/side-menu.php:15 views/pages/dashboard.php:4 views/pages/admin/index.php:27 views/partials/search-results.php:23
 msgid "Boards"
 msgstr ""
 
@@ -527,11 +527,11 @@ msgstr ""
 msgid "Can"
 msgstr ""
 
-#: views/pages/board.php:35 views/partials/note-add.php:10 views/partials/note.php:33 views/partials/list.php:29 views/partials/calendar-days.php:24
+#: views/pages/board.php:49 views/partials/note-add.php:10 views/partials/note.php:33 views/partials/list.php:33 views/partials/calendar-days.php:24
 msgid "Cancel"
 msgstr ""
 
-#: views/pages/board.php:56
+#: views/pages/board.php:73
 msgid "Card"
 msgstr ""
 
@@ -547,7 +547,7 @@ msgstr ""
 msgid "Card id."
 msgstr ""
 
-#: views/partials/card.php:77
+#: views/partials/card.php:80
 msgid "Card items"
 msgstr ""
 
@@ -555,7 +555,7 @@ msgstr ""
 msgid "Card restored."
 msgstr ""
 
-#: views/partials/card.php:20 views/partials/card-new.php:15 views/partials/list.php:26
+#: views/partials/card.php:23 views/partials/card-new.php:15 views/partials/list.php:30
 msgid "Card title"
 msgstr ""
 
@@ -607,11 +607,11 @@ msgstr ""
 msgid "Changes to this policy"
 msgstr ""
 
-#: views/partials/card.php:51 views/partials/card.php:106 views/partials/card-tile.php:26
+#: views/partials/card.php:54 views/partials/card.php:113 views/partials/card-tile.php:26
 msgid "Checklist"
 msgstr ""
 
-#: views/partials/card-checklist.php:21
+#: views/partials/card-checklist.php:22
 msgid "Checklist item"
 msgstr ""
 
@@ -659,7 +659,7 @@ msgstr ""
 msgid "Choose what the token can do."
 msgstr ""
 
-#: views/components/search-modal.php:11 views/components/flash.php:4 views/components/create-board.php:11 views/components/rename-modal.php:8 views/components/confirm-modal.php:7 views/components/side-menu.php:9 views/components/viewer.php:7 views/pages/board.php:49 views/partials/card.php:11 views/partials/board-menu.php:5 views/partials/event.php:21 views/partials/card-new.php:9 views/partials/calendar-menu.php:5 views/partials/event-new.php:15
+#: views/components/search-modal.php:11 views/components/flash.php:4 views/components/create-board.php:11 views/components/rename-modal.php:8 views/components/confirm-modal.php:7 views/components/side-menu.php:9 views/components/viewer.php:7 views/pages/board.php:65 views/partials/card.php:14 views/partials/board-menu.php:5 views/partials/event.php:21 views/partials/card-new.php:9 views/partials/calendar-menu.php:5 views/partials/event-new.php:15
 msgid "Close"
 msgstr ""
 
@@ -671,7 +671,7 @@ msgstr ""
 msgid "Complying with legal obligations and requests from authorities."
 msgstr ""
 
-#: views/components/confirm-modal.php:11 views/partials/card.php:61 views/partials/card.php:109 views/partials/event.php:92 views/partials/event.php:115
+#: views/components/confirm-modal.php:11 views/partials/card.php:64 views/partials/card.php:117 views/partials/event.php:92 views/partials/event.php:115
 msgid "Confirm"
 msgstr ""
 
@@ -715,11 +715,11 @@ msgstr ""
 msgid "Cookies we use"
 msgstr ""
 
-#: views/partials/api-settings.php:27
+#: views/partials/share.php:62 views/partials/api-settings.php:27
 msgid "Copied."
 msgstr ""
 
-#: views/partials/api-settings.php:27
+#: views/partials/share.php:62 views/partials/api-settings.php:27
 msgid "Copy"
 msgstr ""
 
@@ -747,7 +747,7 @@ msgstr ""
 msgid "Create account"
 msgstr ""
 
-#: views/components/create-board.php:6 views/components/create-board.php:17 views/components/header.php:34
+#: views/components/create-board.php:6 views/components/create-board.php:17 views/components/header.php:37
 msgid "Create board"
 msgstr ""
 
@@ -827,7 +827,7 @@ msgstr ""
 msgid "date of registration, last sign-in, the boards you are a member of and when you last opened them, notifications."
 msgstr ""
 
-#: views/partials/card.php:31 views/partials/card-new.php:24 views/partials/card-tile.php:17
+#: views/partials/card.php:34 views/partials/card-new.php:24 views/partials/card-tile.php:17
 msgid "Dates"
 msgstr ""
 
@@ -847,7 +847,7 @@ msgstr ""
 msgid "Defending our rights in legal proceedings."
 msgstr ""
 
-#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:118 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:22 views/partials/event-attachments.php:22 views/partials/card-attachments.php:16 views/partials/labels.php:21
+#: views/pages/dashboard.php:49 views/pages/admin/index.php:53 views/partials/card.php:126 views/partials/event.php:118 views/partials/archived.php:15 views/partials/archived.php:30 views/partials/note.php:22 views/partials/event-attachments.php:22 views/partials/card-attachments.php:17 views/partials/labels.php:21
 msgid "Delete"
 msgstr ""
 
@@ -879,7 +879,7 @@ msgstr ""
 msgid "Deleted"
 msgstr ""
 
-#: app/Models/Activity.php:19 app/Models/EventActivity.php:17 views/pages/api-docs.php:63 views/partials/card.php:50 views/partials/event.php:88 views/partials/card-new.php:41 views/partials/event-new.php:63
+#: app/Models/Activity.php:19 app/Models/EventActivity.php:17 views/pages/api-docs.php:63 views/partials/card.php:53 views/partials/event.php:88 views/partials/card-new.php:41 views/partials/event-new.php:63
 msgid "Description"
 msgstr ""
 
@@ -895,7 +895,7 @@ msgstr ""
 msgid "Doing"
 msgstr ""
 
-#: views/pages/home.php:14 views/partials/card-checklist.php:17
+#: views/pages/home.php:14 views/partials/card-checklist.php:18
 msgid "Done"
 msgstr ""
 
@@ -947,7 +947,7 @@ msgstr ""
 msgid "End"
 msgstr ""
 
-#: app/Models/Activity.php:21 views/partials/card.php:40 views/partials/card-new.php:33
+#: app/Models/Activity.php:21 views/partials/card.php:43 views/partials/card-new.php:33
 msgid "End date"
 msgstr ""
 
@@ -955,7 +955,7 @@ msgstr ""
 msgid "Enter a number of minutes between 5 and 1440."
 msgstr ""
 
-#: views/partials/card-new.php:15 views/partials/list.php:26
+#: views/partials/card-new.php:15 views/partials/list.php:30
 msgid "Enter a title for this card…"
 msgstr ""
 
@@ -963,7 +963,7 @@ msgstr ""
 msgid "Enter a title for this event…"
 msgstr ""
 
-#: views/pages/board.php:32
+#: views/pages/board.php:46
 msgid "Enter list title…"
 msgstr ""
 
@@ -1039,7 +1039,7 @@ msgstr ""
 msgid "Files attached to cards."
 msgstr ""
 
-#: views/pages/board.php:10 views/pages/board.php:12
+#: views/pages/board.php:21 views/pages/board.php:23
 msgid "Filter cards"
 msgstr ""
 
@@ -1203,11 +1203,11 @@ msgstr ""
 msgid "Invalid theme."
 msgstr ""
 
-#: app/Controllers/ShareController.php:112
+#: app/Controllers/ShareController.php:123
 msgid "Invitation declined."
 msgstr ""
 
-#: views/partials/share.php:63
+#: views/partials/share.php:95
 msgid "Invitation pending"
 msgstr ""
 
@@ -1215,7 +1215,7 @@ msgstr ""
 msgid "Invitation sent to :email."
 msgstr ""
 
-#: app/Controllers/ShareController.php:97
+#: app/Controllers/ShareController.php:108
 msgid "Invitation withdrawn."
 msgstr ""
 
@@ -1307,7 +1307,7 @@ msgstr ""
 msgid "Label saved."
 msgstr ""
 
-#: views/partials/card.php:79 views/partials/card.php:81 views/partials/card-labels.php:4
+#: views/partials/card.php:83 views/partials/card.php:85 views/partials/card-labels.php:4
 msgid "Labels"
 msgstr ""
 
@@ -1375,11 +1375,11 @@ msgstr ""
 msgid "Lime"
 msgstr ""
 
-#: app/Models/Activity.php:22 views/partials/card.php:68 views/partials/card.php:71 views/partials/card-new.php:48 views/partials/card-new.php:51
+#: app/Models/Activity.php:22 views/partials/card.php:71 views/partials/card.php:74 views/partials/card-new.php:48 views/partials/card-new.php:51
 msgid "List"
 msgstr ""
 
-#: views/partials/list.php:9 views/partials/list.php:11
+#: views/partials/list.php:11 views/partials/list.php:13
 msgid "List actions"
 msgstr ""
 
@@ -1403,7 +1403,7 @@ msgstr ""
 msgid "List restored."
 msgstr ""
 
-#: views/pages/board.php:32 views/partials/list.php:6
+#: views/pages/board.php:46 views/partials/list.php:7
 msgid "List title"
 msgstr ""
 
@@ -1423,7 +1423,7 @@ msgstr ""
 msgid "Loading photos…"
 msgstr ""
 
-#: views/partials/card.php:91
+#: views/partials/card.php:95
 msgid "Manage my labels"
 msgstr ""
 
@@ -1431,7 +1431,7 @@ msgstr ""
 msgid "March"
 msgstr ""
 
-#: views/partials/card.php:102 views/partials/event.php:110
+#: views/partials/card.php:108 views/partials/event.php:110
 msgid "Maximum size: :size"
 msgstr ""
 
@@ -1439,15 +1439,15 @@ msgstr ""
 msgid "May"
 msgstr ""
 
-#: views/partials/share.php:54
+#: views/partials/share.php:86
 msgid "Member"
 msgstr ""
 
-#: views/partials/share.php:39 views/partials/board-members.php:12
+#: views/partials/share.php:71 views/partials/board-members.php:12
 msgid "Members"
 msgstr ""
 
-#: views/components/header.php:15 views/partials/board-menu.php:4 views/partials/calendar-menu.php:4
+#: views/components/header.php:18 views/partials/board-menu.php:4 views/partials/calendar-menu.php:4
 msgid "Menu"
 msgstr ""
 
@@ -1499,7 +1499,7 @@ msgstr ""
 msgid "New app-specific password"
 msgstr ""
 
-#: views/components/header.php:17
+#: views/components/header.php:14 views/components/header.php:20
 msgid "New card"
 msgstr ""
 
@@ -1587,7 +1587,7 @@ msgstr ""
 msgid "No token, unknown, expired, or API access turned off by the user."
 msgstr ""
 
-#: views/partials/card.php:32 views/partials/card-new.php:25
+#: views/partials/card.php:35 views/partials/card-new.php:25
 msgid "none"
 msgstr ""
 
@@ -1671,6 +1671,10 @@ msgstr ""
 msgid "Only its author or the board owner can delete a note."
 msgstr ""
 
+#: views/partials/share.php:68
+msgid "Only members can open this board."
+msgstr ""
+
 #: views/pages/admin/index.php:30 views/partials/api-settings.php:36
 msgid "only read"
 msgstr ""
@@ -1687,7 +1691,7 @@ msgstr ""
 msgid "Only the fields sent change. \"list_id\" alone moves it to the bottom of that list; with \"position\" to that place. \"archived\": true / false archives or restores it. Every change goes to the card log."
 msgstr ""
 
-#: app/Controllers/Controller.php:53
+#: app/Controllers/Controller.php:62
 msgid "Only the owner of the board can do this."
 msgstr ""
 
@@ -1723,7 +1727,7 @@ msgstr ""
 msgid "Other data stored in your browser"
 msgstr ""
 
-#: views/partials/share.php:49
+#: views/partials/share.php:81
 msgid "Owner"
 msgstr ""
 
@@ -1735,11 +1739,11 @@ msgstr ""
 msgid "Owner only."
 msgstr ""
 
-#: views/components/board-tile.php:8 views/pages/board.php:16
+#: views/components/board-tile.php:8 views/pages/board.php:27
 msgid "Owner: :name"
 msgstr ""
 
-#: app/Core/App.php:99 app/Core/Middleware.php:54 app/Controllers/Api/DocsController.php:28
+#: app/Core/App.php:99 app/Core/Middleware.php:56 app/Controllers/Api/DocsController.php:28
 msgid "Page not found"
 msgstr ""
 
@@ -1887,6 +1891,26 @@ msgstr ""
 msgid "Public authorities, only when required by law."
 msgstr ""
 
+#: views/pages/board.php:13
+msgid "Public board"
+msgstr ""
+
+#: views/pages/board.php:13
+msgid "Public board · read only"
+msgstr ""
+
+#: views/partials/share.php:39 views/partials/share.php:61
+msgid "Public link"
+msgstr ""
+
+#: app/Models/User.php:20
+msgid "Public user"
+msgstr ""
+
+#: views/partials/share.php:46
+msgid "Public: anyone with the address can open it"
+msgstr ""
+
 #: app/Services/Palette.php:56
 msgid "Purple"
 msgstr ""
@@ -1921,6 +1945,10 @@ msgstr ""
 
 #: app/Services/ApiSpec.php:24
 msgid "Read and change your boards, lists and cards. The calendar is not part of the API."
+msgstr ""
+
+#: views/partials/share.php:52
+msgid "Read only: visitors can only add notes"
 msgstr ""
 
 #: views/partials/calendar-settings.php:18
@@ -1967,7 +1995,7 @@ msgstr ""
 msgid "Registration open"
 msgstr ""
 
-#: views/pages/account.php:96 views/partials/card-checklist.php:23 views/partials/share.php:52
+#: views/pages/account.php:96 views/partials/card-checklist.php:25 views/partials/share.php:84
 msgid "Remove"
 msgstr ""
 
@@ -1975,7 +2003,7 @@ msgstr ""
 msgid "Remove a label from a card"
 msgstr ""
 
-#: views/components/board-tile.php:15 views/pages/board.php:2
+#: views/components/board-tile.php:15 views/pages/board.php:6
 msgid "Remove from favourites"
 msgstr ""
 
@@ -2007,7 +2035,7 @@ msgstr ""
 msgid "Responses"
 msgstr ""
 
-#: views/pages/dashboard.php:47 views/partials/card.php:112 views/partials/archived.php:12 views/partials/archived.php:27
+#: views/pages/dashboard.php:47 views/partials/card.php:120 views/partials/archived.php:12 views/partials/archived.php:27
 msgid "Restore"
 msgstr ""
 
@@ -2043,7 +2071,7 @@ msgstr ""
 msgid "Schemas"
 msgstr ""
 
-#: app/Controllers/SearchController.php:19 views/components/search-modal.php:2 views/components/header.php:32 views/pages/search.php:4
+#: app/Controllers/SearchController.php:19 views/components/search-modal.php:2 views/components/header.php:35 views/pages/search.php:4
 msgid "Search"
 msgstr ""
 
@@ -2083,7 +2111,7 @@ msgstr ""
 msgid "Send a new link"
 msgstr ""
 
-#: app/Core/Middleware.php:63 app/Services/ApiSpec.php:217
+#: app/Core/Middleware.php:65 app/Services/ApiSpec.php:217
 msgid "Send a valid API token in the header \"Authorization: Bearer …\"."
 msgstr ""
 
@@ -2119,7 +2147,7 @@ msgstr ""
 msgid "Set APP_KEY in .env first (php bin/key.php)."
 msgstr ""
 
-#: views/components/header.php:37 views/components/side-menu.php:25 views/pages/admin/index.php:65
+#: views/components/header.php:40 views/components/side-menu.php:25 views/pages/admin/index.php:65
 msgid "Settings"
 msgstr ""
 
@@ -2135,11 +2163,11 @@ msgstr ""
 msgid "Share a board from its Share button: the people you invite appear here, and so do the boards others share with you."
 msgstr ""
 
-#: views/pages/board.php:48
+#: views/pages/board.php:64
 msgid "Share board"
 msgstr ""
 
-#: app/Models/Board.php:67
+#: app/Models/Board.php:94
 msgid "Shared"
 msgstr ""
 
@@ -2155,11 +2183,11 @@ msgstr ""
 msgid "Shared by me"
 msgstr ""
 
-#: app/Models/Board.php:66
+#: app/Models/Board.php:93
 msgid "Shared with :name"
 msgstr ""
 
-#: app/Models/Board.php:60
+#: app/Models/Board.php:87
 msgid "Shared with me"
 msgstr ""
 
@@ -2167,15 +2195,15 @@ msgstr ""
 msgid "Shared with me (boards)"
 msgstr ""
 
-#: views/pages/calendar.php:19 views/pages/board.php:19
+#: views/pages/calendar.php:19 views/pages/board.php:31
 msgid "Show menu"
 msgstr ""
 
-#: views/partials/card.php:106
+#: views/partials/card.php:113
 msgid "Show the checklist instead of the description"
 msgstr ""
 
-#: app/Controllers/AuthController.php:22 views/components/header.php:41 views/pages/auth/resend.php:9 views/pages/auth/login.php:2 views/pages/auth/login.php:11 views/pages/auth/register.php:32 views/pages/home.php:10
+#: app/Controllers/AuthController.php:22 views/components/header.php:44 views/pages/auth/resend.php:9 views/pages/auth/login.php:2 views/pages/auth/login.php:11 views/pages/auth/register.php:32 views/pages/home.php:10
 msgid "Sign in"
 msgstr ""
 
@@ -2183,7 +2211,7 @@ msgstr ""
 msgid "Sign out"
 msgstr ""
 
-#: views/components/header.php:43
+#: views/components/header.php:46
 msgid "Sign up"
 msgstr ""
 
@@ -2207,7 +2235,7 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: app/Models/Activity.php:20 views/partials/card.php:35 views/partials/card-new.php:28
+#: app/Models/Activity.php:20 views/partials/card.php:38 views/partials/card-new.php:28
 msgid "Start date"
 msgstr ""
 
@@ -2255,11 +2283,11 @@ msgstr ""
 msgid "The administrators of the service, authorised and bound to confidentiality, to the extent needed to run it. They can see account data and how many boards each account has; they do not open your boards unless this is necessary for security, to comply with the law, or at your request."
 msgstr ""
 
-#: app/Core/Middleware.php:54 app/Controllers/Api/DocsController.php:28
+#: app/Core/Middleware.php:56 app/Controllers/Api/DocsController.php:28
 msgid "The API is turned off on this site."
 msgstr ""
 
-#: app/Core/Middleware.php:66
+#: app/Core/Middleware.php:68
 msgid "The API token has expired: generate a new one from Settings › API access."
 msgstr ""
 
@@ -2267,7 +2295,7 @@ msgstr ""
 msgid "The API token of :name will stop working at once."
 msgstr ""
 
-#: views/partials/event-attachments.php:22 views/partials/card-attachments.php:16
+#: views/partials/event-attachments.php:22 views/partials/card-attachments.php:17
 msgid "The attachment “:name” will be deleted."
 msgstr ""
 
@@ -2279,7 +2307,7 @@ msgstr ""
 msgid "The board will be hidden from you and its members. You can restore it from «Archived boards»."
 msgstr ""
 
-#: app/Controllers/BoardController.php:53
+#: app/Controllers/BoardController.php:56
 msgid "The board “:name” is archived: restore it to open it."
 msgstr ""
 
@@ -2307,7 +2335,7 @@ msgstr ""
 msgid "The calendar “:name” will be disconnected from this site; nothing changes on the calendar itself."
 msgstr ""
 
-#: views/partials/card.php:118 views/partials/archived.php:15
+#: views/partials/card.php:126 views/partials/archived.php:15
 msgid "The card “:name” and its attachments will be deleted for good."
 msgstr ""
 
@@ -2351,7 +2379,7 @@ msgstr ""
 msgid "The file"
 msgstr ""
 
-#: app/Controllers/AccountController.php:199 app/Controllers/CalendarController.php:368 app/Services/CardService.php:180 views/partials/card.php:100 views/partials/event.php:108
+#: app/Controllers/AccountController.php:199 app/Controllers/CalendarController.php:368 app/Services/CardService.php:180 views/partials/card.php:106 views/partials/event.php:108
 msgid "The file is too large (max :size)."
 msgstr ""
 
@@ -2455,16 +2483,20 @@ msgstr ""
 msgid "This account is already connected as “:name”."
 msgstr ""
 
-#: app/Models/Board.php:170
+#: app/Models/Board.php:197
 msgid "This board already has :max cards, the most it can hold: archive some to make room."
 msgstr ""
 
-#: app/Models/Board.php:163
+#: app/Models/Board.php:190
 msgid "This board already has :max lists, the most it can hold: archive one to make room."
 msgstr ""
 
-#: app/Controllers/Controller.php:56 app/Controllers/Api/BoardsController.php:57
+#: app/Controllers/Controller.php:65 app/Controllers/Api/BoardsController.php:57
 msgid "This board is archived."
+msgstr ""
+
+#: app/Controllers/Controller.php:58
+msgid "This board is public to read: you can add notes."
 msgstr ""
 
 #: app/Controllers/CalendarController.php:469
@@ -2483,7 +2515,7 @@ msgstr ""
 msgid "This card has a description."
 msgstr ""
 
-#: views/partials/card.php:14
+#: views/partials/card.php:17
 msgid "This card is archived."
 msgstr ""
 
@@ -2519,7 +2551,7 @@ msgstr ""
 msgid "This event was changed on another device in the meantime: reload the calendar and try again."
 msgstr ""
 
-#: app/Controllers/ShareController.php:122
+#: app/Controllers/ShareController.php:133
 msgid "This invitation has already been answered or withdrawn."
 msgstr ""
 
@@ -2539,7 +2571,7 @@ msgstr ""
 msgid "This server does not accept attachments on events."
 msgstr ""
 
-#: app/Core/Middleware.php:22
+#: app/Core/Middleware.php:24
 msgid "This token is read-only."
 msgstr ""
 
@@ -2583,7 +2615,7 @@ msgstr ""
 msgid "Too many failed attempts for this account: try again in :min minutes."
 msgstr ""
 
-#: app/Core/App.php:98 app/Core/Middleware.php:74
+#: app/Core/App.php:98 app/Core/Middleware.php:76
 msgid "Too Many Requests"
 msgstr ""
 
@@ -2591,7 +2623,7 @@ msgstr ""
 msgid "Too many requests for this address: try again in :min minutes."
 msgstr ""
 
-#: app/Core/Middleware.php:74
+#: app/Core/Middleware.php:76
 msgid "Too many requests: try again in :s seconds."
 msgstr ""
 
@@ -2627,7 +2659,7 @@ msgstr ""
 msgid "Type at least :n characters to search boards, lists, cards, labels, attachments and events."
 msgstr ""
 
-#: app/Core/App.php:96 app/Core/Middleware.php:59
+#: app/Core/App.php:96 app/Core/Middleware.php:61
 msgid "Unauthorized"
 msgstr ""
 
@@ -2635,7 +2667,7 @@ msgstr ""
 msgid "Under Articles 15–22 GDPR you have the right to:"
 msgstr ""
 
-#: app/Controllers/BoardController.php:142
+#: app/Controllers/BoardController.php:147
 msgid "Unsplash is not answering right now."
 msgstr ""
 
@@ -2687,6 +2719,14 @@ msgstr ""
 msgid "Valid for :n days, until :date."
 msgstr ""
 
+#: views/partials/share.php:66
+msgid "Visitors can change and archive anything, but not delete. Without an account they sign as “Public user”."
+msgstr ""
+
+#: views/partials/share.php:65
+msgid "Visitors see lists, cards and their log, and can add notes. Without an account they sign as “Public user”."
+msgstr ""
+
 #: views/pages/legal/privacy.php:92
 msgid "We adopt technical and organisational measures appropriate to the risk (Article 32 GDPR), including: hashed passwords, protection against cross-site request forgery, session cookies not accessible to scripts, access control on every board and attachment, re-encoding of uploaded images, and separation between the data of different users. No system is perfectly secure: keep your password private and a copy of important files."
 msgstr ""
@@ -2715,7 +2755,7 @@ msgstr ""
 msgid "Welcome aboard, :name!"
 msgstr ""
 
-#: app/Controllers/ShareController.php:105
+#: app/Controllers/ShareController.php:116
 msgid "Welcome to “:name”!"
 msgstr ""
 
@@ -2747,7 +2787,7 @@ msgstr ""
 msgid "Who the token belongs to, and their labels."
 msgstr ""
 
-#: views/partials/share.php:66
+#: views/partials/share.php:98
 msgid "Withdraw"
 msgstr ""
 
@@ -2775,7 +2815,7 @@ msgstr ""
 msgid "You also have the right to lodge a complaint with a supervisory authority, in particular in the Member State where you live or work. In Italy it is the Garante per la protezione dei dati personali (www.garanteprivacy.it)."
 msgstr ""
 
-#: app/Core/Middleware.php:89
+#: app/Core/Middleware.php:91
 msgid "You are not allowed to do this."
 msgstr ""
 
@@ -2815,7 +2855,7 @@ msgstr ""
 msgid "You have sent many invitations: try again in :min minutes."
 msgstr ""
 
-#: app/Controllers/BoardController.php:129
+#: app/Controllers/BoardController.php:134
 msgid "You left the board “:name”."
 msgstr ""
 
@@ -2843,11 +2883,11 @@ msgstr ""
 msgid "Your account has been deleted. Goodbye!"
 msgstr ""
 
-#: app/Core/Middleware.php:39
+#: app/Core/Middleware.php:41
 msgid "Your account has been paused by an administrator. Your data is safe; contact the administrator to know more."
 msgstr ""
 
-#: app/Core/Middleware.php:35 app/Core/Middleware.php:69
+#: app/Core/Middleware.php:37 app/Core/Middleware.php:71
 msgid "Your account is suspended."
 msgstr ""
 

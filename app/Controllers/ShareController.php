@@ -68,6 +68,17 @@ final class ShareController extends Controller
         return $this->ok($message, $this->panels($board));
     }
 
+    /** Public board (owner): public=1 opens it to anyone with its address, readonly=1 (the default) only to read and add notes. */
+    public function publish(Request $request, string $uuid): Response
+    {
+        $board = $this->board($uuid, owner: true);
+        $mode = $request->input('public') ? ($request->input('readonly') ? 'read' : 'edit') : null;
+        $board->update(['public_mode' => $mode]);
+        $board = $this->board($uuid);
+
+        return $this->ok('', $this->panels($board));
+    }
+
     public function remove(Request $request, string $uuid, string $id): Response
     {
         $board = $this->board($uuid, owner: true);

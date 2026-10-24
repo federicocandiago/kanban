@@ -3,9 +3,12 @@
  * Card back, loaded into #card-modal. The fields belong to one form (form="…" attribute) that
  * saves itself on every change; labels and attachments are separate forms in the sidebar.
  * @var App\Models\Card $card @var App\Models\Board $board @var App\Models\BoardList[] $lists @var App\Models\Label[] $myLabels
+ * On a public board read only ($access "read") the fields only show; notes can still be added.
  */
 $form = 'card-form-' . (int) $card->id;
-$onCard = $card->labelIds(); ?>
+$onCard = $card->labelIds();
+$read = ($access ?? 'member') === 'read';
+$off = $read ? 'disabled' : ''; ?>
 <div class="card-back" id="card-panel" data-card-id="<?= (int) $card->id ?>">
     <form id="<?= $form ?>" method="post" action="<?= e(url("/cards/{$card->id}/update")) ?>" data-ajax data-autosubmit novalidate><?= csrf_field() ?></form>
     <button type="button" class="pop-close card-back-close" data-bs-dismiss="modal" aria-label="<?= e(__('Close')) ?>"><?= component('icon', ['name' => 'x', 'size' => 20]) ?></button>
@@ -17,7 +20,7 @@ $onCard = $card->labelIds(); ?>
     <div class="card-back-head">
         <?= component('icon', ['name' => 'card', 'size' => 20]) ?>
         <div class="flex-grow-1">
-            <textarea class="card-back-title" name="title" form="<?= $form ?>" rows="1" maxlength="255" required data-enter-submit aria-label="<?= e(__('Card title')) ?>"><?= e($card->title) ?></textarea>
+            <textarea class="card-back-title" name="title" form="<?= $form ?>" rows="1" maxlength="255" required data-enter-submit <?= $off ?> aria-label="<?= e(__('Card title')) ?>"><?= e($card->title) ?></textarea>
             <div class="invalid-feedback" data-error-for="title"></div>
         </div>
     </div>
@@ -33,12 +36,12 @@ $onCard = $card->labelIds(); ?>
                 <div class="card-dates">
                     <label>
                         <span class="card-back-label"><?= e(__('Start date')) ?></span>
-                        <input class="form-control form-control-sm" type="date" name="start_date" form="<?= $form ?>" value="<?= e($card->start_date) ?>">
+                        <input class="form-control form-control-sm" type="date" name="start_date" form="<?= $form ?>" value="<?= e($card->start_date) ?>" <?= $off ?>>
                         <span class="invalid-feedback" data-error-for="start_date"></span>
                     </label>
                     <label>
                         <span class="card-back-label"><?= e(__('End date')) ?></span>
-                        <input class="form-control form-control-sm" type="date" name="end_date" form="<?= $form ?>" value="<?= e($card->end_date) ?>">
+                        <input class="form-control form-control-sm" type="date" name="end_date" form="<?= $form ?>" value="<?= e($card->end_date) ?>" <?= $off ?>>
                         <span class="invalid-feedback" data-error-for="end_date"></span>
                     </label>
                 </div>
@@ -51,14 +54,14 @@ $onCard = $card->labelIds(); ?>
                     <span data-pane-title="checklist"><?= component('icon', ['name' => 'check-square']) ?> <?= e(__('Checklist')) ?> <span data-check-count></span></span>
                 </h3>
                 <div class="card-switch-pane" data-pane="description">
-                    <textarea class="form-control card-description" name="description" form="<?= $form ?>" rows="7"
+                    <textarea class="form-control card-description" name="description" form="<?= $form ?>" rows="7" <?= $off ?>
                               placeholder="<?= e(__('Add a more detailed description…')) ?>"><?= e($card->description) ?></textarea>
                 </div>
                 <div class="card-switch-pane" data-pane="checklist">
                     <?= partial('card-checklist', ['card' => $card, 'items' => $checks]) ?>
                 </div>
             </section>
-            <button class="btn btn-success side-confirm confirm-inline" type="submit" form="<?= $form ?>" data-close><?= component('icon', ['name' => 'check']) ?> <?= e(__('Confirm')) ?></button><?php /* phones only: right under the description, in reach */ ?>
+            <?php if (!$read): ?><button class="btn btn-success side-confirm confirm-inline" type="submit" form="<?= $form ?>" data-close><?= component('icon', ['name' => 'check']) ?> <?= e(__('Confirm')) ?></button><?php endif /* phones only: right under the description, in reach */ ?>
 
             <?= partial('card-attachments', compact('card', 'board')) ?>
             <?= partial('card-activity', compact('card', 'board')) ?>
@@ -68,13 +71,14 @@ $onCard = $card->labelIds(); ?>
             <h3><?= e(__('List')) ?></h3>
             <label class="side-select">
                 <?= component('icon', ['name' => 'list']) ?>
-                <select name="list_id" form="<?= $form ?>" aria-label="<?= e(__('List')) ?>">
+                <select name="list_id" form="<?= $form ?>" aria-label="<?= e(__('List')) ?>" <?= $off ?>>
                     <?php foreach ($lists as $list): ?>
                         <option value="<?= (int) $list->id ?>" <?= (int) $list->id === (int) $card->list_id ? 'selected' : '' ?>><?= e($list->name) ?></option>
                     <?php endforeach ?>
                 </select>
             </label>
             <h3><?= e(__('Card items')) ?></h3>
+            <?php if (!$read && $myLabels): /* labels are each user's own: a visitor without an account has none */ ?>
             <div class="dropdown">
                 <button class="side-btn" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false"><?= component('icon', ['name' => 'tag']) ?> <?= e(__('Labels')) ?></button>
                 <div class="dropdown-menu pop label-picker">
@@ -92,7 +96,9 @@ $onCard = $card->labelIds(); ?>
                     </form>
                 </div>
             </div>
+            <?php endif ?>
             <?php $max = App\Services\AttachmentService::maxBytes(); ?>
+            <?php if (!$read): ?>
             <form method="post" action="<?= e(url("/cards/{$card->id}/attachments")) ?>" enctype="multipart/form-data" data-ajax data-autosubmit data-reset>
                 <?= csrf_field() ?>
                 <label class="side-btn mb-1"><?= component('icon', ['name' => 'clip']) ?> <?= e(__('Attachment')) ?>
@@ -102,9 +108,11 @@ $onCard = $card->labelIds(); ?>
                 <small class="side-hint"><?= e(__('Maximum size: :size', ['size' => format_bytes($max)])) ?></small>
                 <div class="invalid-feedback" data-error-for="file"></div>
             </form>
+            <?php endif ?>
             <button class="side-btn side-toggle" type="button" data-switch-toggle="<?= (int) $card->id ?>" aria-pressed="false"
                     title="<?= e(__('Show the checklist instead of the description')) ?>"><?= component('icon', ['name' => 'check-square']) ?> <?= e(__('Checklist')) ?></button>
 
+            <?php if (!$read): ?>
             <div class="side-bottom">
                 <button class="btn btn-success side-confirm" type="submit" form="<?= $form ?>" data-close><?= component('icon', ['name' => 'check']) ?> <?= e(__('Confirm')) ?></button>
                 <h3><?= e(__('Actions')) ?></h3>
@@ -118,6 +126,7 @@ $onCard = $card->labelIds(); ?>
                             data-confirm="<?= e(__('The card “:name” and its attachments will be deleted for good.', ['name' => $card->title])) ?>"><?= component('icon', ['name' => 'trash']) ?> <?= e(__('Delete')) ?></button>
                 <?php endif ?>
             </div>
+            <?php endif ?>
         </aside>
     </div>
 </div>

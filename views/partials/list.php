@@ -1,10 +1,12 @@
-<?php /** @var App\Models\BoardList $list @var App\Models\Card[] $cards */ ?>
+<?php /** @var App\Models\BoardList $list @var App\Models\Card[] $cards @var string|null $access (see pages/board.php) */
+$read = ($access ?? 'member') === 'read'; ?>
 <section class="list" id="list-<?= (int) $list->id ?>" data-list-id="<?= (int) $list->id ?>">
     <header class="list-head">
         <form method="post" action="<?= e(url("/lists/{$list->id}/update")) ?>" data-ajax data-autosubmit>
             <?= csrf_field() ?>
-            <input class="list-name" name="name" value="<?= e($list->name) ?>" maxlength="100" required aria-label="<?= e(__('List title')) ?>" autocomplete="off">
+            <input class="list-name" name="name" value="<?= e($list->name) ?>" maxlength="100" required aria-label="<?= e(__('List title')) ?>" autocomplete="off" <?= $read ? 'readonly' : '' ?>>
         </form>
+        <?php if (!$read): ?>
         <div class="dropdown">
             <button class="list-menu-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="<?= e(__('List actions')) ?>"><?= component('icon', ['name' => 'more']) ?></button>
             <div class="dropdown-menu dropdown-menu-end pop">
@@ -13,12 +15,14 @@
                 <button class="dropdown-item" type="button" data-post="<?= e(url("/lists/{$list->id}/archive")) ?>"><?= e(__('Archive this list')) ?></button>
             </div>
         </div>
+        <?php endif ?>
     </header>
     <div class="list-cards" data-cards>
         <?php foreach ($cards as $card): ?>
             <?= partial('card-tile', ['card' => $card]) ?>
         <?php endforeach ?>
     </div>
+    <?php if (!$read): ?>
     <details class="quick-add">
         <summary><?= component('icon', ['name' => 'plus', 'size' => 14]) ?> <?= e($cards ? __('Add another card') : __('Add a card')) ?></summary>
         <form method="post" action="<?= e(url("/lists/{$list->id}/cards")) ?>" data-ajax data-reset>
@@ -30,4 +34,5 @@
             </div>
         </form>
     </details>
+    <?php endif ?>
 </section>
